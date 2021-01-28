@@ -1,0 +1,104 @@
+@function get($val, $map) {
+	@return map-get($map, $val);
+}
+
+@function fontSize($size) {
+	@return get($size, $font-sizes-copy);
+}
+
+@function endsWith($string, $find) {
+  @return str-slice($string, (str-length($string) - str-length($find) + 1)) == $find;
+}
+
+@function beginsWith($string, $find) {
+	$test: str-slice($string, 1, str-length($find));
+	@debug $test;
+  @return str-slice($string, 1, str-length($find)) == $find;
+}
+
+@function hasValue($map, $find) {
+	$values: map-values($map);
+	$check: index($values, $find);
+
+	@if $check == null {
+		@return false;
+	} @else {
+		@return true;
+	}
+}
+
+// https://stackoverflow.com/a/42295154
+@function str-split($string, $separator) {
+  // empty array/list
+  $split-arr: ();
+  // first index of separator in string
+  $index : str-index($string, $separator);
+  // loop through string
+  @while $index != null {
+      // get the substring from the first character to the separator
+      $item: str-slice($string, 1, $index - 1);
+      // push item to array
+      $split-arr: append($split-arr, $item);
+      // remove item and separator from string
+      $string: str-slice($string, $index + 1);
+      // find new index of separator
+      $index : str-index($string, $separator);
+  }
+  // add the remaining string to list (the last item)
+  $split-arr: append($split-arr, $string);
+
+  @return $split-arr;
+}
+
+////
+// A collection of function for advanced type checking
+// @author Hugo Giraudel
+////
+
+@function is-number($value) {
+  @return type-of($value) == 'number';
+}
+ 
+@function is-time($value) {
+  @return is-number($value) and index('ms' 's', unit($value)) != null;
+}
+ 
+@function is-duration($value) {
+  @return is-time($value);
+}
+ 
+@function is-angle($value) {
+  @return is-number($value) and index('deg' 'rad' 'grad' 'turn', unit($value)) != null;
+}
+ 
+@function is-frequency($value) {
+  @return is-number($value) and index('Hz' 'kHz', unit($value)) != null;
+}
+ 
+@function is-integer($value) {
+  @return is-number($value) and round($value) == $value;
+}
+ 
+@function is-relative-length($value) {
+  @return is-number($value) and index('em' 'ex' 'ch' 'rem' 'vw' 'vh' 'vmin' 'vmax', unit($value)) != null;
+}
+ 
+@function is-absolute-length($value) {
+  @return is-number($value) and index('cm' 'mm' 'in' 'px' 'pt' 'pc', unit($value)) != null;
+}
+ 
+@function is-percentage($value) {
+  @return is-number($value) and unit($value) == '%';
+}
+ 
+@function is-length($value) {
+  @return is-relative-length($value) or is-absolute-length($value);
+}
+ 
+@function is-resolution($value) {
+  @return is-number($value) and index('dpi' 'dpcm' 'dppx', unit($value)) != null;
+}
+ 
+@function is-position($value) {
+  @return is-length($value) or is-percentage($value) or index('top' 'right' 'bottom' 'left' 'center', $value) != null;
+}
