@@ -1,0 +1,30 @@
+//* ====================================
+//		COLOR SETTINGS
+//		If using a different name for the map, update @include palette();
+//* ====================================
+// if using a different name for the map, update @include palette();
+$coreColors: (
+	'primary': 		#fab3a9, // melon
+	'secondary': 	#70ae6e, // iguana green
+	'tertiary': 	#157a6e, // deep green-cyan turquoise
+	'accent': 		#5f24bf, // grape
+	'neutral': 		#30343f, // gunmetal
+) !default;
+
+$messageColors: (
+	default: 	#5D576B,
+	info: 		#41D3BD,
+	success: 	#A9E190,
+	alert: 		#F4F1BB,
+	warn: 		#ED6A5A
+);
+
+// MUST be imported AFTER defining $coreColors!
+@import "functions";
+@import "mixins";
+
+// quad/quadratic = square tetrad harmony; tetrad/tetradic = rectangular tetrad
+$range: 'static';
+@include palette($color: 'primary', $complement-name: 'complement', $rangeType: $range, $rangeDepth: 9);
+
+// @debug $palette;

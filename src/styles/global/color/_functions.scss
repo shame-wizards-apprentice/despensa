@@ -1,0 +1,778 @@
+@import "round-dec", "pow",
+				"luminance";
+
+//stackoverflow 40389319, Kodie Grantham
+@function endsWith($string, $find) {
+	@return str-slice($string, (str-length($string) - str-length($find) + 1)) == $find;
+}
+
+@function clamp($number, $min: -100, $max: 100) {
+	$m1: max($number, $min);
+	$m2: min($m1, $max);
+	@return $m2;
+}
+
+@function getColor($colorName, $map: $palette) {
+	@return map-get($map, $colorName);
+}
+@function getVal($valName, $map) {
+	@return map-get($map, $valName);
+}
+
+@function lightenColor($color, $amount: 16.5, $clampAmount: 87) {
+	@if($amount >= 0 and $amount <= 1) {
+		$amount: $amount * 100;
+	}
+	$amount: clamp($amount, -($clampAmount), $clampAmount);
+	$clr: scale-color($color, $lightness: ($amount));
+	@return $clr;
+}
+
+@function darkenColor($color, $amount: 16.5, $clampAmount: 87) {
+	@if($amount >= 0 and $amount <= 1) {
+		$amount: $amount * 100;
+	}
+	$amount: clamp($amount, -($clampAmount), $clampAmount);
+	$clr: scale-color($color, $lightness: -($amount));
+	@return $clr;
+}
+
+@function getLightest($color, $map: $palette) {
+	$colornames: map-keys($map);
+	$colors: map-values($map);
+	$clr: null; $match: null;
+
+	@if (type_of($color) == string) and (str-slice($color, 0, str-length($color) - (str-length($color) - 1)) != "#") {
+		@if endsWith($color, '-100') == true {
+			@debug "$color is already the lightest available!";
+			$clr: getColor($color, $map);
+		} @else if str-slice($color, (str-length($color) - 4 + 1), (str-length($color) - 4 + 1)) == "-" {
+			$c: str-slice($color, 0, (str-length($color) - 4));
+			$clr: getColor("#{$c}-100");
+		} @else {
+			$clr: getColor($color, $map);
+			@debug "That's not a color with a defined 'lightest' variant.";
+		}
+	} @else {
+		@each $c in $colors {
+			@if $c == $color {
+				$match: true;
+				$i: index($colors, $c);
+				$cname: nth($colornames, $i);
+				$found: str-slice($cname, 0, (str-length($cname) - 4));
+				$lightest: "#{$found}-100";
+				$clr: getColor($lightest, $map);
+			}
+		}
+
+		@if $match == false {
+			$clr: $color;
+			@debug "The color #{$color} doesn't match any colors in palette.";
+		}
+	}
+
+	@return $clr;
+}
+
+@function getDarkest($color, $map: $palette) {
+	$colornames: map-keys($map);
+	$colors: map-values($map);
+	$clr: null; $match: null;
+
+	@if (type_of($color) == string) and (str-slice($color, 0, str-length($color) - (str-length($color) - 1)) != "#") {
+		@if endsWith($color, '-700') == true {
+			@debug "$color is already the darkest available!";
+			$clr: getColor($color, $map);
+		} @else if str-slice($color, (str-length($color) - 4 + 1), (str-length($color) - 4 + 1)) == "-" {
+			$c: str-slice($color, 0, (str-length($color) - 4));
+			$clr: getColor("#{$c}-700");
+		} @else {
+			$clr: getColor($color, $map);
+			@debug "That's not a color with a defined 'darkest' variant.";
+		}
+	} @else {
+		@each $c in $colors {
+			@if $c == $color {
+				$match: true;
+				$i: index($colors, $c);
+				$cname: nth($colornames, $i);
+				$found: str-slice($cname, 0, (str-length($cname) - 4));
+				$lightest: "#{$found}-700";
+				$clr: getColor($lightest, $map);
+			}
+		}
+
+		@if $match == false {
+			$clr: $color;
+			@debug "The color #{$color} doesn't match any colors in palette.";
+		}
+	}
+
+	@return $clr;
+}
+
+// just returns near-white or near-black based on luminance of color provided
+@function getContrast($color, $map: $palette) {
+	$luminance: null; $clr: null;
+	$luminance-comp: 0.37;
+
+	@if type_of($color) == color {
+		$luminance: luminance($color);
+		@if lightness($color) > $luminance-comp {
+			$clr: scale-color($color, $lightness: -95);
+		} @else {
+			$clr: scale-color($color, $lightness: 95);
+		}
+	} @else {
+		$color: getColor($color, $map);
+		$luminance: luminance($color);
+	}
+
+	@if $luminance >= $luminance-comp {
+		$clr: darkenColor(getColor('neutral-700'), 80);
+	} @else {
+		$clr: lightenColor(getColor('neutral-100'), 80);
+	}
+
+	//@debug $color $luminance $luminance-comp $clr;
+
+	@return $clr;
+}
+
+// returns different colors based on type - copy [default], heading, sub-heading, link
+@function getContrastMulti($color, $map: $palette, $type: 'copy') {
+	$clr: null; $luminance: null;
+	$l: '400'; $c: null;
+
+	// CHECK TO MAKE SURE IT'S A COLOR
+	@if type_of($color) == color {
+		$luminance: luminance($color);
+		@if lightness($color) > 50% {
+			$clr: scale-color($color, $lightness: -95);
+		} @else {
+			$clr: scale-color($color, $lightness: 95);
+		}
+	} @else {
+		$color: getColor($color, $map);
+		$luminance: luminance($color);
+		@if $luminance >= 0.375 {
+			$l: '700';
+		} @else {
+			$l: '100';
+		}
+
+		// GET COLOR BASED ON TYPE
+		@if $type == 'copy' {
+			$c: 'neutral-#{$l}';
+		} @else if $type == 'heading' {
+			$c: 'primary-#{$l}';
+		} @else if $type == 'sub-heading' {
+			@if map-has-key($coreColors, 'secondary') {
+				$c: 'secondary-#{$l}';
+			} @else if map-has-key($palette, 'primary-split1-400') {
+				$c: 'primary-split1-400';
+			} @else if map-has-key($palette, 'primary-triad1-400') {
+				$c: 'primary-triad1-400';
+			} @else if map-has-key($palette, 'primary-tetrad1-400') {
+				$c: 'primary-tetrad1-400';
+			} @else if map-has-key($palette, 'primary-compound1-400') {
+				$c: 'primary-compound1-400';
+			} @else {
+				$c: 'neutral-#{$l}';
+			}
+		} @else if $type == 'link' {
+			@if $luminance >= 0.5 { $l: '200'; } @else { $l: '600'; }
+			$c: 'accent-#{$l}';
+		} @else {
+			$c: 'neutral-#{$l}'
+		}
+
+		$clr: getColor($c);
+
+		$clight: luminance($clr);
+		@if $clight >= ($luminance + .15) {
+			$clr: lightenColor($clr, .25);
+		} @else if $clight <= ($luminance - .15) {
+			$clr: darkenColor($clr, .25);
+		}
+	}
+
+	@return $clr;
+}
+
+// https://www.sitepoint.com/using-sass-build-color-palettes/
+// Returns map of operations to apply to $a in order to get $b
+@function colorDiff($a, $b) {
+	$sat: saturation($a) - saturation($b);
+	$light: lightness($a) - lightness($b);
+	$fn-sat: if($sat > 0, 'desaturate', 'saturate');
+	$fn-light: if($light > 0, 'darken', 'lighten');
+
+	@return (
+		adjust-hue: -(hue($a) - hue($b)),
+		#{$fn-sat}: abs($sat),
+		#{$fn-light}: abs($light)
+	);
+}
+
+@function tintShade($map, $scaleColors: 17, $depth: 7, $scaleRatio: 2) {
+	$r7: (); $r5:(); $r3:(); $tsRange: ();
+
+	@if $depth != 7 and $depth != 5 and $depth != 3 { 
+		@if($depth > 7) { $depth: 7; } @else if $depth > 3 { $depth: 5; } @else { $depth: 3; }
+	}
+
+	$values: map-values($map);
+	$names: map-keys($map);
+	$c1: null; $c2: null; $c3: null; $c4: null;
+	$c5: null; $c6: null; $c7: null;
+
+	@for $i from 1 through length($names) {
+		$color: nth($values,$i);
+		$name: nth($names,$i);
+
+		$l: luminance($color);
+
+		$s1: $scaleColors * $scaleRatio;
+		$s2: $s1 * $scaleRatio;
+		$s3: $s2 * $scaleRatio;
+
+
+		@if $l >= 0.77 {
+			$c1: lightenColor($color, $s3, 85); 
+			$c2: lightenColor($color, $s2, 85);
+			$c3: lightenColor($color, $s1, 85);
+			$c4: $color;
+			$c5: darkenColor($color, $s1, 90); 
+			$c6: darkenColor($color, $s2, 90);
+			$c7: darkenColor($color, $s3, 90);
+		}
+		@if ($l < 0.77) and ($l > 0.37) {
+			$c1: lightenColor($color, $s3, 90); 
+			$c2: lightenColor($color, $s2, 90);
+			$c3: lightenColor($color, $s1, 90);
+			$c4: $color;
+			$c5: darkenColor($color, $s1, 90); 
+			$c6: darkenColor($color, $s2, 90);
+			$c7: darkenColor($color, $s3, 90);
+		}
+		@if ($l <= 0.37) {
+			$c1: lightenColor($color, $s3, 90); 
+			$c2: lightenColor($color, $s2, 90);
+			$c3: lightenColor($color, $s1, 90);
+			$c4: $color;
+			$c5: darkenColor($color, $s1, 85); 
+			$c6: darkenColor($color, $s2, 85);
+			$c7: darkenColor($color, $s3, 85);
+		}
+		
+
+		$r7: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c3,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-500: $c5,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7
+		);
+
+		$r5: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7
+		);
+
+		$r3: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-700: $c7
+		);
+
+		@if $depth == 7 {
+			$tsRange: map-merge($tsRange, $r7);
+
+		} @else if $depth == 5 {
+			$tsRange: map-merge($tsRange, $r5);
+
+		} @else {
+			$tsRange: map-merge($tsRange, $r3);
+		}
+	} // end looping through colors to create tintShade ranges
+
+	@return $tsRange;
+}
+
+@function rangeAdaptive($map, $depth: 7, $scaleColors: 17) {
+	$r7: (); $r5: (); $r3: (); $range: (); 
+
+	@if $depth != 7 and $depth != 5 and $depth != 3 { 
+		@if($depth > 7) { $depth: 7; } @else if $depth > 3 { $depth: 5; } @else { $depth: 3; }
+	}
+	// scale, for lightening/darkening: (-100 - 100[%]) scale
+	// luminance comparison: 0 - 1 scale
+	$scale: $scaleColors; $luminanceComparison: $scale / 100;
+
+	$values: map-values($map);
+	$names: map-keys($map);
+	$c1: null; $c2: null; $c3: null; $c4: null;
+	$c5: null; $c6: null; $c7: null;
+
+	@for $i from 1 through length($values) {
+		$color: nth($values,$i);
+		$l: luminance($color);
+		$name: nth($names,$i);
+
+		// make sure colors don't "duplicate"
+		@for $n from 2 through 6 {
+			@if(($scale * $n) > 100) {
+				$scale: $scale * 0.87;
+			}
+		}
+
+		@if($l <= $luminanceComparison) {
+			$c1: lightenColor($color, ($scale * 6)); 
+			$c2: lightenColor($color, ($scale * 5));
+			$c3: lightenColor($color, ($scale * 4)); 
+			$c4: lightenColor($color, ($scale * 3));
+			$c5: lightenColor($color, ($scale * 2)); 
+			$c6: lightenColor($color, ($scale * 1));
+			$c7: $color;
+
+		} @else if ($l > $luminanceComparison and $l <= ($luminanceComparison * 2)) {
+			$c1: lightenColor($color, ($scale * 5)); 
+			$c2: lightenColor($color, ($scale * 4));
+			$c3: lightenColor($color, ($scale * 3)); 
+			$c4: lightenColor($color, ($scale * 2));
+			$c5: lightenColor($color, ($scale * 1)); 
+			$c6: $color;
+			$c7: darkenColor($color, ($scale * 1));
+
+		} @else if ($l > ($luminanceComparison * 2) and $l <= ($luminanceComparison * 3)) {
+			$c1: lightenColor($color, ($scale * 4)); 
+			$c2: lightenColor($color, ($scale * 3));
+			$c3: lightenColor($color, ($scale * 2)); 
+			$c4: lightenColor($color, ($scale * 1));
+			$c5: $color; 
+			$c6: darkenColor($color, ($scale * 1));
+			$c7: darkenColor($color, ($scale * 2));
+
+		} @else if ($l > ($luminanceComparison * 3) and $l <= ($luminanceComparison * 4)) {
+			$c1: lightenColor($color, ($scale * 3)); 
+			$c2: lightenColor($color, ($scale * 2));
+			$c3: lightenColor($color, ($scale * 1)); 
+			$c4: $color;
+			$c5: darkenColor($color, ($scale * 1)); 
+			$c6: darkenColor($color, ($scale * 2));
+			$c7: darkenColor($color, ($scale * 3));
+
+		} @else if ($l > ($luminanceComparison * 4) and $l <= ($luminanceComparison * 5)) {
+			$c1: lightenColor($color, ($scale * 3)); 
+			$c2: lightenColor($color, ($scale * 1));
+			$c3: $color; 
+			$c4: darkenColor($color, ($scale * 1));
+			$c5: darkenColor($color, ($scale * 2)); 
+			$c6: darkenColor($color, ($scale * 3));
+			$c7: darkenColor($color, ($scale * 4));
+
+		} @else if ($l > ($luminanceComparison * 5) and $l <= ($luminanceComparison * 6)) {
+			$c1: lightenColor($color, ($scale * 1)); 
+			$c2: $color;
+			$c3: darkenColor($color, ($scale * 1));
+			$c4: darkenColor($color, ($scale * 2)); 
+			$c5: darkenColor($color, ($scale * 3));
+			$c6: darkenColor($color, ($scale * 4));
+			$c7: darkenColor($color, ($scale * 5));
+
+		} @else {
+			$c1: $color;
+			$c2: darkenColor($color, ($scale * 1));
+			$c3: darkenColor($color, ($scale * 2)); 
+			$c4: darkenColor($color, ($scale * 3));
+			$c5: darkenColor($color, ($scale * 4));
+			$c6: darkenColor($color, ($scale * 5));
+			$c7: darkenColor($color, ($scale * 6));
+		}
+
+		$r7: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c3,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-500: $c5,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7
+		);
+
+		$r5: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: darkColor($c2, ($scale * 1.5)),
+			unquote("#{$name}")-300: $c4,
+			unquote("#{$name}")-400: lightenColor($c6, ($scale * 1.5)),
+			unquote("#{$name}")-500: $c7
+		);
+
+		$r3: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-700: $c7
+		);
+
+		@if $depth == 7 {
+			$range: map-merge($range, $r7);
+			
+		} @else if $depth == 5 {
+			$range: map-merge($range, $r5);
+			
+		} @else {
+			$range: map-merge($range, $r3);
+			
+		}
+
+	}
+
+	@return $range;
+}
+
+@function rangeStatic($map, $depth: 7) {
+	$r9: (); $r7: (); $r5: (); $r3: (); $range: ();
+
+	@if $depth != 9 and $depth != 7 and $depth != 5 and $depth != 3 { 
+		@if($depth > 9) { $depth: 9; } @else if $depth > 7 { $depth: 7; } @else if $depth > 5 { $depth: 5; } @else { $depth: 3; }
+	}
+
+	$values: map-values($map);
+	$names: map-keys($map);
+	$c1: null; $c2: null; $c3: null; $c4: null;
+	$c5: null; $c6: null; $c7: null;
+
+	@for $i from 1 through length($names) {
+
+		$color: nth($values,$i);
+		$name: nth($names,$i);
+
+		$min: 5%;
+		$min: 50%;
+		$max: 95%;
+		
+		$c50:  97%;
+		$c100: 87%;
+		$c200: 81%;
+		$c300: 69%;
+		$c400: 57%;
+		$c450: 51%;
+		$c500: 45%;
+		$c600: 31%;
+		$c700: 21%;
+		$c800: 11%;
+		$c900: 5%;
+
+		// lightest - darkest
+		$c50: change-color($color, $lightness: $c50);
+		$c1: change-color($color, $lightness: $c100); 
+		$c2: change-color($color, $lightness: $c200);
+		$c3: change-color($color, $lightness: $c300); 
+		$c4: change-color($color, $lightness: $c400);
+		$c5: change-color($color, $lightness: $c500); 
+		$c6: change-color($color, $lightness: $c600);
+		$c7: change-color($color, $lightness: $c700);
+		$c8: change-color($color, $lightness: $c800);
+		$c9: change-color($color, $lightness: $c900);
+
+		$r9: (
+			unquote("#{$name}")-50: $c50,
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c3,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-500: $c5,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7,
+			unquote("#{$name}")-800: $c8,
+			unquote("#{$name}")-900: $c9
+		);
+
+		$r7: (
+			unquote("#{$name}")-50: $c50,
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c4,
+			unquote("#{$name}")-400: $c5,
+			unquote("#{$name}")-500: $c7,
+			unquote("#{$name}")-600: $c8,
+			unquote("#{$name}")-700: $c9
+		);
+
+		$r5: (
+			unquote("#{$name}")-50: $c50,
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c3,
+			unquote("#{$name}")-300: $c5,
+			unquote("#{$name}")-400: $c7,
+			unquote("#{$name}")-500: $c9
+		);
+
+		$r3: (
+			unquote("#{$name}")-50: $c50,
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: change-color($color, $lightness: $c450),
+			unquote("#{$name}")-300: $c9
+		);
+	
+		@if $depth == 9 {
+			$range: map-merge($range, $r9);
+
+		} @else if $depth == 7 {
+			$range: map-merge($range, $r7);
+
+		} @else if $depth == 5 {
+			$range: map-merge($range, $r5);
+
+		} @else {
+			$range: map-merge($range, $r3);
+
+		}
+	}
+
+	@return $range;
+}
+
+@function rangeDefault($map, $depth: 7, $scaleColors: 17) {
+	$r7: (); $r5: (); $r3: (); $range: ();
+
+	@if $depth != 7 and $depth != 5 and $depth != 3 { 
+		@if($depth > 7) { $depth: 7; } @else if $depth > 3 { $depth: 5; } @else { $depth: 3; }
+	} 
+	// scale, for lightening/darkening: (-100 - 100[%]) scale
+	// luminance comparison: 0 - 1 scale
+	$scale: $scaleColors; $luminanceComparison: $scale / 100;
+
+	$values: map-values($map);
+	$names: map-keys($map);
+	$c1: null; $c2: null; $c3: null; $c4: null;
+	$c5: null; $c6: null; $c7: null;
+
+	@for $i from 1 through length($names) {
+		$color: nth($values,$i);
+		$l: luminance($color);
+		$name: nth($names,$i);
+		// make sure colors don't "duplicate"
+		@for $n from 2 through 6 {
+			@if(($scale * $n) > 100) {
+				$scale: $scale * 0.87;
+			} 
+		}
+
+		$c1: lightenColor($color, ($scale * 3)); 
+		$c2: lightenColor($color, ($scale * 2));
+		$c3: lightenColor($color, ($scale * 1)); 
+		$c4: $color;
+		$c5: darkenColor($color, ($scale * 1)); 
+		$c6: darkenColor($color, ($scale * 2));
+		$c7: darkenColor($color, ($scale * 3));
+
+		$r7: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c3,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-500: $c5,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7
+		);
+
+		$r5: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c2,
+			unquote("#{$name}")-300: $c3,
+			unquote("#{$name}")-400: $c4,
+			unquote("#{$name}")-500: $c5,
+			unquote("#{$name}")-600: $c6,
+			unquote("#{$name}")-700: $c7
+		);
+
+		$r3: (
+			unquote("#{$name}")-100: $c1,
+			unquote("#{$name}")-200: $c4,
+			unquote("#{$name}")-300: $c7
+		);
+
+		@if $depth == 7 {
+			$range: map-merge($range, $r7);
+
+		} @else if $depth == 5 {
+			$range: map-merge($range, $r5);
+
+		} @else {
+			$range: map-merge($range, $r3);
+		}
+	}
+
+	@return $range;
+}
+
+@function harmony($color, $colorName: "primary", $harmony: "analogous", $include-complement: false, $complement-name: "#{$colorName}-complement") {
+	$colors: ();
+
+	$main: $color; $complement: complement($main);
+	
+	$palette: ();
+
+	// tetrad = rectangular tetradic harmony
+	// quad(ratic) = square tetradic harmony
+	$tetradType: 0;
+	@if $harmony == 'tetrad' or $harmony == 'tetradic' {
+		$tetradType: 60;
+	} @else if $harmony == 'quad' or $harmony == 'quadratic' { 
+		$tetradType: 90;
+		$harmony: 'tetrad';
+	}
+
+	$c1: adjust-hue($main, 35deg);
+	$c2: adjust-hue($main, 195deg);
+
+	$compound1: change-color($c1, $saturation: clamp(saturation($main) + 60, $min: 0, $max: 100), $lightness: clamp(lightness($main) + 30, $min: 0, $max: 8));
+
+	$compound2: change-color($c1, $saturation: clamp(saturation($main), $min: 0, $max: 70), $lightness: clamp(lightness($main) + 10, $min: 10, $max: 30));
+
+	$compound3: change-color($c2, $saturation: clamp(saturation($main) - 25, $min: 0, $max: 55), $lightness: clamp(lightness($main) + 5, $min: 85, $max: 95));
+
+	$compound4: change-color($c2, $saturation: clamp(saturation($main) + 10, $min: 30, $max: 90), $lightness: clamp(lightness($main) + 20, $min: 25, $max: 65));
+
+	
+	$harmonyPalettes: (
+		"split": (
+			unquote("#{$colorName}-split1"): adjust-hue($main, 150deg),
+			unquote("#{$colorName}-split2"): adjust-hue($main, 210deg)
+		),
+		"triad": (
+			unquote("#{$colorName}-triad1"): adjust-hue($main, 120deg),
+			unquote("#{$colorName}-triad2"): adjust-hue($main, 240deg)
+		),
+		"tetrad": (
+			unquote("#{$colorName}-tetrad1"): adjust-hue($main, $tetradType),
+			unquote("#{$colorName}-tetrad2"): $complement,
+			unquote("#{$colorName}-tetrad3"): adjust-hue($complement, $tetradType)
+		),
+		"analogous": (
+			unquote("#{$colorName}-analogous1"): adjust-hue($main, 285deg),
+			unquote("#{$colorName}-analogous2"): adjust-hue($main, 330deg),
+			unquote("#{$colorName}-analogous3"): adjust-hue($main, 30deg),
+			unquote("#{$colorName}-analogous4"): adjust-hue($main, 75deg)
+		),
+		"compound": (
+			unquote("#{$colorName}-compound1"): $compound1,
+			unquote("#{$colorName}-compound2"): $compound2,
+			unquote("#{$colorName}-compound3"): $compound3,
+			unquote("#{$colorName}-compound4"): $compound4
+		) // end compound
+	);
+	
+	$colors: map-get($harmonyPalettes, $harmony);
+
+	@if($include-complement == true or $include-complement == 'true') and $harmony != 'tetrad' { 
+		$colors: map-merge($colors, (unquote("#{$complement-name}"): $complement));
+	}
+
+	$palette: map-merge($palette, $colors);
+
+	@return $palette;
+}
+
+@function singleRange($color, $colorName: 'single') {
+	$l: luminance($color); $scale: 14.28; $luminanceComparison: $scale / 100;
+	$c1: null; $c2: null; $c3: null; $c4: null;
+	$c5: null; $c6: null; $c7: null;
+	
+	// adjust scale to avoid duplication within range
+	@for $n from 2 through 6 {
+		@if(($scale * $n) > 100) {
+			$scale: $scale * 0.87;
+		} 
+	}
+
+	@if($l <= $s) {
+		$c1: lightenColor($color, ($scale * 6)); 
+		$c2: lightenColor($color, ($scale * 5));
+		$c3: lightenColor($color, ($scale * 4)); 
+		$c4: lightenColor($color, ($scale * 3));
+		$c5: lightenColor($color, ($scale * 2)); 
+		$c6: lightenColor($color, ($scale * 1));
+		$c7: $color;
+
+	} @else if ($l > $s and $l <= ($s * 2)) {
+		$c1: lightenColor($color, ($scale * 5)); 
+		$c2: lightenColor($color, ($scale * 4));
+		$c3: lightenColor($color, ($scale * 3)); 
+		$c4: lightenColor($color, ($scale * 2));
+		$c5: lightenColor($color, ($scale * 1)); 
+		$c6: $color;
+		$c7: darkenColor($color, ($scale * 1));
+
+	} @else if ($l > ($s * 2) and $l <= ($s * 3)) {
+		$c1: lightenColor($color, ($scale * 6)); 
+		$c2: lightenColor($color, ($scale * 5));
+		$c3: lightenColor($color, ($scale * 4)); 
+		$c4: lightenColor($color, ($scale * 3));
+		$c5: $color; 
+		$c6: darkenColor($color, ($scale * 1));
+		$c7: darkenColor($color, ($scale * 2));
+
+	} @else if ($l > ($s * 3) and $l <= ($s * 4)) {
+		$c1: lightenColor($color, ($scale * 6)); 
+		$c2: lightenColor($color, ($scale * 5));
+		$c3: lightenColor($color, ($scale * 4)); 
+		$c4: $color;
+		$c5: darkenColor($color, ($scale * 1)); 
+		$c6: darkenColor($color, ($scale * 2));
+		$c7: darkenColor($color, ($scale * 3));
+
+	} @else if ($l > ($s * 4) and $l <= ($s * 5)) {
+		$c1: lightenColor($color, ($scale * 6)); 
+		$c2: lightenColor($color, ($scale * 5));
+		$c3: $color; 
+		$c4: darkenColor($color, ($scale * 1));
+		$c5: darkenColor($color, ($scale * 2)); 
+		$c6: darkenColor($color, ($scale * 3));
+		$c7: darkenColor($color, ($scale * 4));
+
+	} @else if ($l > ($s * 5) and $l <= ($s * 6)) {
+		$c1: lightenColor($color, ($scale * 6)); 
+		$c2: $color;
+		$c3: darkenColor($color, ($scale * 1));
+		$c4: darkenColor($color, ($scale * 2)); 
+		$c5: darkenColor($color, ($scale * 3));
+		$c6: darkenColor($color, ($scale * 4));
+		$c7: darkenColor($color, ($scale * 5));
+
+	} @else {
+		$c1: $color;
+		$c2: darkenColor($color, ($scale * 1));
+		$c3: darkenColor($color, ($scale * 2)); 
+		$c4: darkenColor($color, ($scale * 3));
+		$c5: darkenColor($color, ($scale * 4));
+		$c6: darkenColor($color, ($scale * 5));
+		$c7: darkenColor($color, ($scale * 6));
+	}
+
+	$singleRange: (
+		unquote("#{$colorName}")-100: $c1,
+		unquote("#{$colorName}")-200: $c2,
+		unquote("#{$colorName}")-300: $c3,
+		unquote("#{$colorName}")-400: $c4,
+		unquote("#{$colorName}")-500: $c5,
+		unquote("#{$colorName}")-600: $c6,
+		unquote("#{$colorName}")-700: $c7,
+	);
+
+	@return $singleRange;
+}
+
+@function compRange($color,$map: singleRange(getColor('primary', $coreColors)),$colorName: 'comp') {
+	$compRange: ();
+	$l: luminance($color);
+
+	@return $compRange;
+}

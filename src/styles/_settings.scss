@@ -1,0 +1,14 @@
+ul {
+	list-style-type: none;
+}
+
+li {
+	padding: 0.2rem;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+li > button {
+	flex: 1 0 10%;
+}
