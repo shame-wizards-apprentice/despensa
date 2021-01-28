@@ -18,10 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     // Each food belongs to a location and cannot be created without a location due to the foreign key constraint
+    // [SK] added the foreignKey name to label the column in the Foods table
     Food.associate = (models) => {
         Food.belongsTo(models.Location, {
             onDelete: "cascade",
             foreignKey: {
+
+            		name: 'location_id',
                 allowNull: false
             } 
         });

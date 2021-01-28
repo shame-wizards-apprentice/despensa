@@ -1,0 +1,67 @@
+$sizes: ('xs','sm','md','lg','xl');
+$text-positions: ('left', 'center', 'right');
+$border-sides: ('top', 'right', 'bottom', 'left');
+$border-corners: ('top-left', 'top-right', 'bottom-right', 'bottom-left');
+$other: ('around', 'x', 'y');
+$justify: ('start', 'center', 'end', 'space-between', 'space-around', 'space-evenly');
+$align: ('stretch','center', 'start', 'end');
+
+//* ====================================
+//		GENERAL DEFAULTS
+//* ====================================
+$range: 'static';
+$scale: 0;
+@if $range == 'default' or $range == 'tintshade' {
+	$scale: 65;
+} @else {
+	$scale: 25;
+}
+
+$defaults: (
+	'padding': 0.75rem,
+	'margin': 0.75rem,
+	'gutter': 0.5rem,
+	'border-width': 1px,
+	'color-light': scale-color(getColor('neutral-100'), $lightness:  $scale),
+	'color-dark': scale-color(getColor('neutral-700'), $lightness: -($scale))
+) !default;
+
+$default-pad: map-get($defaults, 'padding');
+$default-margin: map-get($defaults, 'margin');
+$padding-sizes: (
+	'xs': $default-pad * 0.5,
+	'sm': $default-pad * 0.8,
+	'md': $default-pad,
+	'lg': $default-pad * 1.5,
+	'xl': $default-pad * 2
+) !default;
+
+$margin-sizes: (
+	'xs': $default-margin * 0.5,
+	'sm': $default-margin * 0.8,
+	'md': $default-margin,
+	'lg': $default-margin * 1.5,
+	'xl': $default-margin * 2
+) !default;
+
+$hr-sizes: (
+	'xs': 1px,
+	'sm': 2px,
+	'md': 3px,
+	'lg': 5px,
+	'xl': 7px
+) !default;
+
+//* ====================================
+//		GRID & MEDIA-QUERY BREAKPOINTS
+//* ====================================
+$mq-breakpoints: (
+	'mobile': 414px,
+	'mobileLandscape': 736px,
+	'tablet': 1024px,
+	'desktop': 1280px,
+	'wide': 1920px
+) !default;
+
+$max-columns: 12 !default;
+//$mq-show-breakpoints: (mobile, mobileLandscape, tablet, desktop, wide) !default;
