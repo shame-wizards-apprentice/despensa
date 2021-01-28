@@ -9,15 +9,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        // This data type is an array of strings, so we can store all the advice that corresponds with each theme in one place
         advice: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.STRING,
             allowNull: false
         }
 
     });
 
     // Each theme belongs to a user and is deleted if the user is deleted. It cannot be created without a user due to the foreign key constraint.
+
+    // [SK] added foreignKey name to label column in Themes table
+    // **NOTE** I think we may want to add a theme_id column (not as a foreign key restraint) to the Users table -- we don't want to repeat a theme just to associate it with a user; this field would be good for custom themes, though
     Theme.associate = (models) => {
         Theme.hasMany(models.User);
 

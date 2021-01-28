@@ -4,20 +4,27 @@ module.exports = (sequelize, DataTypes) => {
         type: {
             type: DataTypes.STRING,
             allowNull: false
+
         },
         descripion: {
             type: DataTypes.STRING,
             allowNull: true
+
+
         }
 
     });
 
     // Each container belongs to a location and cannot be created without a location due to the foreign key constraint
+
+
+    // [SK] added foreignKey name to label column in containers table
+
     Container.associate = (models) => {
         Container.belongsTo(models.Location, {
             onDelete: "cascade",
             foreignKey: {
-                name: "location_id",
+                name: 'location_id',
                 allowNull: false
             }
         });
