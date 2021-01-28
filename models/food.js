@@ -2,7 +2,7 @@
 // TODO: What format makes sense for the icon?
 module.exports = (sequelize, DataTypes) => {
     const Food = sequelize.define("Food", {
-        name: { 
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -23,12 +23,20 @@ module.exports = (sequelize, DataTypes) => {
 
     // Each food belongs to a location and cannot be created without a location due to the foreign key constraint
     Food.associate = (models) => {
-        Food.belongsTo(models.Location, {
+        Food.belongsTo(models.Container, {
+            // TODO: figure out what happens when deleted
+            foreignKey: {
+                name: "container_id",
+                allowNull: false
+            }
+        });
+        Food.belongsTo(user.User, {
             onDelete: "cascade",
             foreignKey: {
+                name: "user_id",
                 allowNull: false
-            } 
-        });
+            }
+        })
     };
 
     return Food;

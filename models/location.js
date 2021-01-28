@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Location = sequelize.define("Location", {
         name: {
-        type: DataTypes.STRING,
-        allowNull: false
+            type: DataTypes.STRING,
+            allowNull: false
         },
         type: {
             type: DataTypes.STRING,
@@ -16,16 +16,17 @@ module.exports = (sequelize, DataTypes) => {
     // Each location belongs to a user, and cannot be created without a user due to the foreign key constraint.
     Location.associate = (models) => {
         Location.hasMany(models.Food, {
-            onDelete: "cascade"
+            // TODO: Figure out what happens to food if not deleted when location is deleted
         });
         Location.hasMany(models.Container, {
             onDelete: "cascade"
         });
         Location.belongsTo(models.User, {
             foreignKey: {
+                name: "user_id",
                 allowNull: false
-            }    
-        });   
+            }
+        });
     };
 
     return Location;

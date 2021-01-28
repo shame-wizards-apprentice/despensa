@@ -19,12 +19,8 @@ module.exports = (sequelize, DataTypes) => {
 
     // Each theme belongs to a user and is deleted if the user is deleted. It cannot be created without a user due to the foreign key constraint.
     Theme.associate = (models) => {
-        Theme.belongsTo(models.User, {
-            onDelete: "cascade",
-            foreignKey: {
-                allowNull: false
-            } 
-        });
+        Theme.hasMany(models.User);
+
     };
 
     return Theme;
