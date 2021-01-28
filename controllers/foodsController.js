@@ -9,16 +9,23 @@ var Food = require("../models/food.js");
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
 	res.redirect("/foods");
-
-});
+    }).catch(err => {
+        	res.status(500).send(err.message);
+    });
 router.get("/foods", function(req,res) {
-    Food.findAll()
+    Food.findAll({
+        where: {
+            user_id:req.params.user_id
+        }
+    })
     .then(function(dbFood) {
         console.log(dbFood);
         const dbFoodsJson = dbFood.map(food=>food.toJSON())
         var hbsObject = {food: dbFoodJson};
-        return res.render("index",hbsObject);
-    });
+        return res.render("index",hbsObject);  
+        }).catch(err => {
+        res.status(500).send(err.message);
+    }); 
 });
 
 router.post("/foods/create", function(req, res) {
@@ -29,7 +36,9 @@ router.post("/foods/create", function(req, res) {
     }).then(function(dbFood){
         console.log(dbFood)
 		res.redirect("/");
-	});
+	}).catch(err => {
+        res.status(500).send(err.message);
+    }); 
 });
 router.put("/foods/update/:id", function(req, res) {
     Food.update(
@@ -43,9 +52,12 @@ router.put("/foods/update/:id", function(req, res) {
             id: req.body.id
         }
       }
-      ).then(function(newFood){
+      ).then(function(dbFood){
         res.json("Fresh Food!");
-    });
+        res.redirect("/foods");
+    }).catch(err => {
+        res.status(500).send(err.message);
+    }); 
 });      
 
 router.delete("foods/delete/:id", function (req, res) {
@@ -55,7 +67,9 @@ router.delete("foods/delete/:id", function (req, res) {
         }
     }).then(function(dbFood) {
         res.json(dbFood);
-    });
+    }).catch(err => {
+        res.status(500).send(err.message);
+    }); 
 });
 // Export routes for server.js to use.
 module.exports = router;
