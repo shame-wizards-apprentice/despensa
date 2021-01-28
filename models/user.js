@@ -1,8 +1,17 @@
 // Creates our Users table with id and name
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("User", {
-        name: DataTypes.STRING,
-        allowNull: false
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: dataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        }
     });
 
     // Each user has many locations, which are deleted if their user is deleted
@@ -20,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: {
                 name: "user_id",
                 allowNull: false
-            } 
+            }
         })
     };
 
