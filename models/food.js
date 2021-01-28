@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         use_by_date: {
             type: DataTypes.DATE_FORMAT,
             allowNull: false
+        },
+        isCheese: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
 
     });
