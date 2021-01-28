@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.belongsTo(models.Theme, {
             foreignKey: {
-                name: "user_id",
+                name: "theme_id",
                 allowNull: false
             }
         })
