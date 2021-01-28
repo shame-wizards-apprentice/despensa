@@ -1,0 +1,196 @@
+@mixin palette($color: #777, $colorMap: $coreColors, $colorName: $color, $harmony: 'analogous', $include-complement: false, $complement-name: "#{$color}-complement", $rangeType: 'range', $scaleColors: 17, $rangeDepth: 7) {
+	$palette: ();
+	
+	$primaryColor: getColor($color, $colorMap);
+
+	$colors: (); $primaryHarmonyRange: null; $mapRange: null;
+
+	// only run through the harmony function if it's required
+	@if $harmony == 'none' {
+		$colors: $colorMap;
+
+	} @else {
+		$colors: harmony($color: $primaryColor, $colorName: quote($colorName), $harmony: $harmony, $include-complement: $include-complement, $complement-name: $complement-name);
+	}
+
+	@if $rangeType == 'tintshade' {
+		$primaryHarmonyRange: tintShade($map: $colors, $scaleColors: $scaleColors);
+		$mapRange: tintShade($map: $colorMap, $scaleColors: $scaleColors);
+
+	} @else if $rangeType == 'rangeAdaptive' or $rangeType == 'adaptive' {
+		$primaryHarmonyRange: rangeAdaptive($map: $colors, $scaleColors: $scaleColors, $depth: $rangeDepth);
+		$mapRange: rangeAdaptive($map: $colorMap, $scaleColors: $scaleColors, $depth: $rangeDepth);
+
+	} @else if $rangeType == 'rangeStatic' or $rangeType == 'static' {
+		$primaryHarmonyRange: rangeStatic($map: $colors, $depth: $rangeDepth);
+		$mapRange: rangeStatic($map: $colorMap, $depth: $rangeDepth);
+	} @else {
+		$primaryHarmonyRange: rangeDefault($map: $colors, $scaleColors: $scaleColors, $depth: $rangeDepth);
+		$mapRange: rangeDefault($map: $colorMap, $scaleColors: $scaleColors, $depth: $rangeDepth);
+	}
+
+	// if a harmony was generated, add the range of the core colors (less the one used for the harmony)
+	@if $harmony != 'none' {
+		$originalList: map-remove($colors, $color);
+		$originalRange: rangeDefault($originalList, $scaleColors: $scaleColors);
+
+		@if($rangeType == 'tintshade') {
+			$originalRange: tintShade($map: $originalList, $scaleColors: $scaleColors);
+
+		}
+		@if($rangeType == 'rangeAdaptive' or $rangeType == 'adaptive') {
+			$originalRange: rangeAdaptive($originalList, $scaleColors: $scaleColors);
+		}
+		@if($rangeType == 'rangeStatic' or $rangeType == 'static') {
+			$originalRange: rangeStatic($originalList, $depth: $rangeDepth);
+		}
+
+		$rangeMaps: map-merge($mapRange, $originalRange);
+
+		$palette: map-merge($rangeMaps, $primaryHarmonyRange) !global;
+	// otherwise (no harmony generated) just merge the mapRange since that *is* the coreColors
+	} @else {
+		$palette: map-merge($mapRange, $primaryHarmonyRange) !global;
+	}
+}
+
+@mixin localPalette($colorMap: $coreColors, $color: 'primary', $colorName: $color, $harmony: 'analogous', $include-complement: false, $complement-name: "#{$color}-complement", $rangeType: 'range', $scaleColors: 17) {
+
+	$localPalette: () !global !default;
+
+	$primaryColor: map-get($colorMap, $color);
+
+	$colors: (); $primaryHarmonyRange: null; $mapRange: null;
+
+	// I FORGOT THE BLOODY '@' SYMBOL BEFORE else
+	@if $harmony == 'none' {
+		$colors: $colorMap;
+
+	} @else {
+		$colors: harmony($color: $primaryColor, $colorName: quote($colorName), $harmony: $harmony, $include-complement: $include-complement);
+	}
+
+	@if $rangeType == 'tintshade' {
+		$primaryHarmonyRange: tintShade($map: $colors, $scaleColors: $scaleColors);
+		$mapRange: tintShade($map: $colorMap, $scaleColors: $scaleColors);
+
+	} @else if $rangeType == 'rangeAdaptive' or $rangeType == 'adaptive' {
+		$primaryHarmonyRange: rangeAdaptive($map: $colors, $scaleColors: $scaleColors);
+		$mapRange: rangeAdaptive($map: $colorMap, $scaleColors: $scaleColors);
+
+	} @else {
+		$primaryHarmonyRange: rangeDefault($map: $colors, $scaleColors: $scaleColors);
+		$mapRange: rangeDefault($map: $colorMap, $scaleColors: $scaleColors);
+	}
+
+	// if a harmony was generated, add the range of the core colors (less the one used for the harmony)
+	@if $harmony != 'none' {
+		$originalList: map-remove($colors, $color);
+		$originalRange: rangeDefault($originalList, $scaleColors: $scaleColors);
+
+		@if($rangeType == 'tintshade') {
+			$originalRange: tintShade($map: $originalList, $scaleColors: $scaleColors);
+
+		}
+		@if($rangeType == 'rangeAdaptive' or $rangeType == 'adaptive') {
+			$originalRange: rangeAdaptive($originalList, $scaleColors: $scaleColors);
+		}
+
+		$rangeMaps: map-merge($mapRange, $originalRange);
+
+		$localPalette: map-merge($rangeMaps, $primaryHarmonyRange) !global;
+		//$localPalette: append($localPalette, $palette) !global;
+	// otherwise (no harmony generated) just merge the mapRange since that *is* the coreColors
+	} @else {
+		$localPalette: map-merge($mapRange, $primaryHarmonyRange) !global;
+		//$localPalette: append($localPalette, $palette) !global;
+	}
+}
+
+@mixin newPalette($baseColor: getColor('primary', $coreColors), $map: $coreColors) {
+	$newPalette: () !global;
+	$colors: map-values($coreColors);
+
+	@for $i from 1 through length($colors) {
+		$color: nth($colors, $i);
+		$diff: colorDiff($color, $baseColor);
+		@each $function, $value in $diff {
+			$color: (call($function, $color, $value));
+
+		}
+		$newPalette: append($newPalette, $color) !global;
+	}
+}
+
+@mixin singleRange($color: getColor('primary', $coreColors), $colorName: 'single') {
+	$singleRange: singleRange($color, $colorName) !global;
+}
+
+// provide a color name to get the contrasting color for either background or font
+@mixin colorPair($colorName, $map: $palette, $type: 'bg') {
+	@if $type == 'bg' or $type == 'background' {
+		background-color: getColor($colorName, $map);
+		color: getContrast( getColor($colorName, $map) );
+
+	} @else {
+		color: getColor($colorName, $map);
+		background-color: getContrast( getColor($colorName, $map) );
+	}
+	
+}
+
+// provide a color name to get contrasting color for bg / font + offset border color
+// border width & style *NOT* set
+@mixin colorSet($colorName, $map: $palette, $type: 'bg', $offsetTo: 700) {
+	$offsetName: $offsetTo;
+
+	@if type-of($offsetTo) == 'number' {
+		$splitName: str-split($colorName, "-");
+		
+		@if length($splitName) > 2 {
+			$offsetName: unquote("#{nth($splitName, 1)}-#{nth($splitName, 2)}-#{$offsetTo}");
+		} @else {
+			$offsetName: unquote("#{nth($splitName, 1)}-#{$offsetTo}");
+		}
+	}
+	// @debug $offsetName;
+
+	$colors: (
+		'root': getColor($colorName, $map),
+		'contrast': getContrast( getColor($colorName, $map) ),
+		'offset': getColor($offsetName, $map)
+	);
+
+	@if $type == 'bg' or $type == 'background' {
+		background-color: map-get($colors, 'root');
+		color: map-get($colors, 'contrast');
+		border-color: map-get($colors, 'offset');
+
+	} @else {
+		color: map-get($colors, 'root');
+		background-color: map-get($colors, 'contrast');
+		border-color: map-get($colors, 'offset');
+	}
+
+}
+
+// provide a BACKGROUND color the link text will need to contrast with
+// returns colors for a, a:hover a:focus, a:active, a:visited
+@mixin linkColors($bgColor) {
+	$color: getContrast($bgColor, 'link');
+	$l: null; $s: null;
+
+	@if lightness($color) < 65% { $l: 15%; } @else { $l: -15%; }
+	@if saturation($color) < 65% { $s: 15%; } @else { $s: -15%; }
+
+	a { color: $color; }
+	a:hover, a:focus {
+		color: adjust-color($color, $hue: 45deg, $saturation: $s, $lightness: $l);
+	}
+	a:active { 
+		color: adjust-color($color, $hue: 90deg, $saturation: $s, $lightness: $l);
+	}
+	a:visited { 
+		color: adjust-color($color, $hue: 135deg, $saturation: $s, $lightness: $l);
+	}
+}

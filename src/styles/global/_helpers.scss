@@ -1,0 +1,124 @@
+//* ====================================
+//*		HELPERS
+//*		1. Typography & alignment
+//*		2. Padding
+//*		3. Margin
+//* ====================================
+
+//* ====================================
+//*		HELPERS: TYPOGRAPHY & ALIGNMENT
+//* ====================================
+%flex-child { 
+	flex: 1 0 auto;
+}
+
+@each $position in $text-positions {
+	%text-#{$position} { text-align: unquote($position) !important; }
+}
+
+@each $type in $justify {
+	%justify-#{$type} { justify-content: unquote($type) !important; }
+}
+
+@each $type in $align {
+	%align-#{$type} { align-items: unquote($type) !important; }
+}
+
+%no-pad { padding: 0 !important; }
+%no-margin { margin: 0 !important; }
+
+//* ====================================
+//*		HELPERS: PADDING
+//* ====================================
+
+@each $position in $border-sides {
+	%pad-#{$position} {
+		padding-#{$position}: $default-pad !important;
+	}
+}
+
+@each $position in $other {
+	%pad-#{$position} {
+		@if $position == 'around' { 
+			padding: $default-pad !important; 
+		}
+		@if $position == 'x' { 
+			padding-left: $default-pad !important;
+			padding-right: $default-pad !important;
+		}
+		@if $position == 'y' {
+			padding-top: $default-pad !important;
+			padding-bottom: $default-pad !important;
+		}
+	}
+}
+
+@each $size,$pad in $padding-sizes {
+	@each $position in $border-sides {
+		%pad-#{$size}-#{$position} {
+			padding-#{$position}: map-get($padding-sizes, quote($size)) !important;
+		}
+	}
+
+	@each $position in $other {
+		%pad-#{$size}-#{$position} {
+			@if $position == 'around' { 
+				padding: map-get($padding-sizes, quote($size)) !important; 
+			}
+			@if $position == 'x' { 
+				padding-left: map-get($padding-sizes, quote($size)) !important;
+				padding-right: map-get($padding-sizes, quote($size)) !important;
+			}
+			@if $position == 'y' {
+				padding-top: map-get($padding-sizes, quote($size)) !important;
+				padding-bottom: map-get($padding-sizes, quote($size)) !important;
+			}
+		}
+	}
+}
+
+//* ====================================
+//*		HELPERS: MARGIN
+//* ====================================
+@each $position in $border-sides {
+	%margin-#{$position} {
+		padding-#{$position}: $default-margin !important;
+	}
+}
+
+@each $position in $other {
+	%margin-#{$position} {
+		@if $position == 'around' { padding: $default-margin !important; }
+		@if $position == 'x' { 
+			padding-left: $default-margin !important;
+			padding-right: $default-margin !important;
+		}
+		@if $position == 'y' {
+			padding-top: $default-margin !important;
+			padding-bottom: $default-margin !important;
+		}
+	}
+}
+
+@each $size,$margin in $margin-sizes {
+	@each $position in $border-sides {
+		%margin-#{$size}-#{$position} {
+			margin-#{$position}: map-get($margin-sizes, quote($size)) !important;
+		}
+	}
+	@each $position in $other {
+		%margin-#{$size}-#{$position} {
+			@if $position == 'around' { 
+				margin: map-get($margin-sizes, quote($size)) !important; 
+			}
+			@if $position == 'x' { 
+				margin-left: map-get($margin-sizes, quote($size)) !important;
+				margin-right: map-get($margin-sizes, quote($size)) !important;
+			}
+			@if $position == 'y' {
+				margin-top: map-get($margin-sizes, quote($size)) !important;
+				margin-bottom: map-get($margin-sizes, quote($size)) !important;
+			}
+		}
+	}
+}
