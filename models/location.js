@@ -1,4 +1,4 @@
-// Creates our Locations table with id and name
+// Creates our Locations table with id, name, and type
 module.exports = (sequelize, DataTypes) => {
     const Location = sequelize.define("Location", {
         name: {
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     // Each location has many foods and containers, both of which are deleted if the location is deleted. 
-    // Every location belongs to a user, and cannot be created without a user.
+    // Each location belongs to a user, and cannot be created without a user due to the foreign key constraint.
     Location.associate = (models) => {
         Location.hasMany(models.Food, {
             onDelete: "cascade"
@@ -29,4 +29,4 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     return Location;
-}
+};
