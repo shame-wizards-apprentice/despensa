@@ -22,9 +22,3 @@ $messageColors: (
 // MUST be imported AFTER defining $coreColors!
 @import "functions";
 @import "mixins";
-
-// quad/quadratic = square tetrad harmony; tetrad/tetradic = rectangular tetrad
-$range: 'static';
-@include palette($color: 'primary', $complement-name: 'complement', $rangeType: $range, $rangeDepth: 9);
-
-// @debug $palette;

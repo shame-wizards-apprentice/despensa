@@ -9,6 +9,7 @@ $align: ('stretch','center', 'start', 'end');
 //* ====================================
 //		GENERAL DEFAULTS
 //* ====================================
+$range: 'static';
 $scale: 0;
 @if $range == 'default' or $range == 'tintshade' {
 	$scale: 65;

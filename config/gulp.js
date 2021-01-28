@@ -1,17 +1,17 @@
 var paths = {
-	dist_dir: `dist`,
-	dist_files: 'dist/**/*.*',
+	dist_dir: `public`,
+	dist_files: 'public/**/*.*',
 	styles: { 
-		src:  `src/styles/**/!(#)*.scss`,
-		dest: `dist/public/css`
+		src:  `src`,
+		dest: `public`
 	},
 	scripts: {
 		src: `src/scripts/**/!(_)*.js`,
-		dest: `dist/public/js`
+		dest: `public/js`
 	},
 	images: {
-		src: `src/images/**/!(_)*.{jpg,JPG,jpeg,JPEG,png,PNG}`,
-		dest: `dist/public/images`
+		src: `src/themes`,
+		dest: `public/themes`
 	},
 	views: 'views/**/*.handlebars'
 }

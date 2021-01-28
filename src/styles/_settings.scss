@@ -1,14 +1,18 @@
-ul {
-	list-style-type: none;
+// quad/quadratic = square tetrad harmony; tetrad/tetradic = rectangular tetrad
+$range: 'static';
+@include palette($color: 'primary', $complement-name: 'complement', $rangeType: $range, $rangeDepth: 9);
+
+body {
+	background-color: getColor('neutral-100');
+	color: getColor('accent-400');
+	text-align: center;
 }
 
-li {
-	padding: 0.2rem;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-}
-
-li > button {
-	flex: 1 0 10%;
+.legal-notice {
+	color: getColor('neutral-400');
+	font-size: smaller;
+	border-left: 4px solid getColor('secondary-400');
+	display: inline-block;
+	padding: 1rem;
+	background-color: darkenColor(getColor('neutral-50'), 6);
 }

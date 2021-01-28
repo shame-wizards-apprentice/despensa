@@ -437,23 +437,15 @@ body {
 	max-width: 100%;
 	width: 100%; }
 
-ul {
-	list-style-type: none; }
+body {
+	background-color: #d9dce2;
+	color: #7f46dc;
+	text-align: center; }
 
-li {
-	padding: 0.2rem;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row nowrap;
-	        flex-flow: row nowrap;
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between; }
-
-li > button {
-	-webkit-box-flex: 1;
-	    -ms-flex: 1 0 10%;
-	        flex: 1 0 10%; }
+.legal-notice {
+	color: #838aa0;
+	font-size: smaller;
+	border-left: 4px solid #74b072;
+	display: inline-block;
+	padding: 1rem;
+	background-color: #e5e7ec; }

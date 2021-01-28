@@ -1,15 +1,23 @@
 {
-  "name": "ehm-template",
+  "name": "despensa",
   "version": "1.0.0",
-  "description": "* **Instructions**",
+  "description": "",
   "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/shame-wizards-apprentice/despensa#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shame-wizards-apprentice/despensa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shame-wizards-apprentice/despensa/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "autoprefixer": "^9.0.0",
     "browser-sync": "^2.26.13",
@@ -29,7 +37,8 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-wait": "0.0.2",
-    "mysql": "^2.18.1"
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0"
   },
   "devDependencies": {
     "jshint": "latest"
