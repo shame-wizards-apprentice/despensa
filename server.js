@@ -1,4 +1,5 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
 
 var PORT = process.env.PORT || 8080;
 
@@ -11,11 +12,14 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Set Handlebars.
-var exphbs = require("express-handlebars");
+var hbsHelpers = exphbs.create({
+	helpers: require('./config/hbs-helpers.js').helpers,
+	defaultLayout: 'main',
+	extname: 'hbs'
+});
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.engine("hbs", hbsHelpers.engine);
+app.set("view engine", "hbs");
 
 // Import routes and give the server access to them.
 var routes = require("./controllers/usersController.js");
