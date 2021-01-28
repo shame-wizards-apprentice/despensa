@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         Food.belongsTo(models.Location, {
             onDelete: "cascade",
             foreignKey: {
+
             		name: 'location_id',
                 allowNull: false
             } 
