@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
         type: { 
             type: DataTypes.STRING,
             allowNull: false
+        },
+        descripion: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
 
     });
