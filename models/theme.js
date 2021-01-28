@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        // This data type is an array of strings, so we can store all the advice that corresponds with each theme in one place
         advice: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.STRING,
             allowNull: false
         }
 
