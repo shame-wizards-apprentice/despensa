@@ -12,10 +12,7 @@ const { Location } = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {
-    res.redirect("/locations/:user_id").catch((err) => {
-        if (err) console.log(err.message)
-        res.status(500).send("Internal server error")
-    });
+    res.redirect("/locations/:user_id")
 
 });
 
@@ -29,10 +26,7 @@ router.get("/locations/:user_id", (req, res) => {
         const dbLocationJson = data.map(location => location.toJSON())
         var hbsObject = { location: dbLocationJson };
         return res.render("index", hbsObject);
-    }).catch((err) => {
-        if (err) console.log(err.message)
-        res.status(500).send("Internal server error")
-    });
+    })
 });
 
 router.post("/locations/create", (req, res) => {

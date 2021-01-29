@@ -18,8 +18,6 @@ router.get("/containers", function (req, res) {
             const dbContainersJson = dbContainer.map(Container => Container.toJSON())
             var hbsObject = { Container: dbContainerJson };
             return res.render("index", hbsObject);
-        }).catch(err => {
-            res.status(500).send(err.message);
         });
 });
 
