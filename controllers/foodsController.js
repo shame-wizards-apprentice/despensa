@@ -9,8 +9,6 @@ var { Food } = require("../models");
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {
     res.redirect("/foods");
-}).catch(err => {
-    res.status(500).send(err.message);
 });
 router.get("/foods", function (req, res) {
     Food.findAll({
@@ -23,9 +21,7 @@ router.get("/foods", function (req, res) {
             const dbFoodsJson = dbFood.map(food => food.toJSON())
             var hbsObject = { food: dbFoodJson };
             return res.render("index", hbsObject);
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
+        })
 });
 
 router.post("/foods/create", function (req, res) {
