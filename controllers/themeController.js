@@ -1,5 +1,5 @@
 const express = require("express");
-const { Theme } = require("../models/theme.js");
+const { Theme } = require("../models");
 
 const router = express.Router();
 
