@@ -26,7 +26,10 @@
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+  	"gulp-jshint": "latest",
+    "jshint": "latest"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
