@@ -4,11 +4,7 @@ const food = require("../models/food.js");
 const router = express.Router();
 
 // Import the model (location.js) to use its database functions.
-<<<<<<< HEAD
-const {Location} = require("../models");
-=======
 const { Location } = require("../models");
->>>>>>> dev
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {

@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
                 isEmail: true
             }
         },
-        password:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                len:[8]
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8]
             }
-        }   
+        }
     });
 
     // Each user has many locations, which are deleted if their user is deleted
@@ -40,11 +40,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             }
         });
-        User.hasMany(models.Review);
     };
-        User.beforeCreate(function(user) {
-            user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-        });
+    User.beforeCreate(function (user) {
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    });
 
     return User;
 };
