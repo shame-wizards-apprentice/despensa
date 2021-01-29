@@ -3,41 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://github.com/shame-wizards-apprentice/despensa#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shame-wizards-apprentice/despensa.git"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
-    "mysql2": "^1.6.4",
-    "sequelize": "^4.41.2"
-  },
-  "bugs": {
-    "url": "https://github.com/shame-wizards-apprentice/despensa/issues"
-  },
-  "homepage": "https://github.com/shame-wizards-apprentice/despensa#readme"
-
-  "bugs": {
-    "url": "https://github.com/shame-wizards-apprentice/despensa/issues"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "autoprefixer": "^9.0.0",
-    "browser-sync": "^2.26.13",
+    "autoprefixer": "^10.2.4",
+    "bcrypt": "^5.0.0",
+    "browser-sync": "^2.26.14",
     "del": "^6.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
@@ -57,7 +26,19 @@
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0"
   },
-  "devDependencies": {
-    "jshint": "latest"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shame-wizards-apprentice/despensa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shame-wizards-apprentice/despensa/issues"
+  },
+  "homepage": "https://github.com/shame-wizards-apprentice/despensa#readme"
 }
