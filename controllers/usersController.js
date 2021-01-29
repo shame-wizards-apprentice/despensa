@@ -22,9 +22,7 @@ router.get("/Users", function (req, res) {
             const dbUsersJson = dbUser.map(User => User.toJSON())
             var hbsObject = { User: dbUserJson };
             return res.render("index", hbsObject);
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
+        })
 });
 // Create Route
 router.post("/Users/create", function (req, res) {
