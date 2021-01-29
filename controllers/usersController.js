@@ -3,7 +3,11 @@ var express = require("express");
 var router = express.Router();
 
 // Import the model (User.js) to use its database functions.
+<<<<<<< HEAD
+var {User}= require("../models");
+=======
 const { User } = require("../models");
+>>>>>>> dev
 
 // Create all our routes and set up logic within those routes where required.
 // Read Route
