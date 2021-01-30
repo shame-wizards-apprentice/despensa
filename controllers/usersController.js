@@ -1,60 +1,43 @@
 var express = require("express");
 
-var router = express.Router();
+const router = express.Router();
 
 // Import the model (User.js) to use its database functions.
 const { User } = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
-// Read Route
-router.get("/", function (req, res) {
-    res.redirect("/Users");
-});
-router.get("/Users", function (req, res) {
-    User.findAll({
-        where: {
-            name: req.body.name,
-            id: req.params.id
-        }
-    })
-        .then(function (dbUser) {
-            console.log(dbUser);
-            const dbUsersJson = dbUser.map(User => User.toJSON())
-            var hbsObject = { User: dbUserJson };
-            return res.render("index", hbsObject);
-        })
-});
+
 // Create Route
-router.post("/Users/create", function (req, res) {
+router.post("/signup", function (req, res) {
     User.create({
-        name: req.body.name,
+        username: req.body.username,
         email: req.body.email,
-    }).then(function (dbUser) {
-        console.log(dbUser)
-        res.redirect("/");
+        password: req.body.password
+    }).then((data) => {
+        res.json(data)
     }).catch(err => {
         res.status(500).send(err.message);
     });
 });
 // Update Route
-router.put("/users/update/:id", function (req, res) {
+router.put("/users/update/:id", (req, res) => {
     User.update(
         {
-            name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
+            password: req.body.password
 
         },
         {
             where: {
                 id: req.body.id
             }
-        }
-    ).then(function (dbUser) {
-        res.json("User settings updated.");
-        res.redirect("/users");
-    }).catch(err => {
-        res.status(500).send(err.message);
-    });
+        }).then((data) => {
+            console.log(data)
+            res.send("User settings updated.");
+        }).catch(err => {
+            res.status(500).send(err.message);
+        });
 });
 // Delete Route
 router.delete("users/delete/:id", function (req, res) {
@@ -62,8 +45,8 @@ router.delete("users/delete/:id", function (req, res) {
         where: {
             id: req.params.id
         }
-    }).then(function (dbUser) {
-        res.json(dbUser);
+    }).then((data) => {
+        res.json(data);
     }).catch(err => {
         res.status(500).send(err.message);
     });
