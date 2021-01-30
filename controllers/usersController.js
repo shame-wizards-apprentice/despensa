@@ -6,13 +6,17 @@ const router = express.Router();
 const { User } = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
+router.get('/', function(req, res) {
+	res.render("index", {});
+});
 
 // Create Route
 router.post("/signup", function (req, res) {
     User.create({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        theme_id: req.body.theme_id
     }).then((data) => {
         res.json(data)
     }).catch(err => {
