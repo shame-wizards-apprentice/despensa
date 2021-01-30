@@ -13,7 +13,7 @@ var paths = {
 		src: `src/themes`,
 		dest: `public/themes`
 	},
-	views: 'views/**/*.handlebars'
+	views: 'views/**/*.{handlebars,hbs}'
 }
 
 module.exports = {

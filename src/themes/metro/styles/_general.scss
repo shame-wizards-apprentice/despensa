@@ -1,0 +1,11 @@
+body {
+	background-color: $body--bg-color;
+	color: $text-color;
+}
+
+.site-header { background-color: $site-header--bg-color; }
+.site-title { color: $site-title--color; }
+
+ul.menu {
+	background-color: transparent;
+}

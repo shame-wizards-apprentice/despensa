@@ -10,12 +10,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        use_by_date: {
-            type: DataTypes.DATE_FORMAT,
+        days_to_use: {
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         isCheese: {
             type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        amount: {
+            type: DataTypes.INTEGER,
             allowNull: false
         }
 
@@ -31,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             }
         });
-        Food.belongsTo(user.User, {
+        Food.belongsTo(models.User, {
             onDelete: "cascade",
             foreignKey: {
                 name: "user_id",

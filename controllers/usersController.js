@@ -3,82 +3,72 @@ var express = require("express");
 var router = express.Router();
 
 // Import the model (User.js) to use its database functions.
-var User = require("../models/User.js");
+const { User } = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
-router.get("/users", function(req, res) {
-	res.render("index",
-		{
-			theme: "cute",
-			user: {
-				name: "Leora Harlyn",
-				email: "leora@dinonite.com",
-			},
-			locations: [
-				{
-					name: "Kitchen Fridge",
-					type: "Refridgerator",
-					containers: [
-						{
-							type: "Bin",
-							description: "Bottom left"
-						},
-						{
-							type: "Bin",
-							description: "Bottom right"
-						},
-						{
-							type: "Shelf",
-							description: "Middle left"
-						}
-					]
-				},
-				{
-					name: "Kitchen Freezer",
-					type: "Freezer",
-					containers: [
-						{
-							type: "Bin",
-							description: "Top left"
-						},
-						{
-							type: "Shelf",
-							description: "Top right"
-						}
-					]
-				}
-			]
-		});
-  // User.findAll().then(function(data) {
-  // 	// send object back to index to use with handlebars
-  //   res.render("index", {user: data});
+// Read Route
+// router.get("/", function (req, res) {
+//     res.redirect("/Users");
+// });
+// router.get("/Users", function (req, res) {
+//     User.findAll({
+//         where: {
+//             name: req.body.name,
+//             id: req.params.id
+//         }
+//     })
+//         .then(function (dbUser) {
+//             console.log(dbUser);
+//             const dbUsersJson = dbUser.map(User => User.toJSON())
+//             var hbsObject = { User: dbUserJson };
+//             return res.render("index", hbsObject);
+//         })
+// });
+// // Create Route
+// router.post("/Users/create", function (req, res) {
+//     User.create({
+//         name: req.body.name,
+//         email: req.body.email,
+//     }).then(function (dbUser) {
+//         console.log(dbUser)
+//         res.redirect("/");
+//     }).catch(err => {
+//         res.status(500).send(err.message);
+//     });
+// });
+// // Update Route
+// router.put("/users/update/:id", function (req, res) {
+//     User.update(
+//         {
+//             name: req.body.name,
+//             email: req.body.email,
 
-  // }).catch(err => {
-  // 	res.status(500).send(err.message);
+//         },
+//         {
+//             where: {
+//                 id: req.body.id
+//             }
+//         }
+//     ).then(function (dbUser) {
+//         res.json("User settings updated.");
+//         res.redirect("/users");
+//     }).catch(err => {
+//         res.status(500).send(err.message);
+//     });
+// });
+// // Delete Route
+// router.delete("users/delete/:id", function (req, res) {
+//     User.destroy({
+//         where: {
+//             id: req.params.id
+//         }
+//     }).then(function (dbUser) {
+//         res.json(dbUser);
+//     }).catch(err => {
+//         res.status(500).send(err.message);
+//     });
+// });
 
-  // });
-});
-
-router.post("/api/users", function(req, res) {
-  User.create(req.body).then(data => {
-		res.json(data);
-	});
-});
-
-router.put("/api/users/:id", function(req, res) {
-
-  User.update(req.body, {
-    where: {
-      id: req.body.id
-    }
-  }).then(data => {
-    res.json(data);
-
-  }).catch(err => {
-    res.status(500).send(err.message);
-
-  });
-});
 
 // Export routes for server.js to use.
 module.exports = router;

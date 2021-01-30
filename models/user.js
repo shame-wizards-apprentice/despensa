@@ -1,8 +1,26 @@
+const bcrypt = require('bcrypt');
+
 // Creates our Users table with id and name
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("User", {
-        name: DataTypes.STRING,
-        allowNull: false
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8]
+            }
+        }
     });
 
     // Each user has many locations, which are deleted if their user is deleted
@@ -18,11 +36,14 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.belongsTo(models.Theme, {
             foreignKey: {
-                name: "user_id",
+                name: "theme_id",
                 allowNull: false
-            } 
-        })
+            }
+        });
     };
+    User.beforeCreate(function (user) {
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    });
 
     return User;
-}
+};
