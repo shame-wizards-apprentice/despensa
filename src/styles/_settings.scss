@@ -7,6 +7,14 @@ body {
 	color: getColor('accent-400');
 }
 
+.site-header {
+	padding: 0 4rem;
+}
+
+.top-bar-right {
+	text-align: center;
+}
+
 .legal-notice {
 	color: getColor('neutral-400');
 	font-size: smaller;

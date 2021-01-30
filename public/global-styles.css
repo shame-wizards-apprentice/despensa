@@ -441,6 +441,12 @@ body {
 	background-color: #d9dce2;
 	color: #7f46dc; }
 
+.site-header {
+	padding: 0 4rem; }
+
+.top-bar-right {
+	text-align: center; }
+
 .legal-notice {
 	color: #838aa0;
 	font-size: smaller;
@@ -448,3 +454,61 @@ body {
 	display: inline-block;
 	padding: 1rem;
 	background-color: #e5e7ec; }
+
+.text-left {
+	text-align: left; }
+
+.text-center {
+	text-align: center; }
+
+.text-right {
+	text-align: right; }
+
+.justify-start {
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: start; }
+
+.justify-center {
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center; }
+
+.justify-end {
+	-webkit-box-pack: end;
+	    -ms-flex-pack: end;
+	        justify-content: end; }
+
+.justify-space-between {
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between; }
+
+.justify-space-around {
+	-ms-flex-pack: distribute;
+	    justify-content: space-around; }
+
+.justify-space-evenly {
+	-webkit-box-pack: space-evenly;
+	    -ms-flex-pack: space-evenly;
+	        justify-content: space-evenly; }
+
+.align-stretch {
+	-webkit-box-align: stretch;
+	    -ms-flex-align: stretch;
+	        align-items: stretch; }
+
+.align-center {
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center; }
+
+.align-start {
+	-webkit-box-align: start;
+	    -ms-flex-align: start;
+	        align-items: start; }
+
+.align-end {
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: end; }
