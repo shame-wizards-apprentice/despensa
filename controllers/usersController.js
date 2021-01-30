@@ -20,37 +20,37 @@ router.post("/signup", function (req, res) {
     });
 });
 // Update Route
-router.put("/users/update/:id", (req, res) => {
-    User.update(
-        {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
+// router.put("/users/update/:id", (req, res) => {
+//     User.update(
+//         {
+//             username: req.body.username,
+//             email: req.body.email,
+//             password: req.body.password
 
-        },
-        {
-            where: {
-                id: req.body.id
-            }
-        }).then((data) => {
-            console.log(data)
-            res.send("User settings updated.");
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
-});
+//         },
+//         {
+//             where: {
+//                 id: req.body.id
+//             }
+//         }).then((data) => {
+//             console.log(data)
+//             res.send("User settings updated.");
+//         }).catch(err => {
+//             res.status(500).send(err.message);
+//         });
+// });
 // Delete Route
-router.delete("users/delete/:id", function (req, res) {
-    User.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then((data) => {
-        res.json(data);
-    }).catch(err => {
-        res.status(500).send(err.message);
-    });
-});
+// router.delete("users/delete/:id", function (req, res) {
+//     User.destroy({
+//         where: {
+//             id: req.params.id
+//         }
+//     }).then((data) => {
+//         res.json(data);
+//     }).catch(err => {
+//         res.status(500).send(err.message);
+//     });
+// });
 
 
 // Export routes for server.js to use.
