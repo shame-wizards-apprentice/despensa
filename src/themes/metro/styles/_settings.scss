@@ -1,11 +1,11 @@
 @import "../../../styles/global/core";
 
 $coreColors: (
-	green: #CBE896,
-	orange: #F7934C,
-	blue: #087e8b,
-	red: #ca2e55,
-	neutral: #2f2f2f
+	"green": #CBE896,
+	"orange": #F7934C,
+	"blue": #087e8b,
+	"red": #ca2e55,
+	"neutral": #2f2f2f
 );
 
 @include palette($color: 'green', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);

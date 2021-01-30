@@ -26,6 +26,10 @@ var routes = require("./controllers/usersController.js");
 
 app.use(routes);
 
+app.get("/", (req, res) => {
+	res.render("index", {});
+});
+
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
   // Log (server-side) when our server has started
