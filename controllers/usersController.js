@@ -23,13 +23,33 @@ router.post("/signup", function (req, res) {
         res.status(500).send(err.message);
     });
 });
+
+// Login Route
+router.post("/login", function (req, res) {
+    User.findOne({
+        where: {
+        username: req.body.username
+        }
+    }).then((data) => {
+        if(!data) {
+            res.status(404).send("user does not exist...on this app.")
+        } else {
+            res.json(data)
+        }
+        
+    }).catch(err => {
+        res.status(500).send(err.message);
+    });
+});
+
 // Update Route
 // router.put("/users/update/:id", (req, res) => {
 //     User.update(
 //         {
 //             username: req.body.username,
 //             email: req.body.email,
-//             password: req.body.password
+//             password: req.body.password,
+//             theme_id: req.body.theme_id
 
 //         },
 //         {
