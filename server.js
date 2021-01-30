@@ -25,10 +25,13 @@ const userRoutes = require("./controllers/usersController.js");
 
 app.use(userRoutes);
 
+
 // Start our server so that it can begin listening to client requests.
 db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
-    console.log("Server listening on: http://localhost:" + PORT);
+    console.log('App listening on PORT ' + PORT);
   });
 });
+
+
 
