@@ -3,9 +3,10 @@ const bcrypt = require('bcrypt');
 // Creates our Users table with id and name
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("User", {
-        name: {
+        username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         email: {
             type: DataTypes.STRING,
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
                 len: [8]
             }
         }
-    });
+    }, { underscored: true });
 
     // Each user has many locations, which are deleted if their user is deleted
     User.associate = (models) => {
