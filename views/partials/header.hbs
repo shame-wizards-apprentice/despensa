@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="themes/{{theme}}/css/{{theme}}-styles.css" type="text/css"/>
+</head>
+<body>
+<div class="top-bar">
+	<div class="top-bar-left">
+			<li class="menu-text">Despensa</li>
+	</div>
+	<div class="top-bar-right">
+		<ul class="menu">
+			<li><a href="#">Sign {{#if user}}Out{{else}}In{{/if}}</a></li>
+			<li><a href="#">View Despensa</a></li>
+			<li><a href="#">Add Food</a></li>
+		  <li>
+		  	<form class="form form-horizontal">
+				  <div id="username-group">
+				      <label for="user">User Name</label>
+				      <input type="text" id="user" name="user">
+				  </div>
+
+				  <div id="password-group">
+				      <label for="pass">Password</label>
+				      <input type="text" id="pass" name="pass">
+				  </div>
+
+				  <button type="submit" id="sign-in-btn">Sign In</button> / 
+				  <button type="submit" id="sign-up-btn">Sign Up</button>
+				</form>
+		  </li>
+		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
+		</ul>
+	</div>
+</div>
