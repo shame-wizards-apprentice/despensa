@@ -1,7 +1,14 @@
 const express = require("express");
+<<<<<<< HEAD
 const session = require('express-session');
 const PORT = process.env.PORT || 8080;
 
+=======
+const session = require ('express-session');
+
+const PORT = process.env.PORT || 8080;
+
+>>>>>>> dev
 const app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -17,7 +24,11 @@ app.use(session({
   resave: false,
   saveUninitialied: true,
   cookies: {
+<<<<<<< HEAD
     maxAge: 1000 * 60 * 60 * 2
+=======
+    maxAge: 1000*60*60*2
+>>>>>>> dev
   }
 }));
 
