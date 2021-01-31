@@ -35,13 +35,13 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.Container, {
             onDelete: "cascade"
         });
-        // User.belongsTo(models.Theme, {
-        //     foreignKey: {
-        //         name: "theme_id",
-        //         allowNull: false,
-        //         defaultValue: 1
-        //     }
-        // });
+        User.belongsTo(models.Theme, {
+            foreignKey: {
+                name: "theme_id",
+                allowNull: false,
+                defaultValue: 1
+            }
+        });
     };
     User.beforeCreate(function (user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
