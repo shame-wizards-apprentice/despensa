@@ -22,7 +22,7 @@ router.get("/locations/:user_id", (req, res) => {
             where: {
                 user_id: req.sessions.user_id
             }
-        }).then((data) => {
+        }).then(data => {
             console.log(data);
             const dbLocationJson = data.map(location => location.toJSON())
             var hbsObject = { location: dbLocationJson };
@@ -43,11 +43,11 @@ router.post("/locations/create", (req, res) => {
             name: req.body.name,
             type: req.body.type,
             user_id: req.session.user.id
-        }).then((data) => {
+        }).then(data => {
             console.log(data);
             res.send(data);
             res.redirect("/");
-        }).catch((err) => {
+        }).catch(err => {
             if (err) console.log(err.message)
             res.status(500).send("Internal server error")
         });
@@ -73,10 +73,10 @@ router.put("/locations/update/:id", (req, res) => {
                     id: req.body.id
                 }
             }
-        ).then((data) => {
+        ).then(data => {
             res.send(data);
             res.redirect("/");
-        }).catch((err) => {
+        }).catch(err => {
             if (err) console.log(err.message)
             res.status(500).send("Internal server error")
         });
@@ -96,10 +96,10 @@ router.delete("locations/delete/:id", (req, res) => {
                 user_id: req.sessions.user.id,
                 id: req.params.id
             }
-        }).then((data) => {
+        }).then(data => {
             res.send(data);
             res.redirect("/");
-        }).catch((err) => {
+        }).catch(err => {
             if (err) console.log(err.message)
             res.status(500).send("Internal server error")
         });

@@ -39,6 +39,7 @@ router.post("/signup", (req, res) => {
         }
     )
     .then((data) => {
+    }).then(data => {
         res.json(data)
     }).catch(err => {
         res.status(500).send(err.message);
@@ -51,7 +52,7 @@ router.post("/login", (req, res) => {
         where: {
             username: req.body.username
         }
-    }).then((data) => {
+    }).then(data => {
         if (!data) {
             res.status(404).send("user does not exist...on this app.")
         } else {
@@ -65,6 +66,9 @@ router.post("/login", (req, res) => {
                 res.status(401).send("Ah ah ah! You didn't say the magic word...")
             }
         }
+    }).catch(err => {
+        if (err) console.log(err.message)
+        res.status(500).send("Internal server error")
     });
 
 });
@@ -86,7 +90,8 @@ router.get("/lardersquadVIP", (req, res) => {
 // Logout route
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/')
+    res.redirect('/');
+    console.log("success")
 })
 
 
