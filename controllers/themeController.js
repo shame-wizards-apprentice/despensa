@@ -1,6 +1,8 @@
+// Dependencies
 const express = require("express");
 const { Theme } = require("../models");
 
+// Express router methods
 const router = express.Router();
 
 // API route to display all themes as json
