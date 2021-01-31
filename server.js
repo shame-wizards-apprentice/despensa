@@ -1,5 +1,5 @@
 const express = require("express");
-
+const session = require ('express-session');
 const PORT = process.env.PORT || 8080;
 
 const app = express();
@@ -10,6 +10,16 @@ app.use(express.static("public"));
 // Parse application body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Sets up sessions for user login
+app.use(session({
+  secret: 'What does despensa mean? ',
+  resave: false,
+  saveUninitialied: true,
+  cookies: {
+    maxAge: 1000*60*60*2
+  }
+}));
 
 // Set Handlebars.
 const exphbs = require("express-handlebars");
