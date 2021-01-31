@@ -25,16 +25,19 @@
 //     })
 // });
 
-// router.post("/locations/create", (req, res) => {
-//     Location.create(req.body).then((data) => {
-//         console.log(data);
-//         res.send(data);
-//         res.redirect("/");
-//     }).catch((err) => {
-//         if (err) console.log(err.message)
-//         res.status(500).send("Internal server error")
-//     });
-// });
+router.post("/locations/create", (req, res) => {
+    if(!req.session.user){
+        res.status(401).send("Please login first.")
+    }
+    Location.create(req.body).then((data) => {
+        console.log(data);
+        res.send(data);
+        res.redirect("/");
+    }).catch((err) => {
+        if (err) console.log(err.message)
+        res.status(500).send("Internal server error")
+    });
+});
 // router.put("/locations/update/:id", (req, res) => {
 //     Location.update(
 //         {

@@ -5,7 +5,7 @@ const router = express.Router();
 // Import the model (User.js) to use its database functions.
 const { User } = require("../models");
 
-const bcrypt =require("bcrypt");
+const bcrypt = require("bcrypt");
 
 // Create all our routes and set up logic within those routes where required.
 router.get('/', function(req, res) {
@@ -58,7 +58,7 @@ router.get("/readsessions",(req,res)=>{
 // Test Route
 router.get("/lardersquadVIP", (req,res)=> {
     if(req.session.user) {
-        res.send(`    You are part of an exceptional group of people, ${req.session.user.username}.`)
+        res.send(`You are part of an exceptional group of people, ${req.session.user.username}.`)
     } else {
         res.status(401).send("login required.")
     }
