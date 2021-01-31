@@ -6,7 +6,8 @@ const { User } = require("../models");
 // Express router methods 
 const router = express.Router();
 
-// Create all our routes and set up logic within those routes where required.
+// Routes
+// Homepage route
 router.get('/', (req, res) => {
     res.render("index", {});
 });
@@ -63,39 +64,13 @@ router.get("/lardersquadVIP", (req, res) => {
     }
 });
 
-// Update route
-router.put("/users/update/:id", (req, res) => {
-    User.update(
-        {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            theme_id: req.body.theme_id
+// Logout route
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/')
+})
 
-        },
-        {
-            where: {
-                id: req.body.id
-            }
-        }).then((data) => {
-            console.log(data)
-            res.send("User settings updated.");
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
-});
-Delete Route
-router.delete("users/delete/:id", function (req, res) {
-    User.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then((data) => {
-        res.json(data);
-    }).catch(err => {
-        res.status(500).send(err.message);
-    });
-});
+
 
 
 // Export routes for server.js to use.
