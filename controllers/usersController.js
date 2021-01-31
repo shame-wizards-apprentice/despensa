@@ -1,7 +1,7 @@
 // Dependencies
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const db = require("../models");
 
 // Express router methods 
 const router = express.Router();
@@ -30,7 +30,7 @@ router.post("/signup", (req, res) => {
 
 // Login route
 router.post("/login", (req, res) => {
-    User.findOne({
+    db.User.findOne({
         where: {
             username: req.body.username
         }
