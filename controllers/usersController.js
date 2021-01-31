@@ -14,12 +14,14 @@ router.get('/', (req, res) => {
 
 // Signup route
 router.post("/signup", (req, res) => {
-    User.create({
+    db.User.create({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         theme_id: req.body.theme_id
-    }).then((data) => {
+    }),
+    db.Location.create
+    .then((data) => {
         res.json(data)
     }).catch(err => {
         res.status(500).send(err.message);
