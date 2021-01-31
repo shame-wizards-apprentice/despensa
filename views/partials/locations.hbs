@@ -1,12 +1,11 @@
 {{#each locations}}
-	<div class="location {{type}}">
-		<div class="header">
-			<h3>{{name}}</h3>
-		</div>
-		<div class="body">
-			{{#each containers}}
-				<p class="container {{type}}"><strong>{{type}}</strong>: {{description}}</p>
-			{{/each}}
-		</div>
-	</div>
+<li class="accordion-item is-active" data-accordion-item>
+  <a href="#" class="accordion-title">{{name}}</a>
+  <div class="accordion-content" data-tab-content>
+  	<h3>Containers</h3>
+    {{#each containers}}
+			<p class="container {{type}}"><strong>{{type}}</strong>: {{description}}</p>
+		{{/each}}
+  </div>
+</li>
 {{/each}}

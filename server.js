@@ -27,7 +27,25 @@ app.set("view engine", "hbs");
 // app.use(routes);
 
 app.get("/", (req, res) => {
-	res.render("index", {theme: "metro"});
+	res.render("index", {
+		theme: "metro",
+		locations: [
+			{
+				name: "Kitchen Fridge",
+				type: "Refridgerator",
+				containers: [
+					{
+						type: "Shelf",
+						description: "Top left"
+					},
+					{
+						type: "Drawer",
+						description: "bottom left"
+					}
+				]
+			}
+		]
+	});
 });
 
 // Start our server so that it can begin listening to client requests.
