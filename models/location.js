@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
 
-    });
+
+    }, { underscored: true });
 
     // Each location has many foods and containers, both of which are deleted if the location is deleted. 
     // Each location belongs to a user, and cannot be created without a user due to the foreign key constraint.
