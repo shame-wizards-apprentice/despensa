@@ -1,7 +1,7 @@
 const express = require("express");
-const food = require("../models/food.js");
-
 const router = express.Router();
+
+const food = require("../models/food.js");
 
 // // Import the model (location.js) to use its database functions.
 const { Location } = require("../models");

@@ -26,7 +26,7 @@ router.get("/foods", (req, res) => {
             .then(dbFood => {
                 console.log(dbFood);
                 const dbFoodsJson = dbFood.map(food => food.toJSON())
-                var hbsObject = { food: dbFoodJson };
+                var hbsObject = { food: dbFoodsJson };
                 return res.render("index", hbsObject);
             })
 
