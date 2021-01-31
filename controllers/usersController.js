@@ -20,7 +20,24 @@ router.post("/signup", (req, res) => {
         password: req.body.password,
         theme_id: req.body.theme_id
     }),
-    db.Location.create
+    db.Location.create(
+        {
+        name: "Shopping list",
+        type: list,
+        },
+        {
+            name: "Pantry",
+            type: pantry
+        },
+    ),
+    db.Container.create(
+        {
+            type: shelf,
+        },
+        {
+          type: drawer,  
+        }
+    )
     .then((data) => {
         res.json(data)
     }).catch(err => {

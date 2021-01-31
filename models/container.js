@@ -1,6 +1,7 @@
 // Creates our Containers table with id and type
 module.exports = (sequelize, DataTypes) => {
     const Container = sequelize.define("Container", {
+        // TODO: Do we want to have a name option for shelves?
         type: {
             type: DataTypes.STRING,
             allowNull: false
