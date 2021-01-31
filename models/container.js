@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
         }
 
-    });
+    }, { underscored: true });
 
     // Each container belongs to a location and cannot be created without a location due to the foreign key constraint
 

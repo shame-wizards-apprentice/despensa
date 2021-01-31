@@ -86,7 +86,7 @@ router.put("/locations/update/:id", (req, res) => {
 });
 
 // Delete a location, if user is logged in
-router.delete("locations/delete/:id", function (req, res) {
+router.delete("locations/delete/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -96,7 +96,7 @@ router.delete("locations/delete/:id", function (req, res) {
                 user_id: req.sessions.user.id,
                 id: req.params.id
             }
-        }).then(function (data) {
+        }).then((data) => {
             res.send(data);
             res.redirect("/");
         }).catch((err) => {
