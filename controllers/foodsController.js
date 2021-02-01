@@ -7,13 +7,9 @@ const router = express.Router();
 
 
 // Routes
-// Homepage route
-router.get("/", (req, res) => {
-    res.render("index", {});
-});
 
 // Display all foods belonging to logged in user
-router.get("/foods", (req, res) => {
+router.get("api/foods", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -35,7 +31,7 @@ router.get("/foods", (req, res) => {
 });
 
 // Add a new food
-router.post("/foods/create", (req, res) => {
+router.post("api/foods/create", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -59,7 +55,7 @@ router.post("/foods/create", (req, res) => {
 });
 
 // Update food stats
-router.put("/foods/update/:id", (req, res) => {
+router.put("api/foods/update/:id", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -90,7 +86,7 @@ router.put("/foods/update/:id", (req, res) => {
 });
 
 // Delete a food
-router.delete("foods/delete/:id", (req, res) => {
+router.delete("api/foods/delete/:id", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -112,6 +108,7 @@ router.delete("foods/delete/:id", (req, res) => {
 });
 // Export routes for server.js to use.
 module.exports = router;
+<<<<<<< HEAD
 // var express = require("express");
 // const food = require("../models/food.js");
 
@@ -183,3 +180,5 @@ module.exports = router;
 // });
 // // Export routes for server.js to use.
 // module.exports = router;
+=======
+>>>>>>> dev

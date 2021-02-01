@@ -1,0 +1,16 @@
+@import "../../../styles/global/core";
+
+$coreColors: (
+	"green": #CBE896,
+	"orange": #F7934C,
+	"blue": #087e8b,
+	"red": #ca2e55,
+	"neutral": #2f2f2f
+);
+
+@include palette($color: 'green', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+$body--bg-color: getColor('neutral-50');
+$text-color: getColor('neutral-700');
+$site-header--bg-color: getColor('green-500');
+$site-title--color: getColor('neutral-50');

@@ -1,15 +1,13 @@
-const express = require("express");
-<<<<<<< HEAD
+var express = require("express");
+var exphbs = require("express-handlebars");
 const session = require('express-session');
-const PORT = process.env.PORT || 8080;
-
-=======
-const session = require ('express-session');
 
 const PORT = process.env.PORT || 8080;
 
->>>>>>> dev
 const app = express();
+
+// Access sequelize database
+const db = require("./models");
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
@@ -18,32 +16,26 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+var hbsHelpers = exphbs.create({
+	helpers: require('./config/hbs-helpers.js').helpers,
+	defaultLayout: 'main',
+	extname: 'hbs'
+});
+
 // Sets up sessions for user login
 app.use(session({
   secret: 'What does despensa mean? ',
   resave: false,
   saveUninitialied: true,
   cookies: {
-<<<<<<< HEAD
     maxAge: 1000 * 60 * 60 * 2
-=======
-    maxAge: 1000*60*60*2
->>>>>>> dev
   }
 }));
 
-// Set Handlebars.
-const exphbs = require("express-handlebars");
+app.engine("hbs", hbsHelpers.engine);
+app.set("view engine", "hbs");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-// Access sequelize database
-const db = require("./models");
-
-// Import routes and give the server access to them.
 const userRoutes = require("./controllers/usersController.js");
-
 app.use(userRoutes);
 
 // Start our server so that it can begin listening to client requests.

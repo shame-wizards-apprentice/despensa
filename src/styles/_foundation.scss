@@ -1,0 +1,17 @@
+.accordion {
+	border-radius: 1rem;
+	overflow: hidden;
+	border: 0;
+
+	& li:first-child {
+		border-radius: inherit;
+	}
+
+	& li {
+		background-color: getColor('neutral-500');
+		color: getContrast('neutral-500');
+		border: 0;
+	}
+
+	& .accordion-content { background-color: transparent; border: 0; }
+}

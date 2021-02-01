@@ -7,11 +7,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
 
         },
-        descripion: {
+        description: {
             type: DataTypes.STRING,
             allowNull: true
-
-
         }
 
     }, { underscored: true });

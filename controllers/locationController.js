@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+<<<<<<< HEAD
 const food = require("../models/food.js");
 
 // // Import the model (location.js) to use its database functions.
@@ -13,18 +14,24 @@ router.get("/", (req, res) => {
 // const food = require("../models/food.js");
 
 // const router = express.Router();
+=======
+const { Location, Food} = require("../models");
+>>>>>>> dev
 
 // // Import the model (location.js) to use its database functions.
 // const { Location } = require("../models");
 
+<<<<<<< HEAD
 // // Create all our routes and set up logic within those routes where required.
 // router.get("/", function (req, res) {
 //     res.redirect("/locations/:user_id")
 
 // });
 
+=======
+>>>>>>> dev
 // Display all locations owned by user
-router.get("/locations/:user_id", (req, res) => {
+router.get("api/locations/:user_id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -43,6 +50,7 @@ router.get("/locations/:user_id", (req, res) => {
     }
 
 });
+<<<<<<< HEAD
 // router.get("/locations/:user_id", (req, res) => {
 //     Location.findAll({
 //         where: {
@@ -58,6 +66,12 @@ router.get("/locations/:user_id", (req, res) => {
 
 // Create a new location if user is logged in
 router.post("/locations/create", (req, res) => {
+=======
+
+
+// Create a new location if user is logged in
+router.post("api/locations/create", (req, res) => {
+>>>>>>> dev
     if (!req.session.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -80,7 +94,7 @@ router.post("/locations/create", (req, res) => {
 });
 
 // Update user's locations if logged in
-router.put("/locations/update/:id", (req, res) => {
+router.put("api/locations/update/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -109,7 +123,7 @@ router.put("/locations/update/:id", (req, res) => {
 });
 
 // Delete a location, if user is logged in
-router.delete("locations/delete/:id", (req, res) => {
+router.delete("api/locations/delete/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -131,6 +145,7 @@ router.delete("locations/delete/:id", (req, res) => {
 
 });
 // // Export routes for server.js to use.
+<<<<<<< HEAD
 module.exports = router;
     if(!req.session.user){
         res.status(401).send("Please login first.")
@@ -179,3 +194,6 @@ module.exports = router;
 // });
 // // Export routes for server.js to use.
 // module.exports = router;
+=======
+module.exports = router;
+>>>>>>> dev
