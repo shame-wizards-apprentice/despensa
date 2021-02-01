@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Dependencies
 const express = require("express");
 const { Food } = require("../models");
@@ -113,7 +112,6 @@ router.delete("foods/delete/:id", (req, res) => {
 });
 // Export routes for server.js to use.
 module.exports = router;
-=======
 // var express = require("express");
 // const food = require("../models/food.js");
 
@@ -185,4 +183,3 @@ module.exports = router;
 // });
 // // Export routes for server.js to use.
 // module.exports = router;
->>>>>>> dev

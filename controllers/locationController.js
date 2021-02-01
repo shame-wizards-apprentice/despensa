@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 
@@ -10,7 +9,6 @@ const { Location } = require("../models");
 // // Create all our routes and set up logic within those routes where required.
 router.get("/", (req, res) => {
     res.render("index", {});
-=======
 // const express = require("express");
 // const food = require("../models/food.js");
 
@@ -22,11 +20,9 @@ router.get("/", (req, res) => {
 // // Create all our routes and set up logic within those routes where required.
 // router.get("/", function (req, res) {
 //     res.redirect("/locations/:user_id")
->>>>>>> dev
 
 // });
 
-<<<<<<< HEAD
 // Display all locations owned by user
 router.get("/locations/:user_id", (req, res) => {
     if (!req.sessions.user) {
@@ -47,7 +43,6 @@ router.get("/locations/:user_id", (req, res) => {
     }
 
 });
-=======
 // router.get("/locations/:user_id", (req, res) => {
 //     Location.findAll({
 //         where: {
@@ -60,11 +55,9 @@ router.get("/locations/:user_id", (req, res) => {
 //         return res.render("index", hbsObject);
 //     })
 // });
->>>>>>> dev
 
 // Create a new location if user is logged in
 router.post("/locations/create", (req, res) => {
-<<<<<<< HEAD
     if (!req.session.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -139,7 +132,6 @@ router.delete("locations/delete/:id", (req, res) => {
 });
 // // Export routes for server.js to use.
 module.exports = router;
-=======
     if(!req.session.user){
         res.status(401).send("Please login first.")
     }
@@ -187,4 +179,3 @@ module.exports = router;
 // });
 // // Export routes for server.js to use.
 // module.exports = router;
->>>>>>> dev
