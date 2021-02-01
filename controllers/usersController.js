@@ -6,7 +6,6 @@ const db = require("../models");
 // Express router methods 
 const router = express.Router();
 
-const { User } = require('../models');
 
 router.get("/", (req, res) => {
 	res.render("index", {username: "Angel", email: "skelliebunnie@gmail.com", theme: "metro"});
@@ -14,27 +13,9 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function(req, res) {
-  User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      theme_id: req.body.theme_id
-    })
-  // ,
-  //   db.Location.create({
-  //     name: "Shopping list",
-  //     type: "list",
-  //   }, {
-  //     name: "Pantry",
-  //     type: "pantry"
-  //   },
-  //   ),
-  //   db.Container.create({
-  //     type: "shelf",
-  //   }, {
-  //     type: "drawer",
-  //   })
-    .then((data) => {}).then(data => {
+  createUser(req.body)
+    .then(data => {
+      defaultLocation(data)
       res.json(data)
     }).catch(err => {
       res.status(500).send(err.message);
@@ -108,8 +89,8 @@ router.put("/api/users/update/:id", (req, res) => {
   if (req.body.password !== "" && req.body.password !== null) {
     userObj.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
   }
-  if (req.body.theme_id !== "" && req.body.theme_id !== null) {
-    userObj.theme_id = req.body.theme_id;
+  if (req.body.ThemeId !== "" && req.body.ThemeId !== null) {
+    userObj.ThemeId = req.body.ThemeId;
   }
   User.update(
     userObj, {
@@ -142,8 +123,57 @@ router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
   console.log("success")
-})
+});
 
+async function createUser(data) {
+  let userObj = await db.User.create(
+    {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      ThemeId: data.ThemeId
+    }
+  ); return userObj
+}
 
+const locationArray = [{}]
+async function defaultLocation(userObj) {
+  let locationObj = await db.Location.create({
+        name: "Shopping list",
+        type: "list",
+        userId: `${userObj.id}`,
+      }, 
+      {
+        name: "Pantry",
+        type: "pantry",
+        userId: `${userObj.id}`,
+      },
+      {
+        name: "Refrigerator",
+        type: "regrigerator",
+        userId: `${userObj.id}`,
+      },
+      {
+        name: "Freezer",
+        type: "freezer",
+        userId: `${userObj.id}`,
+      }
+    );
+      return locationObj.then(locationObj=>{locationArray.push(locationObj)});
+      console.log(locationArray);  
+}
+async function defaultContainer(locationArray) {
+  let containerObj = await db.container.create(
+    {
+      type: "shelf",
+    }, 
+    {
+      type: "drawer",
+      }
+      ).then(locationArray.map(function(containerObj){
+        if (err) throw err
+        return containerObj
+      })
+  )}
 // Export routes for server.js to use.
 module.exports = router;

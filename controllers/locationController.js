@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-<<<<<<< HEAD
 const food = require("../models/food.js");
 
 // // Import the model (location.js) to use its database functions.
@@ -14,31 +13,26 @@ router.get("/", (req, res) => {
 // const food = require("../models/food.js");
 
 // const router = express.Router();
-=======
 const { Location, Food} = require("../models");
->>>>>>> dev
 
 // // Import the model (location.js) to use its database functions.
 // const { Location } = require("../models");
 
-<<<<<<< HEAD
 // // Create all our routes and set up logic within those routes where required.
 // router.get("/", function (req, res) {
-//     res.redirect("/locations/:user_id")
+//     res.redirect("/locations/:userId")
 
 // });
 
-=======
->>>>>>> dev
 // Display all locations owned by user
-router.get("api/locations/:user_id", (req, res) => {
+router.get("api/locations/:userId", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Nice try, idiot")
     }
     else {
         Location.findAll({
             where: {
-                user_id: req.sessions.user_id
+                userId: req.sessions.userId
             }
         }).then(data => {
             console.log(data);
@@ -50,11 +44,10 @@ router.get("api/locations/:user_id", (req, res) => {
     }
 
 });
-<<<<<<< HEAD
-// router.get("/locations/:user_id", (req, res) => {
+// router.get("/locations/:userId", (req, res) => {
 //     Location.findAll({
 //         where: {
-//             user_id: req.params.user_id
+//             userId: req.params.userId
 //         }
 //     }).then((data) => {
 //         console.log(data);
@@ -66,12 +59,10 @@ router.get("api/locations/:user_id", (req, res) => {
 
 // Create a new location if user is logged in
 router.post("/locations/create", (req, res) => {
-=======
 
 
 // Create a new location if user is logged in
 router.post("api/locations/create", (req, res) => {
->>>>>>> dev
     if (!req.session.user) {
         res.status(401).send("Nice try, idiot")
     }
@@ -79,7 +70,7 @@ router.post("api/locations/create", (req, res) => {
         Location.create({
             name: req.body.name,
             type: req.body.type,
-            user_id: req.session.user.id
+            userId: req.session.user.id
         }).then(data => {
             console.log(data);
             res.send(data);
@@ -103,7 +94,7 @@ router.put("api/locations/update/:id", (req, res) => {
             {
                 name: req.body.name,
                 type: req.body.type,
-                user_id: req.session.user.id
+                userId: req.session.user.id
             },
             {
                 where: {
@@ -130,7 +121,7 @@ router.delete("api/locations/delete/:id", (req, res) => {
     else {
         Location.destroy({
             where: {
-                user_id: req.sessions.user.id,
+                userId: req.sessions.user.id,
                 id: req.params.id
             }
         }).then(data => {
@@ -145,20 +136,19 @@ router.delete("api/locations/delete/:id", (req, res) => {
 
 });
 // // Export routes for server.js to use.
-<<<<<<< HEAD
 module.exports = router;
-    if(!req.session.user){
-        res.status(401).send("Please login first.")
-    }
-    Location.create(req.body).then((data) => {
-        console.log(data);
-        res.send(data);
-        res.redirect("/");
-    }).catch((err) => {
-        if (err) console.log(err.message)
-        res.status(500).send("Internal server error")
-    });
-});
+//     if(!req.session.user){
+//         res.status(401).send("Please login first.")
+//     }
+//     Location.create(req.body).then((data) => {
+//         console.log(data);
+//         res.send(data);
+//         res.redirect("/");
+//     }).catch((err) => {
+//         if (err) console.log(err.message)
+//         res.status(500).send("Internal server error")
+//     });
+// });
 // router.put("/locations/update/:id", (req, res) => {
 //     Location.update(
 //         {
@@ -194,6 +184,4 @@ module.exports = router;
 // });
 // // Export routes for server.js to use.
 // module.exports = router;
-=======
-module.exports = router;
->>>>>>> dev
+

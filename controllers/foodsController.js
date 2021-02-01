@@ -16,7 +16,7 @@ router.get("api/foods", (req, res) => {
     else {
         Food.findAll({
             where: {
-                user_id: req.session.user.id
+                userId: req.session.user.id
             }
         })
             .then(dbFood => {
@@ -39,10 +39,10 @@ router.post("api/foods/create", (req, res) => {
         Food.create({
             name: req.body.name,
             brand: req.body.brand,
-            days_to_use: req.body.days_to_use,
+            daysToUse: req.body.daysToUse,
             isCheese: req.body.isCheese,
             amount: req.body.amount,
-            user_id: req.session.user.id
+            userId: req.session.user.id
         }).then(data => {
             res.json(data);
             res.redirect("/foods");
@@ -63,14 +63,14 @@ router.put("api/foods/update/:id", (req, res) => {
         Food.update({
             name: req.body.name,
             brand: req.body.brand,
-            days_to_use: req.body.days_to_use,
+            daysToUse: req.body.daysToUse,
             isCheese: req.body.isCheese,
             amount: req.body.amount,
-            user_id: req.session.user.id
+            userId: req.session.user.id
         },
             {
                 where: {
-                    user_id: req.session.user.id,
+                    userId: req.session.user.id,
                     id: req.body.id
                 }
             }
@@ -93,7 +93,7 @@ router.delete("api/foods/delete/:id", (req, res) => {
     else {
         Food.destroy({
             where: {
-                user_id: req.session.user.id,
+                userId: req.session.user.id,
                 id: req.params.id
             }
         }).then(data => {
@@ -124,7 +124,7 @@ module.exports = router;
 // router.get("/foods", function (req, res) {
 //     Food.findAll({
 //         where: {
-//             user_id: req.params.user_id
+//             userId: req.params.userId
 //         }
 //     })
 //         .then(function (dbFood) {
