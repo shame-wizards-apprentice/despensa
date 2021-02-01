@@ -1,73 +1,145 @@
-var express = require("express");
+// Dependencies
+const express = require("express");
+const bcrypt = require("bcrypt");
+const db = require("../models");
 
-var router = express.Router();
+// Express router methods 
+const router = express.Router();
 
-// Import the model (User.js) to use its database functions.
-const { User } = require("../models");
+const { User } = require('../models');
 
-// Create all our routes and set up logic within those routes where required.
-// Read Route
-// router.get("/", function (req, res) {
-//     res.redirect("/Users");
+// router.get('/', function(req, res) {
+// 	res.render("index", {});
 // });
-// router.get("/Users", function (req, res) {
-//     User.findAll({
-//         where: {
-//             name: req.body.name,
-//             id: req.params.id
-//         }
-//     })
-//         .then(function (dbUser) {
-//             console.log(dbUser);
-//             const dbUsersJson = dbUser.map(User => User.toJSON())
-//             var hbsObject = { User: dbUserJson };
-//             return res.render("index", hbsObject);
-//         })
-// });
-// // Create Route
-// router.post("/Users/create", function (req, res) {
-//     User.create({
-//         name: req.body.name,
-//         email: req.body.email,
-//     }).then(function (dbUser) {
-//         console.log(dbUser)
-//         res.redirect("/");
+
+// Create Route
+router.post("api/signup", function(req, res) {
+  User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      theme_id: req.body.theme_id
+    }),
+    db.Location.create({
+      name: "Shopping list",
+      type: list,
+    }, {
+      name: "Pantry",
+      type: pantry
+    }, ),
+    db.Container.create({
+      type: shelf,
+    }, {
+      type: drawer,
+    })
+    .then((data) => {}).then(data => {
+      res.json(data)
+    }).catch(err => {
+      res.status(500).send(err.message);
+    });
+});
+
+// Login route
+router.post("api/login", (req, res) => {
+  db.User.findOne({
+    where: {
+      username: req.body.username
+    }
+  }).then(data => {
+    if (!data) {
+      res.status(404).send("user does not exist...on this app.")
+    } else {
+      if (bcrypt.compareSync(req.body.password, data.password)) {
+        req.session.user = {
+          id: data.id,
+          username: data.username
+        }
+        res.json(data);
+      } else {
+        res.status(401).send("Ah ah ah! You didn't say the magic word...")
+      }
+    }
+  }).catch(err => {
+    if (err) console.log(err.message)
+    res.status(500).send("Internal server error")
+  });
+
+});
+
+// Sessions route
+// router.get("/readsessions", (req, res) => {
+// 			// no need to do anything
+//     }).then((data) => {
+//         res.json(data)
 //     }).catch(err => {
 //         res.status(500).send(err.message);
 //     });
-// });
-// // Update Route
-// router.put("/users/update/:id", function (req, res) {
-//     User.update(
-//         {
-//             name: req.body.name,
-//             email: req.body.email,
+router.get('/profile', (req, res) => {
+  if (req.session.user) {
+    res.render("profile", { user: req.session.user });
+  } else {
+    res.send("Login first, please");
+  }
+});
 
-//         },
-//         {
-//             where: {
-//                 id: req.body.id
-//             }
-//         }
-//     ).then(function (dbUser) {
-//         res.json("User settings updated.");
-//         res.redirect("/users");
-//     }).catch(err => {
-//         res.status(500).send(err.message);
-//     });
-// });
-// // Delete Route
+
+// Test Route
+router.get("/lardersquadVIP", (req, res) => {
+  if (req.session.user) {
+    res.send(`You are part of an exceptional group of people, ${req.session.user.username}.`)
+  } else {
+    res.status(401).send("login required.")
+  }
+});
+
+// Update Route
+router.put("/api/users/update/:id", (req, res) => {
+	console.log(req.body);
+  let userObj = {};
+  if (req.body.username !== "" && req.body.username !== null) {
+    userObj.username = req.body.username;
+  }
+  if (req.body.email !== "" && req.body.email !== null) {
+    userObj.email = req.body.email;
+  }
+  if (req.body.password !== "" && req.body.password !== null) {
+    userObj.password = req.body.password;
+  }
+  if (req.body.theme_id !== "" && req.body.theme_id !== null) {
+    userObj.theme_id = req.body.theme_id;
+  }
+  User.update(
+    userObj, {
+      where: {
+        id: req.params.id
+      }
+    }).then((data) => {
+    console.log(data)
+    res.send("User info updated.");
+  }).catch(err => {
+    res.status(500).send(err.message);
+  });
+});
+
+// Delete Route
 // router.delete("users/delete/:id", function (req, res) {
 //     User.destroy({
 //         where: {
 //             id: req.params.id
 //         }
-//     }).then(function (dbUser) {
-//         res.json(dbUser);
+//     }).then((data) => {
+//         res.json(data);
 //     }).catch(err => {
 //         res.status(500).send(err.message);
 //     });
 // });
+
+// Logout route
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+  console.log("success")
+})
 
 
 // Export routes for server.js to use.

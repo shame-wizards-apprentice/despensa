@@ -1,9 +1,13 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
+const session = require('express-session');
 
-var PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
-var app = express();
+const app = express();
+
+// Access sequelize database
+const db = require("./models");
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
@@ -18,38 +22,33 @@ var hbsHelpers = exphbs.create({
 	extname: 'hbs'
 });
 
+// Sets up sessions for user login
+app.use(session({
+  secret: 'What does despensa mean? ',
+  resave: false,
+  saveUninitialied: true,
+  cookies: {
+    maxAge: 1000 * 60 * 60 * 2
+  }
+}));
+
 app.engine("hbs", hbsHelpers.engine);
 app.set("view engine", "hbs");
 
-// Import routes and give the server access to them.
-// var routes = require("./controllers/usersController.js");
-
-// app.use(routes);
-
 app.get("/", (req, res) => {
-	res.render("index", {
-		theme: "metro",
-		locations: [
-			{
-				name: "Kitchen Fridge",
-				type: "Refridgerator",
-				containers: [
-					{
-						type: "Shelf",
-						description: "Top left"
-					},
-					{
-						type: "Drawer",
-						description: "bottom left"
-					}
-				]
-			}
-		]
-	});
-});
+	res.render("index", {});
+})
+
+const userRoutes = require("./controllers/usersController.js");
+app.use(userRoutes);
 
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+// 'force: true' drops the database/tables and recreates everything
+db.sequelize.sync({ force: false }).then(function () {
+  app.listen(PORT, function () {
+    console.log('App listening on PORT ' + PORT);
+  });
 });
+
+
+

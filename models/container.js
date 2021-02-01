@@ -1,19 +1,18 @@
 // Creates our Containers table with id and type
 module.exports = (sequelize, DataTypes) => {
     const Container = sequelize.define("Container", {
+        // TODO: Do we want to have a name option for shelves?
         type: {
             type: DataTypes.STRING,
             allowNull: false
 
         },
-        descripion: {
+        description: {
             type: DataTypes.STRING,
             allowNull: true
-
-
         }
 
-    });
+    }, { underscored: true });
 
     // Each container belongs to a location and cannot be created without a location due to the foreign key constraint
 

@@ -14,16 +14,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        isCheese: {
+        is_cheese: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
         amount: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false
         }
 
-    });
+    }, { underscored: true });
 
     // Each food belongs to a location and cannot be created without a location due to the foreign key constraint
     // [SK] added the foreignKey name to label the column in the Foods table
