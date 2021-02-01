@@ -1,0 +1,14 @@
+body {
+	background-color: $body--bg-color;
+	color: $text-color;
+}
+
+.site-header { background-color: $site-header--bg-color; }
+.site-title { color: $site-title--color; }
+
+ul.menu { background-color: transparent; }
+
+.accordion a {
+	color: getColor('neutral-50');
+	font-size: 1rem;
+}
