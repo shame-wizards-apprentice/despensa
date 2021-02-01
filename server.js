@@ -35,10 +35,6 @@ app.use(session({
 app.engine("hbs", hbsHelpers.engine);
 app.set("view engine", "hbs");
 
-app.get("/", (req, res) => {
-	res.render("index", {});
-})
-
 const userRoutes = require("./controllers/usersController.js");
 app.use(userRoutes);
 
