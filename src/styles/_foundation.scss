@@ -1,16 +1,26 @@
 .accordion {
+	position: relative;
 	border-radius: 1rem;
 	overflow: hidden;
 	border: 0;
-
-	& li:first-child {
-		border-radius: inherit;
-	}
+	margin-bottom: 0;
+	bottom: 0;
 
 	& li {
-		background-color: getColor('neutral-500');
-		color: getContrast('neutral-500');
+		background-color: $accordion--bg-color;
 		border: 0;
+
+		&.is-active {
+			background-color: $accordion--bg-color-2;
+
+			& a { background-color: transparent; }
+		}
+	}
+
+	& a {
+		border: 0;
+		color: getContrast($accordion--bg-color);
+		font-size: 1rem;
 	}
 
 	& .accordion-content { background-color: transparent; border: 0; }
