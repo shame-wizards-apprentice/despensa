@@ -1,8 +1,8 @@
 var paths = {
 	dist_dir: `public`,
 	dist_files: 'public/**/*.*',
-	styles: { 
-		src:  `src`,
+	styles: {
+		src: `src`,
 		dest: `public`
 	},
 	scripts: {
