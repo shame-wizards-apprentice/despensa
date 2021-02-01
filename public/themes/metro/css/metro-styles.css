@@ -438,91 +438,18 @@ body {
 	width: 100%; }
 
 body {
-	background-color: #d9dce2;
-	color: #7f46dc; }
+	background-color: #f7f7f7;
+	color: #363636; }
 
 .site-header {
-	padding: 0 4rem; }
+	background-color: #88bc29; }
 
-.top-bar-right {
-	text-align: center; }
+.site-title {
+	color: #f7f7f7; }
 
-.legal-notice {
-	color: #838aa0;
-	font-size: smaller;
-	border-left: 4px solid #74b072;
-	display: inline-block;
-	padding: 1rem;
-	background-color: #e5e7ec; }
+ul.menu {
+	background-color: transparent; }
 
-.text-left {
-	text-align: left; }
-
-.text-center {
-	text-align: center; }
-
-.text-right {
-	text-align: right; }
-
-.justify-start {
-	-webkit-box-pack: start;
-	    -ms-flex-pack: start;
-	        justify-content: start; }
-
-.justify-center {
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center; }
-
-.justify-end {
-	-webkit-box-pack: end;
-	    -ms-flex-pack: end;
-	        justify-content: end; }
-
-.justify-space-between {
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between; }
-
-.justify-space-around {
-	-ms-flex-pack: distribute;
-	    justify-content: space-around; }
-
-.justify-space-evenly {
-	-webkit-box-pack: space-evenly;
-	    -ms-flex-pack: space-evenly;
-	        justify-content: space-evenly; }
-
-.align-stretch {
-	-webkit-box-align: stretch;
-	    -ms-flex-align: stretch;
-	        align-items: stretch; }
-
-.align-center {
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center; }
-
-.align-start {
-	-webkit-box-align: start;
-	    -ms-flex-align: start;
-	        align-items: start; }
-
-.align-end {
-	-webkit-box-align: end;
-	    -ms-flex-align: end;
-	        align-items: end; }
-
-.accordion {
-	border-radius: 1rem;
-	overflow: hidden;
-	border: 0; }
-	.accordion li:first-child {
-		border-radius: inherit; }
-	.accordion li {
-		background-color: #636c82;
-		color: #f7f8f9;
-		border: 0; }
-	.accordion .accordion-content {
-		background-color: transparent;
-		border: 0; }
+.accordion a {
+	color: #f7f7f7;
+	font-size: 1rem; }

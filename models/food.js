@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        isCheese: {
+        is_cheese: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
         amount: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false
         }
 

@@ -14,14 +14,17 @@
 
 @each $position in $text-positions {
 	%text-#{$position} { text-align: unquote($position) !important; }
+	.text-#{$position} { text-align: unquote($position); }
 }
 
 @each $type in $justify {
 	%justify-#{$type} { justify-content: unquote($type) !important; }
+	.justify-#{$type} { justify-content: unquote($type); }
 }
 
 @each $type in $align {
 	%align-#{$type} { align-items: unquote($type) !important; }
+	.align-#{$type} { align-items: unquote($type);; }
 }
 
 %no-pad { padding: 0 !important; }

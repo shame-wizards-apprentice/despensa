@@ -1,19 +1,16 @@
--- USERS --
--- **NOTE** added theme_id here, since users can't have more than 1 theme assigned at a time; we shouldn't have the same theme repeated in the theme table just to assign it to different users
--- if we allow CUSTOM themes would be added to the themes table ... we may have to add a "restriction" column (for user_id) so only that user can view their custom themes
-INSERT INTO users (name, theme_id) VALUES ("Leora Harlyn"); -- bunnies! ("kawaii" theme)
-INSERT INTO users (name, theme_id) VALUES ("Hella Margrave"); -- gothic theme
-INSERT INTO users (name, theme_id) VALUES ("Cas Reynolds"); -- sci-fi / space theme
-INSERT INTO users (name, theme_id) VALUES ("Adelaide Stromnahl"); -- default theme
+USE despensa;
 
 -- THEMES --
--- **NOTE** removed user_id and changed 'advice' to advice_id
--- we should probably also have an advice table to avoid repetition
--- we should probably also put the images in a table, then use a stringified JSON object listing all the urls with their 'target' as the key (e.g. milk: "<url>/themes/<theme>/images/milk.png")
-INSERT INTO themes (icon_class, images, advice_id) VALUES("metro-con", "");
-INSERT INTO themes (icon_class, images, advice_id) VALUES("gothi-con");
-INSERT INTO themes (icon_class, images, advice_id) VALUES("space-con");
-INSERT INTO themes (icon_class, images, advice_id) VALUES("cutie-con");
+INSERT INTO themes (icon_class, images, advice) VALUES("metro", "[]", "[]");
+INSERT INTO themes (icon_class, images, advice) VALUES("goth", "[]", "[]");
+INSERT INTO themes (icon_class, images, advice) VALUES("space", "[]", "[]");
+INSERT INTO themes (icon_class, images, advice) VALUES("cute", "[]", "[]");
+
+-- USERS --
+INSERT INTO users (username, email, theme_id) VALUES ("Leora Harlyn", "name@email.com", 4); -- bunnies! ("kawaii" theme)
+INSERT INTO users (username, email, theme_id) VALUES ("Hella Margrave", "name@email.com", 2); -- gothic theme
+INSERT INTO users (username, email, theme_id) VALUES ("Cas Reynolds", "name@email.com", 3); -- sci-fi / space theme
+INSERT INTO users (username, email, theme_id) VALUES ("Adelaide Stromnahl", "name@email.com", 1); -- default theme
 
 -- LOCATIONS --
 -- ID 1
@@ -39,29 +36,29 @@ INSERT INTO locations (name, type, user_id) VALUES ("Larder", "Pantry", 4);
 
 -- CONTAINERS --
 -- should we add 'position(s)'? Provide a dropdown for those as well: top, middle, bottom, left, right?
-INSERT INTO containers (type, container_id) VALUES ("Door Shelf", 1);
-INSERT INTO containers (type, container_id) VALUES ("Top Shelf", 1);
-INSERT INTO containers (type, container_id) VALUES ("Middle Shelf", 1);
-INSERT INTO containers (type, container_id) VALUES ("Drawer", 1);
-INSERT INTO containers (type, container_id) VALUES ("Shelf, Top", 3);
-INSERT INTO containers (type, container_id) VALUES ("Shelf, Middle", 3);
-INSERT INTO containers (type, container_id) VALUES ("Shelf, Bottom", 3);
-INSERT INTO containers (type, container_id) VALUES ("Drawer, Bottom", 3);
-INSERT INTO containers (type, container_id) VALUES ("Shelf, Door", 3);
-INSERT INTO containers (type, container_id) VALUES ("Shelf A", 4);
-INSERT INTO containers (type, container_id) VALUES ("Shelf B", 4);
-INSERT INTO containers (type, container_id) VALUES ("Shelf C", 4);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 2);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 6);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 7);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 8);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 9);
-INSERT INTO containers (type, container_id) VALUES ("Shelf", 10);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "Top left", 1, 1);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "top right", 1, 1);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "middle", 1, 1);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Drawer", 1, 1);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", 3, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", 3, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", 3, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Drawer", 3, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", 3, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "A", 4, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "B", 4, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "C", 4, 2);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 2, 1);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 6, 3);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 7, 3);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 8, 4);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 9, 4);
+INSERT INTO containers (type, description, location_id, user_id) VALUES ("Shelf", "", 10, 4);
 
 -- FOODS --
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("milk", "Krogers", "2021-02-11", 1);
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("strawberry yogurt", "Yoplait", "2021-04-27", 1);
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("Mayonnaise", "Best Foods", "", 2);
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("Crackers, Original", "Ritz", "2024-08-21", 6);
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("Orange Juice, Pulp Free", "Simply Orange", "2021-03-04", 1);
-INSERT INTO foods (name, brand, use_by_date, location_id) VALUES ("Butter (Canola Oil)", "Land O' Lakes", "2021-09-30", 2);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("milk", "Krogers", 8, 0, 128, 1, 1);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("strawberry yogurt", "Yoplait", 87, 0, 32, 1, 1);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("Mayonnaise", "Best Foods", 231, 0, 20, 2, 1);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("Crackers, Original", "Ritz", 497, 0, 13.7, 6, 2);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("Orange Juice, Pulp Free", "Simply Orange", 23, 0, 52, 1, 1);
+INSERT INTO food (name, brand, days_to_use, is_cheese, amount, container_id, user_id) VALUES ("Butter (Canola Oil)", "Land O' Lakes", 42, 0, 15, 2, 1);

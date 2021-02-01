@@ -1,0 +1,23 @@
+@import "../../../styles/global/core";
+
+$coreColors: (
+	champagne: #FFD6A5,
+	lemon: #FDFFB6,
+	tea: #CAFFBF,
+	celeste: #9BF6FF,
+	bluepurple: #BDB2FF,
+	mauve: #FFC6FF,
+	neutral: #FFFFFC
+);
+
+@include palette($color: 'champagne', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+body {
+	text-align: center;
+	background-color: getColor('celeste-100');
+	color: getColor('neutral-900');
+}
+
+// .container-shelf {
+// 	content: "3";
+// }
