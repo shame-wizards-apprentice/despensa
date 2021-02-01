@@ -10,7 +10,7 @@ const router = express.Router();
 // Display all of user's containers
 router.get("api/containers", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.findAll({
@@ -31,7 +31,7 @@ router.get("api/containers", (req, res) => {
 // Create a new container
 router.post("api/containers/create", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.create({
@@ -56,7 +56,7 @@ router.post("api/containers/create", (req, res) => {
 // Update existing container
 router.put("api/containers/update/:id", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.update({
@@ -85,7 +85,7 @@ router.put("api/containers/update/:id", (req, res) => {
 // Delete a container
 router.delete("api/containers/delete/:id", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.destroy({

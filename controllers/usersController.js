@@ -8,14 +8,39 @@ const router = express.Router();
 
 
 router.get("/", (req, res) => {
-	res.render("index", {username: "Angel", email: "skelliebunnie@gmail.com", theme: "metro"});
+  res.render("index", { username: "Angel", email: "skelliebunnie@gmail.com", theme: "metro" });
 });
 
 // Create Route
+<<<<<<< HEAD
 router.post("/api/signup", function(req, res) {
   createUser(req.body)
     .then(data => {
       defaultLocation(data)
+=======
+router.post("/api/signup", function (req, res) {
+  User.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    theme_id: req.body.theme_id
+  })
+    // ,
+    //   db.Location.create({
+    //     name: "Shopping list",
+    //     type: "list",
+    //   }, {
+    //     name: "Pantry",
+    //     type: "pantry"
+    //   },
+    //   ),
+    //   db.Container.create({
+    //     type: "shelf",
+    //   }, {
+    //     type: "drawer",
+    //   })
+    .then((data) => { }).then(data => {
+>>>>>>> dev
       res.json(data)
     }).catch(err => {
       res.status(500).send(err.message);
@@ -38,9 +63,9 @@ router.post("/api/login", (req, res) => {
           username: data.username
         }
         // res.json(data);
-        res.render("profile", {user: req.session.user});
+        res.render("profile", { user: req.session.user });
       } else {
-        res.status(401).send("Ah ah ah! You didn't say the magic word...")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
       }
     }
   }).catch(err => {
@@ -62,7 +87,7 @@ router.get('/profile', (req, res) => {
   if (req.session.user) {
     res.render("profile", { user: req.session.user });
   } else {
-    res.send("Login first, please");
+    res.send("Oops, I'm sorry! I'm not supposed to talk to strangers.");
   }
 });
 
@@ -72,13 +97,13 @@ router.get("/lardersquadVIP", (req, res) => {
   if (req.session.user) {
     res.send(`You are part of an exceptional group of people, ${req.session.user.username}.`)
   } else {
-    res.status(401).send("login required.")
+    res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
   }
 });
 
 // Update Route
 router.put("/api/users/update/:id", (req, res) => {
-	console.log(req.body);
+  console.log(req.body);
   let userObj = {};
   if (req.body.username !== "" && req.body.username !== null) {
     userObj.username = req.body.username;
@@ -94,10 +119,10 @@ router.put("/api/users/update/:id", (req, res) => {
   }
   User.update(
     userObj, {
-      where: {
-        id: req.params.id
-      }
-    }).then((data) => {
+    where: {
+      id: req.params.id
+    }
+  }).then((data) => {
     console.log(data)
     res.send("User info updated.");
   }).catch(err => {

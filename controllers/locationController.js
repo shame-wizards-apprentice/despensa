@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+<<<<<<< HEAD
 const food = require("../models/food.js");
 
 // // Import the model (location.js) to use its database functions.
@@ -14,6 +15,9 @@ router.get("/", (req, res) => {
 
 // const router = express.Router();
 const { Location, Food} = require("../models");
+=======
+const { Location, Food } = require("../models");
+>>>>>>> dev
 
 // // Import the model (location.js) to use its database functions.
 // const { Location } = require("../models");
@@ -27,7 +31,7 @@ const { Location, Food} = require("../models");
 // Display all locations owned by user
 router.get("api/locations/:userId", (req, res) => {
     if (!req.sessions.user) {
-        res.status(401).send("Nice try, idiot")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Location.findAll({
@@ -64,7 +68,7 @@ router.post("/locations/create", (req, res) => {
 // Create a new location if user is logged in
 router.post("api/locations/create", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Nice try, idiot")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Location.create({
@@ -87,7 +91,7 @@ router.post("api/locations/create", (req, res) => {
 // Update user's locations if logged in
 router.put("api/locations/update/:id", (req, res) => {
     if (!req.sessions.user) {
-        res.status(401).send("Nice try, idiot")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Location.update(
@@ -116,7 +120,7 @@ router.put("api/locations/update/:id", (req, res) => {
 // Delete a location, if user is logged in
 router.delete("api/locations/delete/:id", (req, res) => {
     if (!req.sessions.user) {
-        res.status(401).send("Nice try, idiot")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Location.destroy({
@@ -137,6 +141,7 @@ router.delete("api/locations/delete/:id", (req, res) => {
 });
 // // Export routes for server.js to use.
 module.exports = router;
+<<<<<<< HEAD
 //     if(!req.session.user){
 //         res.status(401).send("Please login first.")
 //     }
@@ -185,3 +190,5 @@ module.exports = router;
 // // Export routes for server.js to use.
 // module.exports = router;
 
+=======
+>>>>>>> dev
