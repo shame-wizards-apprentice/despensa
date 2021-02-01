@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
                 len: [8]
             }
         }
-    }, { underscored: true });
+    });
 
     // Each user has many locations, which are deleted if their user is deleted
     User.associate = (models) => {
@@ -37,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.belongsTo(models.Theme, {
             foreignKey: {
-                name: "theme_id",
                 allowNull: false,
                 defaultValue: 1
             }

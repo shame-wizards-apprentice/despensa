@@ -1,10 +1,10 @@
 USE despensa;
 
 -- THEMES --
-INSERT INTO themes (icon_class, images, advice) VALUES("metro", "[]", "[]");
-INSERT INTO themes (icon_class, images, advice) VALUES("goth", "[]", "[]");
-INSERT INTO themes (icon_class, images, advice) VALUES("space", "[]", "[]");
-INSERT INTO themes (icon_class, images, advice) VALUES("cute", "[]", "[]");
+INSERT INTO themes (icon_class, images, advice, created_at, updated_at) VALUES("metro", "[]", "[]", NOW(), NOW());
+INSERT INTO themes (icon_class, images, advice, created_at, updated_at) VALUES("goth", "[]", "[]", NOW(), NOW());
+INSERT INTO themes (icon_class, images, advice, created_at, updated_at) VALUES("space", "[]", "[]", NOW(), NOW());
+INSERT INTO themes (icon_class, images, advice, created_at, updated_at) VALUES("cute", "[]", "[]", NOW(), NOW());
 
 -- USERS --
 INSERT INTO users (username, email, theme_id) VALUES ("Leora Harlyn", "name@email.com", 4); -- bunnies! ("kawaii" theme)

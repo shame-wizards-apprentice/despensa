@@ -15,7 +15,7 @@ router.get("api/containers", (req, res) => {
     else {
         Container.findAll({
             where: {
-                user_id: req.session.user.id
+                userId: req.session.user.id
             }
         }).then(dbContainer => {
             console.log(dbContainer);
@@ -38,8 +38,8 @@ router.post("api/containers/create", (req, res) => {
 
             type: req.body.type,
             description: req.body.description,
-            location_id: req.body.location_id,
-            user_id: req.session.user.id,
+            locationId: req.body.locationId,
+            userId: req.session.user.id,
 
         }).then(dbContainer => {
             console.log("Container created");
@@ -62,12 +62,12 @@ router.put("api/containers/update/:id", (req, res) => {
         Container.update({
             type: req.body.type,
             description: req.body.description,
-            location_id: req.body.location_id,
-            user_id: req.session.user.id
+            locationId: req.body.locationId,
+            userId: req.session.user.id
         },
             {
                 where: {
-                    user_id: req.session.user.id,
+                    userId: req.session.user.id,
                     id: req.body.id
                 }
             }).then(data => {
@@ -90,7 +90,7 @@ router.delete("api/containers/delete/:id", (req, res) => {
     else {
         Container.destroy({
             where: {
-                user_id: req.session.user.id,
+                userId: req.session.user.id,
                 id: req.params.id
             }
         }).then(data => {
