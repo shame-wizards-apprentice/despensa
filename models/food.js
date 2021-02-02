@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        days_to_use: {
+        daysToUse: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        is_cheese: {
+        isCheese: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
 
-    }, { underscored: true });
+    },);
 
     // Each food belongs to a location and cannot be created without a location due to the foreign key constraint
     // [SK] added the foreignKey name to label the column in the Foods table
@@ -31,14 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         Food.belongsTo(models.Container, {
             // TODO: figure out what happens when deleted
             foreignKey: {
-                name: "container_id",
+                name: "containerId",
                 allowNull: false
             }
         });
         Food.belongsTo(models.User, {
             onDelete: "cascade",
             foreignKey: {
-                name: "user_id",
+                name: "UserId",
                 allowNull: false
             }
         })
