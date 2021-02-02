@@ -18,37 +18,41 @@ router.get("/", (req, res) => {
 router.post("/api/signup", function (req, res) {
   createUser(req.body).then((data) => {
     defaultLocation(data);
+  }).catch(err => {
+    if (err) console.log(err.message);
+    res.status(500).send("Internal server error");
   });
 });
-router.post("/api/signup", function (req, res) {
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    themeId: req.body.themeId,
-  })
-    // ,
-    //   db.Location.create({
-    //     name: "Shopping list",
-    //     type: "list",
-    //   }, {
-    //     name: "Pantry",
-    //     type: "pantry"
-    //   },
-    //   ),
-    //   db.Container.create({
-    //     type: "shelf",
-    //   }, {
-    //     type: "drawer",
-    //   })
-    .then((data) => {})
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      res.status(500).send(err.message);
-    });
-});
+
+// router.post("/api/signup", function (req, res) {
+//   User.create({
+//     username: req.body.username,
+//     email: req.body.email,
+//     password: req.body.password,
+//     themeId: req.body.themeId,
+//   })
+//     // ,
+//       db.Location.create({
+//         name: "Shopping list",
+//         type: "list",
+//       }, {
+//         name: "Pantry",
+//         type: "pantry"
+//       },
+//       ),
+//       db.Container.create({
+//         type: "shelf",
+//       }, {
+//         type: "drawer",
+//       })
+//     .then((data) => {})
+//     .then((data) => {
+//       res.json(data);
+//     })
+//     .catch((err) => {
+//       res.status(500).send(err.message);
+//     });
+// });
 
 // Login route
 router.post("/api/login", (req, res) => {
@@ -196,12 +200,12 @@ async function defaultLocation(userObj) {
       name: "Freezer",
       type: "freezer",
       userId: `${userObj.id}`,
-    })
-    return locationObj.then((locationObj) => {
-      locationArray.push(locationObj)})
-      .then(defaultContainer(locationArray))
-      .catch(err=>console.log(err));
-      
+  })
+  return locationObj.then((locationObj) => {
+  locationArray.push(locationObj)}).catch(err=>console.log(err))
+  .then(defaultContainer(locationArray))
+  .catch(err=>console.log(err));
+    
 }; 
 
   async function defaultContainer(locationArray) {
