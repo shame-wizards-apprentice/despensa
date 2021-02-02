@@ -16,8 +16,10 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
-  createUser(req.body).then((data) => {
-    defaultLocation(data);
+  createUser(req.body).then(userObj => {
+    res.json(userObj)
+    console.log(userObj)
+    // defaultLocation(data)
   }).catch(err => {
     if (err) console.log(err.message);
     res.status(500).send("Internal server error");
@@ -174,56 +176,58 @@ async function createUser(data) {
     email: data.email,
     password: data.password,
     ThemeId: data.ThemeId,
-  });
-  return userObj;
+  }).then(userObj => {
+    return (userObj)
+  })
+
 }
 
 const locationArray = [{}];
-async function defaultLocation(userObj) {
+async function defaultLocation(user) {
   let locationObj = await db.Location.create(
     {
       name: "Shopping list",
       type: "list",
-      userId: `${userObj.id}`,
+      userId: `${user.dataValues.id}`,
     },
     {
       name: "Pantry",
       type: "pantry",
-      userId: `${userObj.id}`,
+      userId: `${user.dataValues.id}`,
     },
     {
       name: "Refrigerator",
       type: "refrigerator",
-      userId: `${userObj.id}`,
+      userId: `${user.dataValues.id}`,
     },
     {
       name: "Freezer",
       type: "freezer",
-      userId: `${userObj.id}`,
-  })
+      userId: `${user.dataValues.id}`,
+    })
   return locationObj.then((locationObj) => {
-  locationArray.push(locationObj)}).catch(err=>console.log(err))
-  .then(defaultContainer(locationArray))
-  .catch(err=>console.log(err));
-    
-}; 
+    locationArray.push(locationObj)
+  }).catch(err => console.log(err))
+    .then(defaultContainer(locationArray))
+    .catch(err => console.log(err));
 
-  async function defaultContainer(locationArray) {
-  let containerObj = await db.container
-    .create(
-      {
-        type: "shelf",
-      },
-      {
-        type: "drawer",
-      }
-    )
+};
+
+async function defaultContainer(locationArray) {
+  let containerObj = await db.Container.create({
+    type: "shelf",
+  },
+    {
+      type: "drawer",
+    }
+  )
     .then(locationArray.map(function (containerObj) {
-        if (err) throw err;
-        return containerObj;
-      })
-    );
-  };
+      if (err) throw err;
+      return containerObj;
+    })).catch(err => {
+      if (err) throw err
+    });
+};
 
 // Export routes for server.js to use.
 module.exports = router;
