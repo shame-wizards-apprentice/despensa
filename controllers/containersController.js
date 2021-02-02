@@ -10,12 +10,12 @@ const router = express.Router();
 // Display all of user's containers
 router.get("api/containers", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.findAll({
             where: {
-                user_id: req.session.user.id
+                userId: req.session.user.id
             }
         }).then(dbContainer => {
             console.log(dbContainer);
@@ -31,15 +31,15 @@ router.get("api/containers", (req, res) => {
 // Create a new container
 router.post("api/containers/create", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.create({
 
             type: req.body.type,
             description: req.body.description,
-            location_id: req.body.location_id,
-            user_id: req.session.user.id,
+            locationId: req.body.locationId,
+            userId: req.session.user.id,
 
         }).then(dbContainer => {
             console.log("Container created");
@@ -56,18 +56,18 @@ router.post("api/containers/create", (req, res) => {
 // Update existing container
 router.put("api/containers/update/:id", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.update({
             type: req.body.type,
             description: req.body.description,
-            location_id: req.body.location_id,
-            user_id: req.session.user.id
+            locationId: req.body.locationId,
+            userId: req.session.user.id
         },
             {
                 where: {
-                    user_id: req.session.user.id,
+                    userId: req.session.user.id,
                     id: req.body.id
                 }
             }).then(data => {
@@ -85,12 +85,12 @@ router.put("api/containers/update/:id", (req, res) => {
 // Delete a container
 router.delete("api/containers/delete/:id", (req, res) => {
     if (!req.session.user) {
-        res.status(401).send("Go get your own")
+        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
         Container.destroy({
             where: {
-                user_id: req.session.user.id,
+                userId: req.session.user.id,
                 id: req.params.id
             }
         }).then(data => {
