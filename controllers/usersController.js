@@ -213,20 +213,14 @@ async function defaultLocation() {
 
 async function defaultContainer(locationArray) {
   console.log(`This is location array: ${JSON.stringify(locationArray, null, 2)}`)
+  let containerObj = await db.Container.createBulk({
+    type: "shelf",
+  },
+    {
+      type: "drawer",
+    }
+  )
 
-
-  // let containerObj = await db.Container.create({
-  //   type: "shelf",
-  // },
-  //   {
-  //     type: "drawer",
-  //   }
-  // )
-  // return containerObj.then(locationArray.map(function (containerObj) {
-  //   if (err) throw err;
-  // })).catch(err => {
-  //   if (err) throw err
-  // });
 };
 
 // Export routes for server.js to use.
