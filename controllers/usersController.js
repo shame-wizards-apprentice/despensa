@@ -184,11 +184,7 @@ async function createUser(data) {
 
 // Maybe we need to map location on to user object after location is created
 const locationArray = [{}];
-<<<<<<< HEAD
 async function defaultLocation() {
-=======
-async function defaultLocation(user) {
->>>>>>> e37b20c1f3804e973e7dcb0d8707f1dd2a18227e
   let locationObj = await db.Location.create(
     {
       name: "Shopping list",
@@ -211,31 +207,6 @@ async function defaultLocation(user) {
       userId: `${user.dataValues.id}`,
     })
   return locationObj.then((locationObj) => {
-<<<<<<< HEAD
-  locationArray.push(locationObj)}).catch(err=>console.log(err))
-  .then(defaultContainer(locationArray))
-  .catch(err=>console.log(err));
-    
-}; 
-let containerObj = db.Container.create
-// Maybe issue on "joining" container to locationObj? Do we need to tell it what value to set at location?
-  function defaultContainer(locationArray) {
-    .create(
-      {
-        type: "shelf",
-      },
-      {
-        type: "drawer",
-      }
-    )
-    .then(locationArray.map(function (containerObj) {
-        if (err) throw err;
-        return containerObj 
-        // Maybe we want to return locationArray here
-      })
-    );
-  };
-=======
     locationArray.push(locationObj)
   }).catch(err => console.log(err))
     .then(defaultContainer(locationArray))
@@ -258,7 +229,6 @@ async function defaultContainer(locationArray) {
       if (err) throw err
     });
 };
->>>>>>> e37b20c1f3804e973e7dcb0d8707f1dd2a18227e
 
 // Export routes for server.js to use.
 module.exports = router;
