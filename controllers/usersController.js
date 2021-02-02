@@ -16,9 +16,8 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
-  createUser(req.body).then(userObj => {
-    res.json(userObj)
-    console.log(userObj)
+  createUser(req.body).then(data => {
+    res.json(data);
     // defaultLocation(data)
   }).catch(err => {
     if (err) console.log(err.message);
@@ -176,9 +175,8 @@ async function createUser(data) {
     email: data.email,
     password: data.password,
     ThemeId: data.ThemeId,
-  }).then(userObj => {
-    return (userObj)
-  })
+  });
+  await defaultLocation(userObj).catch(err => console.log(err));
 
 }
 
@@ -189,45 +187,46 @@ async function defaultLocation() {
     {
       name: "Shopping list",
       type: "list",
-      userId: `${user.dataValues.id}`,
+      UserId: `${user.id}`,
     },
     {
       name: "Pantry",
       type: "pantry",
-      userId: `${user.dataValues.id}`,
+      UserId: `${user.id}`,
     },
     {
       name: "Refrigerator",
       type: "refrigerator",
-      userId: `${user.dataValues.id}`,
+      UserId: `${user.id}`,
     },
     {
       name: "Freezer",
       type: "freezer",
-      userId: `${user.dataValues.id}`,
-    })
-  return locationObj.then((locationObj) => {
-    locationArray.push(locationObj)
-  }).catch(err => console.log(err))
-    .then(defaultContainer(locationArray))
-    .catch(err => console.log(err));
+      UserId: `${user.id}`,
+    }])
+  console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`)
+  locationArray.push(locationObj);
+  await defaultContainer(locationArray).catch(err => console.log(err));
+  console.log("==================================================")
 
 };
 
 async function defaultContainer(locationArray) {
-  let containerObj = await db.Container.create({
-    type: "shelf",
-  },
-    {
-      type: "drawer",
-    }
-  )
-    .then(locationArray.map(function (containerObj) {
-      if (err) throw err;
-      return containerObj;
-    })).catch(err => {
-      if (err) throw err
-    });
+  console.log(`This is location array: ${JSON.stringify(locationArray, null, 2)}`)
+
+
+  // let containerObj = await db.Container.create({
+  //   type: "shelf",
+  // },
+  //   {
+  //     type: "drawer",
+  //   }
+  // )
+  // return containerObj.then(locationArray.map(function (containerObj) {
+  //   if (err) throw err;
+  // })).catch(err => {
+  //   if (err) throw err
+  // });
 };
 
 // Export routes for server.js to use.
