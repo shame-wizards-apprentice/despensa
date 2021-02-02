@@ -105,17 +105,17 @@ router.put("/api/users/update/:id", (req, res) => {
 });
 
 // Delete Route
-// router.delete("users/delete/:id", function (req, res) {
-//     User.destroy({
-//         where: {
-//             id: req.params.id
-//         }
-//     }).then((data) => {
-//         res.json(data);
-//     }).catch(err => {
-//         res.status(500).send(err.message);
-//     });
-// });
+router.delete("users/delete/:id", function (req, res) {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then((data) => {
+        res.json(data);
+    }).catch(err => {
+        res.status(500).send(err.message);
+    });
+});
 
 // Logout route
 router.get("/logout", (req, res) => {
@@ -144,8 +144,6 @@ async function createUser(data, cb) {
     cb(user)
   })
 }
-
-// Maybe we need to map location on to user object after location is created
 
 async function defaultLocation(user) {
   let locationObj = await db.Location.bulkCreate([
