@@ -3,27 +3,29 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const db = require("../models");
 
-// Express router methods 
+// Express router methods
 const router = express.Router();
 
-
 router.get("/", (req, res) => {
-  res.render("index", { username: "Angel", email: "skelliebunnie@gmail.com", theme: "metro" });
+  res.render("index", {
+    username: "Angel",
+    email: "skelliebunnie@gmail.com",
+    theme: "metro",
+  });
 });
 
 // Create Route
-<<<<<<< HEAD
-router.post("/api/signup", function(req, res) {
-  createUser(req.body)
-    .then(data => {
-      defaultLocation(data)
-=======
+router.post("/api/signup", function (req, res) {
+  createUser(req.body).then((data) => {
+    defaultLocation(data);
+  });
+});
 router.post("/api/signup", function (req, res) {
   User.create({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
-    theme_id: req.body.theme_id
+    themeId: req.body.themeId,
   })
     // ,
     //   db.Location.create({
@@ -39,10 +41,11 @@ router.post("/api/signup", function (req, res) {
     //   }, {
     //     type: "drawer",
     //   })
-    .then((data) => { }).then(data => {
->>>>>>> dev
-      res.json(data)
-    }).catch(err => {
+    .then((data) => {})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
       res.status(500).send(err.message);
     });
 });
@@ -51,28 +54,31 @@ router.post("/api/signup", function (req, res) {
 router.post("/api/login", (req, res) => {
   db.User.findOne({
     where: {
-      username: req.body.username
-    }
-  }).then(data => {
-    if (!data) {
-      res.status(404).send("user does not exist...on this app.")
-    } else {
-      if (bcrypt.compareSync(req.body.password, data.password)) {
-        req.session.user = {
-          id: data.id,
-          username: data.username
-        }
-        // res.json(data);
-        res.render("profile", { user: req.session.user });
+      username: req.body.username,
+    },
+  })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("user does not exist...on this app.");
       } else {
-        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
+        if (bcrypt.compareSync(req.body.password, data.password)) {
+          req.session.user = {
+            id: data.id,
+            username: data.username,
+          };
+          // res.json(data);
+          res.render("profile", { user: req.session.user });
+        } else {
+          res
+            .status(401)
+            .send("Oops, I'm sorry! I'm not supposed to talk to strangers.");
+        }
       }
-    }
-  }).catch(err => {
-    if (err) console.log(err.message)
-    res.status(500).send("Internal server error")
-  });
-
+    })
+    .catch((err) => {
+      if (err) console.log(err.message);
+      res.status(500).send("Internal server error");
+    });
 });
 
 // Sessions route
@@ -83,7 +89,7 @@ router.post("/api/login", (req, res) => {
 //     }).catch(err => {
 //         res.status(500).send(err.message);
 //     });
-router.get('/profile', (req, res) => {
+router.get("/profile", (req, res) => {
   if (req.session.user) {
     res.render("profile", { user: req.session.user });
   } else {
@@ -91,13 +97,16 @@ router.get('/profile', (req, res) => {
   }
 });
 
-
 // Test Route
 router.get("/lardersquadVIP", (req, res) => {
   if (req.session.user) {
-    res.send(`You are part of an exceptional group of people, ${req.session.user.username}.`)
+    res.send(
+      `You are part of an exceptional group of people, ${req.session.user.username}.`
+    );
   } else {
-    res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
+    res
+      .status(401)
+      .send("Oops, I'm sorry! I'm not supposed to talk to strangers.");
   }
 });
 
@@ -112,22 +121,27 @@ router.put("/api/users/update/:id", (req, res) => {
     userObj.email = req.body.email;
   }
   if (req.body.password !== "" && req.body.password !== null) {
-    userObj.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
+    userObj.password = bcrypt.hashSync(
+      req.body.password,
+      bcrypt.genSaltSync(10),
+      null
+    );
   }
   if (req.body.ThemeId !== "" && req.body.ThemeId !== null) {
     userObj.ThemeId = req.body.ThemeId;
   }
-  User.update(
-    userObj, {
+  User.update(userObj, {
     where: {
-      id: req.params.id
-    }
-  }).then((data) => {
-    console.log(data)
-    res.send("User info updated.");
-  }).catch(err => {
-    res.status(500).send(err.message);
-  });
+      id: req.params.id,
+    },
+  })
+    .then((data) => {
+      console.log(data);
+      res.send("User info updated.");
+    })
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
 });
 
 // Delete Route
@@ -144,61 +158,70 @@ router.put("/api/users/update/:id", (req, res) => {
 // });
 
 // Logout route
-router.get('/logout', (req, res) => {
+router.get("/logout", (req, res) => {
   req.session.destroy();
-  res.redirect('/');
-  console.log("success")
+  res.redirect("/");
+  console.log("success");
 });
 
 async function createUser(data) {
-  let userObj = await db.User.create(
-    {
-      username: data.username,
-      email: data.email,
-      password: data.password,
-      ThemeId: data.ThemeId
-    }
-  ); return userObj
+  let userObj = await db.User.create({
+    username: data.username,
+    email: data.email,
+    password: data.password,
+    ThemeId: data.ThemeId,
+  });
+  return userObj;
 }
 
-const locationArray = [{}]
+const locationArray = [{}];
 async function defaultLocation(userObj) {
-  let locationObj = await db.Location.create({
-        name: "Shopping list",
-        type: "list",
-        userId: `${userObj.id}`,
-      }, 
+  let locationObj = await db.Location.create(
+    {
+      name: "Shopping list",
+      type: "list",
+      userId: `${userObj.id}`,
+    },
+    {
+      name: "Pantry",
+      type: "pantry",
+      userId: `${userObj.id}`,
+    },
+    {
+      name: "Refrigerator",
+      type: "refrigerator",
+      userId: `${userObj.id}`,
+    },
+    {
+      name: "Freezer",
+      type: "freezer",
+      userId: `${userObj.id}`,
+    }
+  );
+  return locationObj.then((locationObj) => {
+    locationArray.push(locationObj);
+    // }).then(defaultContainer(locationArray))
+    // .catch(err=>console.log(err));
+    console.log(locationArray);
+  });
+};
+  async function defaultContainer(locationArray) {
+  let containerObj = await db.container
+    .create(
       {
-        name: "Pantry",
-        type: "pantry",
-        userId: `${userObj.id}`,
+        type: "shelf",
       },
       {
-        name: "Refrigerator",
-        type: "regrigerator",
-        userId: `${userObj.id}`,
-      },
-      {
-        name: "Freezer",
-        type: "freezer",
-        userId: `${userObj.id}`,
+        type: "drawer",
       }
-    );
-      return locationObj.then(locationObj=>{locationArray.push(locationObj)});
-      console.log(locationArray);  
-}
-async function defaultContainer(locationArray) {
-  let containerObj = await db.container.create(
-    {
-      type: "shelf",
-    }, 
-    {
-      type: "drawer",
-      }
-      ).then(locationArray.map(function(containerObj){
-        if (err) throw err
-        return containerObj
+    )
+    .then(
+      locationArray.map(function (containerObj) {
+        if (err) throw err;
+        return containerObj;
       })
-  )}
+    );
+  };
+
 // Export routes for server.js to use.
 module.exports = router;

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Location.belongsTo(models.User, {
             foreignKey: {
-                name: "userId",
+                name: "UserId",
                 allowNull: false
             }
         });
