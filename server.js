@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 var hbsHelpers = exphbs.create({
-	helpers: require('./config/hbs-helpers.js').helpers,
-	defaultLayout: 'main',
-	extname: 'hbs'
+  helpers: require('./config/hbs-helpers.js').helpers,
+  defaultLayout: 'main',
+  extname: 'hbs'
 });
 
 // Sets up sessions for user login
