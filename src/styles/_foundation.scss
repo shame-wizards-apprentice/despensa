@@ -3,6 +3,7 @@ body {
 	color: $body--color;
 	height: 100vh;
 	position: relative;
+	font-size: 1rem;
 }
 
 #page-container {
@@ -68,21 +69,8 @@ body {
 	& li {
 		flex: 1;
 		text-align: center;
-	}
 
-	& li.pantry {
-		background-color: $pantry--bg-color;
-		a { color: $pantry--color; }
-	}
-
-	& li.refridgerator {
-		background-color: $fridge--bg-color;
-		a { color: $fridge--color; }
-	}
-
-	& li.freezer {
-		background-color: $freezer--bg-color;
-		a { color: $freezer--color; }
+		& a { font-size: 1rem; }
 	}
 }
 
@@ -92,7 +80,7 @@ body {
 	border: 0;
 	margin-bottom: 0;
 	padding: 0;
-	background-color: $accordion--bg-color;
+	// background-color: $accordion--bg-color;
 
 	& li {
 		border-radius: inherit;
@@ -116,3 +104,26 @@ body {
 	& .accordion-content { background-color: transparent; border: 0; }
 }
 
+li.pantry {
+	background-color: $pantry--bg-color;
+	a { color: $pantry--color; }
+
+	&.accordion-item::after {
+		z-index: -1;
+		height: 20px;
+		width: 1200px;
+		position: absolute;
+		bottom: 0;
+		background-color: $pantry--bg-color;
+	}
+}
+
+li.refridgerator {
+	background-color: $fridge--bg-color;
+	a { color: $fridge--color; }
+}
+
+li.freezer {
+	background-color: $freezer--bg-color;
+	a { color: $freezer--color; }
+}

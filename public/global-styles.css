@@ -499,7 +499,8 @@ body {
 	background-color: #d9dce2;
 	color: #7f46dc;
 	height: 100vh;
-	position: relative; }
+	position: relative;
+	font-size: 1rem; }
 
 #page-container {
 	height: 100vh; }
@@ -583,26 +584,15 @@ body {
 		    -ms-flex: 1;
 		        flex: 1;
 		text-align: center; }
-	.tabs li.pantry {
-		background-color: #74b072; }
-		.tabs li.pantry a {
-			color: #f7f8f9; }
-	.tabs li.refridgerator {
-		background-color: #44dfcc; }
-		.tabs li.refridgerator a {
-			color: #090a0c; }
-	.tabs li.freezer {
-		background-color: #7f46dc; }
-		.tabs li.freezer a {
-			color: #f7f8f9; }
+		.tabs li a {
+			font-size: 1rem; }
 
 .accordion {
 	border-radius: 1rem 1rem 0 0;
 	overflow: hidden;
 	border: 0;
 	margin-bottom: 0;
-	padding: 0;
-	background-color: #636c82; }
+	padding: 0; }
 	.accordion li {
 		border-radius: inherit;
 		background-color: #636c82;
@@ -618,3 +608,25 @@ body {
 	.accordion .accordion-content {
 		background-color: transparent;
 		border: 0; }
+
+li.pantry {
+	background-color: #74b072; }
+	li.pantry a {
+		color: #f7f8f9; }
+	li.pantry.accordion-item::after {
+		z-index: -1;
+		height: 20px;
+		width: 1200px;
+		position: absolute;
+		bottom: 0;
+		background-color: #74b072; }
+
+li.refridgerator {
+	background-color: #44dfcc; }
+	li.refridgerator a {
+		color: #090a0c; }
+
+li.freezer {
+	background-color: #7f46dc; }
+	li.freezer a {
+		color: #f7f8f9; }
