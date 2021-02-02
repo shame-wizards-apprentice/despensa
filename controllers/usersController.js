@@ -16,13 +16,9 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
-  createUser(req.body).then(response => {
-    res.send(JSON.stringify(response));
-    // defaultLocation(data)
-  }).catch(err => {
-    if (err) console.log(err.message);
-    res.status(500).send("Internal server error");
-  });
+  createUser(req.body, function (data) {
+    res.json(data);
+  })
 });
 
 // router.post("/api/signup", function (req, res) {
@@ -169,7 +165,7 @@ router.get("/logout", (req, res) => {
   console.log("success");
 });
 
-async function createUser(data) {
+async function createUser(data, cb) {
   let userObj = await db.User.create({
     username: data.username,
     email: data.email,
@@ -185,7 +181,8 @@ async function createUser(data) {
     include: [db.Location, db.Container]
   }).then(user => {
     // return data
-    console.log(`this is user: ${JSON.stringify(user, null, 2)}`)
+    console.log(`this is user: ${JSON.stringify(user, null, 2)}`);
+    cb(user)
   })
 }
 
