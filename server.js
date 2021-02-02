@@ -17,9 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 var hbsHelpers = exphbs.create({
-	helpers: require('./config/hbs-helpers.js').helpers,
-	defaultLayout: 'main',
-	extname: 'hbs'
+  helpers: require('./config/hbs-helpers.js').helpers,
+  defaultLayout: 'main',
+  extname: 'hbs'
 });
 
 // Sets up sessions for user login
@@ -40,7 +40,7 @@ app.use(userRoutes);
 
 // Start our server so that it can begin listening to client requests.
 // 'force: true' drops the database/tables and recreates everything
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log('App listening on PORT ' + PORT);
   });
