@@ -21,36 +21,6 @@ router.post("/api/signup", function (req, res) {
   })
 });
 
-// router.post("/api/signup", function (req, res) {
-//   User.create({
-//     username: req.body.username,
-//     email: req.body.email,
-//     password: req.body.password,
-//     themeId: req.body.themeId,
-//   })
-//     // ,
-//       db.Location.create({
-//         name: "Shopping list",
-//         type: "list",
-//       }, {
-//         name: "Pantry",
-//         type: "pantry"
-//       },
-//       ),
-//       db.Container.create({
-//         type: "shelf",
-//       }, {
-//         type: "drawer",
-//       })
-//     .then((data) => {})
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((err) => {
-//       res.status(500).send(err.message);
-//     });
-// });
-
 // Login route
 router.post("/api/login", (req, res) => {
   db.User.findOne({
@@ -82,14 +52,6 @@ router.post("/api/login", (req, res) => {
     });
 });
 
-// Sessions route
-// router.get("/readsessions", (req, res) => {
-// 			// no need to do anything
-//     }).then((data) => {
-//         res.json(data)
-//     }).catch(err => {
-//         res.status(500).send(err.message);
-//     });
 router.get("/profile", (req, res) => {
   if (req.session.user) {
     res.render("profile", { user: req.session.user });
@@ -146,17 +108,17 @@ router.put("/api/users/update/:id", (req, res) => {
 });
 
 // Delete Route
-// router.delete("users/delete/:id", function (req, res) {
-//     User.destroy({
-//         where: {
-//             id: req.params.id
-//         }
-//     }).then((data) => {
-//         res.json(data);
-//     }).catch(err => {
-//         res.status(500).send(err.message);
-//     });
-// });
+router.delete("users/delete/:id", function (req, res) {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then((data) => {
+        res.json(data);
+    }).catch(err => {
+        res.status(500).send(err.message);
+    });
+});
 
 // Logout route
 router.get("/logout", (req, res) => {
@@ -185,8 +147,6 @@ async function createUser(data, cb) {
     cb(user)
   })
 }
-
-// Maybe we need to map location on to user object after location is created
 
 async function defaultLocation(user) {
   let locationObj = await db.Location.bulkCreate([
@@ -239,20 +199,6 @@ async function defaultContainer(locationArray) {
   }
 
 };
-
-// let containerObj = await db.Container.create({
-//   type: "shelf",
-// },
-//   {
-//     type: "drawer",
-//   }
-// )
-// return containerObj.then(locationArray.map(function (containerObj) {
-//   if (err) throw err;
-// })).catch(err => {
-//   if (err) throw err
-// });
-
 
 // Export routes for server.js to use.
 module.exports = router;
