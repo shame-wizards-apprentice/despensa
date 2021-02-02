@@ -5,28 +5,4 @@
 @import "global/variables",
 				"global/helpers";
 
-body {
-	background-color: $body--bg-color;
-	color: $body--color;
-	height: 100vh;
-	position: relative;
-}
-
-.site-header {
-	padding: 0 4rem;
-}
-
-.top-bar-right {
-	text-align: center;
-}
-
-.legal-notice {
-	color: $legal-notice--color;
-	font-size: smaller;
-	border-left: $legal-notice--border-left;
-	display: inline-block;
-	padding: 1rem;
-	background-color: $legal-notice--bg-color;
-}
-
 @import	"foundation";

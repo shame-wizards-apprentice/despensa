@@ -1,4 +1,8 @@
+{{#if user}}
 <link rel="stylesheet" href="themes/{{user.theme}}/css/{{user.theme}}-styles.css" type="text/css"/>
+{{else}}
+<link rel="stylesheet" href="themes/{{theme}}/css/{{theme}}-styles.css" type="text/css"/>
+{{/if}}
 </head>
 <body>
 <div id="page-container" class="grid-y">
@@ -13,26 +17,26 @@
 			<li><a href="#">Add Food</a></li>
 		  <li>
 		  	<a href="/signout">Sign Out</a>
-		  	{{else}}
+		  </li>
+		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
+		 	{{else}}
+		 	<li>
 		  	<form class="form form-horizontal">
-				  <div id="username-group">
+				  <div id="username-group" class="field-group">
 				      <label for="user">User Name</label>
 				      <input type="text" id="user" name="user">
 				  </div>
 
-				  <div id="password-group">
+				  <div id="password-group" class="field-group">
 				      <label for="pass">Password</label>
 				      <input type="password" id="pass" name="pass">
 				  </div>
 
-				  <div class="button-group">
-				  	<button type="submit" id="sign-in-btn">Sign In</button> / 
-				  	<button type="submit" id="sign-up-btn">Sign Up</button>
-				  </div>	
+				  <button type="submit" id="sign-in-btn" class="btn btn-default">Sign In</button>
+			  	<button type="submit" id="sign-up-btn" class="btn btn-warn">Sign Up</button>
 				</form>
 		  </li>
 		  {{/if}}
-		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
 		</ul>
 	</div>
 </div>

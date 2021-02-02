@@ -10,3 +10,12 @@ $legal-notice--bg-color: darkenColor(getColor('neutral-50'), 6);
 
 $accordion--bg-color: getColor('neutral-500');
 $accordion--bg-color-2: getColor('primary-500');
+
+$pantry--bg-color: getColor('secondary-400');
+$pantry--color: getContrast($pantry--bg-color);
+
+$fridge--bg-color: getColor('tertiary-400');
+$fridge--color: getContrast($fridge--bg-color);
+
+$freezer--bg-color: getColor('accent-400');
+$freezer--color: getContrast($freezer--bg-color);

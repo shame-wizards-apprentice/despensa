@@ -1,14 +1,15 @@
-<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
-    <li class="accordion-item is-active" data-accordion-item>
+<div id="location-menu">
+	<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
+    <li class="accordion-item pantry" data-accordion-item>
         <!-- Accordion tab title -->
-        <a href="#" class="accordion-title">Pantry</a>
+        <a href="#" class="accordion-title pa">Pantry</a>
 
         <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
         <div class="accordion-content" data-tab-content>
             {{> containers/pantry}}
         </div>
     </li>
-    <li class="accordion-item is-active" data-accordion-item>
+    <li class="accordion-item refridgerator" data-accordion-item>
         <!-- Accordion tab title -->
         <a href="#" class="accordion-title">Refridgerator</a>
 
@@ -17,14 +18,14 @@
             {{> containers/fridge}}
         </div>
     </li>
-    <li class="accordion-item is-active" data-accordion-item>
+    <li class="accordion-item freezer" data-accordion-item>
         <!-- Accordion tab title -->
         <a href="#" class="accordion-title">Freezer</a>
 
         <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
         <div class="accordion-content" data-tab-content>
-            {{> containers/pantry}}
+            {{> containers/freezer}}
         </div>
     </li>
-    
-</ul>
+	</ul>
+</div>

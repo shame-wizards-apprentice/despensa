@@ -9,7 +9,7 @@ const router = express.Router();
 // Routes
 
 // Display all foods belonging to logged in user
-router.get("api/foods", (req, res) => {
+router.get("/api/foods", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -31,7 +31,7 @@ router.get("api/foods", (req, res) => {
 });
 
 // Add a new food
-router.post("api/foods/create", (req, res) => {
+router.post("/api/foods/create", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("The cake is a lie")
     }
@@ -40,7 +40,7 @@ router.post("api/foods/create", (req, res) => {
             name: req.body.name,
             brand: req.body.brand,
             days_to_use: req.body.days_to_use,
-            isCheese: req.body.isCheese,
+            is_cheese: req.body.isCheese,
             amount: req.body.amount,
             user_id: req.session.user.id
         }).then(data => {
@@ -64,7 +64,7 @@ router.put("api/foods/update/:id", (req, res) => {
             name: req.body.name,
             brand: req.body.brand,
             days_to_use: req.body.days_to_use,
-            isCheese: req.body.isCheese,
+            is_cheese: req.body.isCheese,
             amount: req.body.amount,
             user_id: req.session.user.id
         },

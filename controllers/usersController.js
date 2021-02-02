@@ -9,7 +9,8 @@ const router = express.Router();
 const { User } = require('../models');
 
 router.get("/", (req, res) => {
-	res.render("index", {username: "Angel", email: "skelliebunnie@gmail.com", theme: "metro"});
+	// check session for user info
+	res.render("index", {theme: "metro"});
 });
 
 // Create Route
@@ -81,7 +82,7 @@ router.get('/profile', (req, res) => {
   if (req.session.user) {
     res.render("profile", { user: req.session.user });
   } else {
-    res.send("Login first, please");
+    res.render("index", {theme: "metro", message: "Log in first, please!"});
   }
 });
 
