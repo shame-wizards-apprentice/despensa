@@ -16,8 +16,8 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
-  createUser(req.body).then(data => {
-    res.send(JSON.stringify(data));
+  createUser(req.body).then(response => {
+    res.send(JSON.stringify(response));
     // defaultLocation(data)
   }).catch(err => {
     if (err) console.log(err.message);
@@ -183,9 +183,9 @@ async function createUser(data) {
       id: userObj.id
     },
     include: [db.Location, db.Container]
-  }).then(data => {
+  }).then(user => {
     // return data
-    console.log(`this is data: ${JSON.stringify(data, null, 2)}`)
+    console.log(`this is user: ${JSON.stringify(user, null, 2)}`)
   })
 }
 
