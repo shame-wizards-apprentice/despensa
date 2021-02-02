@@ -1,5 +1,6 @@
 <a class="button expanded" href="#">Scane Barcode</a>
 <a class="button expanded" href="#">Upload Barcode</a>
+<a class="button expanded" href="#">Manually Enter Food Info</a>
 
 <div class="card" style="width: 300px;">
     <div class="card-divider">
@@ -16,21 +17,31 @@
 </div>
 
 
-<div id="Switcharoo-Location">
-    <h3>Locations</h3>
+<div id="Select-Location">>
     <ul class="dropdown menu" data-dropdown-menu>
-        <li><a href="#">Pantry</a></li>
-        <li><a href="#">Refridgerator</a></li>
-        <li><a href="#">Freezer</a></li>
+        <li>
+            <a href="#">Locations</a>
+            <ul>
+                <li><a data-location-id="1">Pantry</a></li>
+                <li><a data-location-id="2">Refridgerator</a></li>
+                <li><a data-location-id="3">Freezer</a></li>
+            </ul>
+        </li>
     </ul>
+    <button type="button" id="new-location-btn" class="success button">Create New Location</button>
 </div>
 
-{{!-- then.... --}}
 
-<div id="Switcharoo-Container">
-    <h3>Locations</h3>
+<div class="hide" id="Select-Container">
+    <a href="#">Container</a>
     <ul class="dropdown menu" data-dropdown-menu>
         <li><a href="#">Shelf</a></li>
         <li><a href="#">Drawer</a></li>
     </ul>
+    <button type="button" id="new-container-btn" class="success button">Create New Container</button>
+</div>
+
+
+<div id="Select-Add" class="hide">
+    <button type="button" class="success button">Add to Inventory</button>
 </div>
