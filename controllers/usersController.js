@@ -178,8 +178,9 @@ async function createUser(data) {
   return userObj;
 }
 
+// Maybe we need to map location on to user object after location is created
 const locationArray = [{}];
-async function defaultLocation(userObj) {
+async function defaultLocation() {
   let locationObj = await db.Location.create(
     {
       name: "Shopping list",
@@ -207,9 +208,9 @@ async function defaultLocation(userObj) {
   .catch(err=>console.log(err));
     
 }; 
-
-  async function defaultContainer(locationArray) {
-  let containerObj = await db.container
+let containerObj = db.Container.create
+// Maybe issue on "joining" container to locationObj? Do we need to tell it what value to set at location?
+  function defaultContainer(locationArray) {
     .create(
       {
         type: "shelf",
@@ -220,7 +221,8 @@ async function defaultLocation(userObj) {
     )
     .then(locationArray.map(function (containerObj) {
         if (err) throw err;
-        return containerObj;
+        return containerObj 
+        // Maybe we want to return locationArray here
       })
     );
   };
