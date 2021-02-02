@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 // Create Route
 router.post("/api/signup", function (req, res) {
   createUser(req.body).then(data => {
-    res.json(data);
+    res.send(JSON.stringify(data));
     // defaultLocation(data)
   }).catch(err => {
     if (err) console.log(err.message);
@@ -176,12 +176,21 @@ async function createUser(data) {
     password: data.password,
     ThemeId: data.ThemeId,
   });
-  await defaultLocation(userObj).catch(err => console.log(err));
 
+  await defaultLocation(userObj).catch(err => console.log(err));
+  db.User.findOne({
+    where: {
+      id: userObj.id
+    },
+    include: [db.Location, db.Container]
+  }).then(data => {
+    // return data
+    console.log(`this is data: ${JSON.stringify(data, null, 2)}`)
+  })
 }
 
 // Maybe we need to map location on to user object after location is created
-const locationArray = [];
+
 async function defaultLocation(user) {
   let locationObj = await db.Location.bulkCreate([
     {
@@ -204,30 +213,49 @@ async function defaultLocation(user) {
       type: "freezer",
       UserId: `${user.id}`,
     }])
-  console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`)
-  locationArray.push(locationObj);
+  // console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`)
+  let locationArray = locationObj;
   await defaultContainer(locationArray).catch(err => console.log(err));
-  console.log("==================================================")
+  // console.log("==================================================")
 
 };
 
 async function defaultContainer(locationArray) {
-  console.log(`This is location array: ${JSON.stringify(locationArray, null, 2)}`)
+  // console.log(`This is location array: ${JSON.stringify(locationArray, null, 2)}`)
 
+  let noList = locationArray.filter(obj => obj.type != "list")
+  // console.log(`this is noList: ${JSON.stringify(noList)}`)
 
-  // let containerObj = await db.Container.create({
-  //   type: "shelf",
-  // },
-  //   {
-  //     type: "drawer",
-  //   }
-  // )
-  // return containerObj.then(locationArray.map(function (containerObj) {
-  //   if (err) throw err;
-  // })).catch(err => {
-  //   if (err) throw err
-  // });
+  for (i = 0; i < noList.length; i++) {
+    db.Container.bulkCreate([{
+      type: "shelf",
+      description: "it's a shelf, yo",
+      UserId: `${noList[i].UserId}`,
+      LocationId: `${noList[i].id}`
+    },
+    {
+      type: "drawer",
+      description: "it's a drawer, yo",
+      UserId: `${noList[i].UserId}`,
+      LocationId: `${noList[i].id}`
+    }]).catch(err => console.log(err))
+  }
+
 };
+
+// let containerObj = await db.Container.create({
+//   type: "shelf",
+// },
+//   {
+//     type: "drawer",
+//   }
+// )
+// return containerObj.then(locationArray.map(function (containerObj) {
+//   if (err) throw err;
+// })).catch(err => {
+//   if (err) throw err
+// });
+
 
 // Export routes for server.js to use.
 module.exports = router;
