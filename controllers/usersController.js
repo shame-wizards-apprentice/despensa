@@ -196,15 +196,14 @@ async function defaultLocation(userObj) {
       name: "Freezer",
       type: "freezer",
       userId: `${userObj.id}`,
-    }
-  );
-  return locationObj.then((locationObj) => {
-    locationArray.push(locationObj);
-    // }).then(defaultContainer(locationArray))
-    // .catch(err=>console.log(err));
-    console.log(locationArray);
-  });
-};
+    })
+    return locationObj.then((locationObj) => {
+      locationArray.push(locationObj)})
+      .then(defaultContainer(locationArray))
+      .catch(err=>console.log(err));
+      
+}; 
+
   async function defaultContainer(locationArray) {
   let containerObj = await db.container
     .create(
@@ -215,8 +214,7 @@ async function defaultLocation(userObj) {
         type: "drawer",
       }
     )
-    .then(
-      locationArray.map(function (containerObj) {
+    .then(locationArray.map(function (containerObj) {
         if (err) throw err;
         return containerObj;
       })
