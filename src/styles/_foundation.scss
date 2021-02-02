@@ -45,21 +45,6 @@ body {
 	}
 }
 
-.btn {
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
-	padding: 0.5rem 1rem;
-	vertical-align: middle;
-
-	@each $name,$color in $messageColors {
-		&-#{$name} {
-			background-color: $color;
-			color: getContrast($color);
-		}
-	}
-}
-
 .tabs {
 	display: flex;
 	flex-flow: row wrap;
@@ -80,7 +65,7 @@ body {
 	border: 0;
 	margin-bottom: 0;
 	padding: 0;
-	// background-color: $accordion--bg-color;
+	background-color: $accordion--bg-color;
 
 	& li {
 		border-radius: inherit;
@@ -126,4 +111,19 @@ li.refridgerator {
 li.freezer {
 	background-color: $freezer--bg-color;
 	a { color: $freezer--color; }
+}
+
+.btn {
+	position: relative;
+	background-color: gainsboro;
+	margin: 0.2rem 0.4rem;
+	padding: 0.5rem 1rem;
+	vertical-align: middle;
+
+	@each $name,$color in $messageColors {
+		&-#{$name} {
+			background-color: $color;
+			color: getContrast($color);
+		}
+	}
 }

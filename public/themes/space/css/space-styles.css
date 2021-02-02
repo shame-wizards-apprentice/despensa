@@ -438,21 +438,21 @@ body {
 	width: 100%; }
 
 body {
-	background-color: #ffffbd;
-	color: #6b6b00; }
+	background-color: #e0dcdc;
+	color: #393332; }
 
 .site-header {
-	background-color: #27e600; }
+	background-color: #a3e401; }
 
 .site-title {
-	color: ivory; }
+	color: #f8f7f7; }
 
 ul.menu {
 	background-color: transparent; }
 
 body {
-	background-color: #ffffbd;
-	color: #ff24ff;
+	background-color: #e0dcdc;
+	color: #8773af;
 	height: 100vh;
 	position: relative;
 	font-size: 1rem; }
@@ -467,12 +467,12 @@ body {
 	text-align: center; }
 
 .legal-notice {
-	color: #ffff24;
+	color: #988c8a;
 	font-size: smaller;
-	border-left: 4px solid #ff9b24;
+	border-left: 4px solid #2ef59a;
 	display: inline-block;
 	padding: 1rem;
-	background-color: #ffffd2; }
+	background-color: #eae7e7; }
 
 #location-menu {
 	position: fixed;
@@ -526,44 +526,44 @@ body {
 	border: 0;
 	margin-bottom: 0;
 	padding: 0;
-	background-color: #e6e600; }
+	background-color: #7a6d6b; }
 	.accordion li {
 		border-radius: inherit;
-		background-color: #e6e600;
+		background-color: #7a6d6b;
 		border: 0; }
 		.accordion li:active, .accordion li.is-active {
-			background-color: #27e600; }
+			background-color: #a3e401; }
 			.accordion li:active a, .accordion li.is-active a {
 				background-color: transparent; }
 	.accordion a {
 		border: 0;
-		color: #151500;
+		color: #f9f8f8;
 		font-size: 1rem; }
 	.accordion .accordion-content {
 		background-color: transparent;
 		border: 0; }
 
 li.pantry {
-	background-color: #ff9b24; }
+	background-color: #2ef59a; }
 	li.pantry a {
-		color: #151500; }
+		color: #0b0a0a; }
 	li.pantry.accordion-item::after {
 		z-index: -1;
 		height: 20px;
 		width: 1200px;
 		position: absolute;
 		bottom: 0;
-		background-color: #ff9b24; }
+		background-color: #2ef59a; }
 
 li.refridgerator {
-	background-color: #24ebff; }
+	background-color: #71aeb2; }
 	li.refridgerator a {
-		color: #151500; }
+		color: #f9f8f8; }
 
 li.freezer {
-	background-color: #ff24ff; }
+	background-color: #8773af; }
 	li.freezer a {
-		color: #fffff2; }
+		color: #f9f8f8; }
 
 .btn {
 	position: relative;
@@ -573,16 +573,16 @@ li.freezer {
 	vertical-align: middle; }
 	.btn-default {
 		background-color: #5D576B;
-		color: #fffff2; }
+		color: #f9f8f8; }
 	.btn-info {
 		background-color: #41D3BD;
-		color: #151500; }
+		color: #0b0a0a; }
 	.btn-success {
 		background-color: #A9E190;
-		color: #151500; }
+		color: #0b0a0a; }
 	.btn-alert {
 		background-color: #F4F1BB;
-		color: #151500; }
+		color: #0b0a0a; }
 	.btn-warn {
 		background-color: #ED6A5A;
-		color: #fffff2; }
+		color: #f9f8f8; }
