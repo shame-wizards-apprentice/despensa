@@ -34,22 +34,6 @@ router.get("api/locations/:userId", (req, res) => {
     }
 
 });
-// router.get("/locations/:userId", (req, res) => {
-//     Location.findAll({
-//         where: {
-//             userId: req.params.userId
-//         }
-//     }).then((data) => {
-//         console.log(data);
-//         const dbLocationJson = data.map(location => location.toJSON())
-//         var hbsObject = { location: dbLocationJson };
-//         return res.render("index", hbsObject);
-//     })
-// });
-
-// Create a new location if user is logged in
-// router.post("/locations/create", (req, res) => {
-
 
 // Create a new location if user is logged in
 router.post("api/locations/create", (req, res) => {
