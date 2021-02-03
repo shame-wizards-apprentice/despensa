@@ -5,10 +5,10 @@ INSERT INTO advice(content, createdAt, updatedAt) VALUES("Never be far from a ca
 INSERT INTO advice(content, createdAt, updatedAt) VALUES("Refrigerator does not have a d in it", NOW(), NOW());
 
 -- THEMES --
-INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("metro", "[]", "[]", NOW(), NOW());
-INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("goth", "[]", "[]", NOW(), NOW());
-INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("space", "[]", "[]", NOW(), NOW());
-INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("cute", "[]", "[]", NOW(), NOW());
+INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("metro", "[]", NOW(), NOW());
+INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("goth", "[]", NOW(), NOW());
+INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("space", "[]", NOW(), NOW());
+INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("cute", "[]", NOW(), NOW());
 
 -- USERS --
 INSERT INTO users (username, email, ThemeId) VALUES ("Leora Harlyn", "name@email.com", 4); -- bunnies! ("kawaii" theme)
