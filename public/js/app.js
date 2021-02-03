@@ -1,14 +1,5 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function () {
-	$(".accordion-item").each(function() {
-		$(this).removeClass('is-active');
-	});
-
-	$(".tabs-title:first-child").addClass('is-active');
-	$(".tabs-title:first-child").find("a").attr("tabindex", "0").attr("aria-selected", "true");
-	let firstTabTarget = $(".tabs-title:first-child").find("a").attr("href");
-	$(firstTabTarget).addClass("is-active").attr("aria-hidden", null);
-
 	$("form, [type='submit']").submit(function (e) {
 		e.preventDefault();
 	});
