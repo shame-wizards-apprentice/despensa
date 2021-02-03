@@ -216,10 +216,10 @@ gulp.task('dev:images', gulp.parallel('dev:images:metro', 'dev:images:goth', 'de
 
 // DEV
 // dev:views not included; views files aren't compiled
-gulp.task('dev', gulp.parallel('dev:styles', 'dev:images', 'dev:scripts'));
+gulp.task('dev', gulp.parallel('dev:styles', 'dev:images'));
 
 // WATCH
-gulp.task('watch', gulp.parallel('watch:styles', 'watch:scripts', 'watch:images', 'watch:views'));
+gulp.task('watch', gulp.parallel('watch:styles', 'watch:images', 'watch:views'));
 
 // DEFAULT
 // 'clean' @ beginning to delete public folder
