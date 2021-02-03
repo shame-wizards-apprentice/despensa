@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
   		where: {
   			id: id
   		},
-  		include: [db.Theme, db.Location, db.Container, db.Food]
+  		include: [db.Theme, db.Location, db.Food]
   	}).then(data => {
   		console.log(data);
   		res.render("index", data.dataValues);
@@ -38,7 +38,7 @@ router.post("/api/signup", function(req, res) {
     // console.log(data);
     res.json(data);
     // res.redirect('/', {theme: "cute"});
-  })
+  });
 });
 
 // Login route
@@ -200,7 +200,7 @@ async function defaultLocation(user) {
   ])
   // console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`)
   let locationArray = locationObj;
-  await defaultContainer(locationArray).catch(err => console.log(err));
+  //await defaultContainer(locationArray).catch(err => console.log(err));
   // console.log("==================================================")
 
 };

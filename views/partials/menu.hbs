@@ -5,9 +5,10 @@
 				<a href="#" class="accordion-title">{{dataValues.name}}</a>
 
 				<div class="accordion-content" data-tab-content>
-					{{#ifEquals dataValues.type "Pantry"}}
+					{{dataValues.type}}
+					{{!-- {{#ifEquals dataValues.type "Pantry"}}
 						{{> containers/pantry}}
-					{{/if}}
+					{{/ifEquals}} --}}
 				</div>
 			</li>
 		{{/each}}

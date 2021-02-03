@@ -32,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.Food, {
             onDelete: "cascade"
         });
-        User.hasMany(models.Container, {
-            onDelete: "cascade"
-        });
+        // User.hasMany(models.Container, {
+        //     onDelete: "cascade"
+        // });
         User.belongsTo(models.Theme, {
             foreignKey: {
                 allowNull: false,
