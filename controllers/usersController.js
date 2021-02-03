@@ -7,11 +7,37 @@ const db = require("../models");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index", {
-    username: "Angel",
-    email: "skelliebunnie@gmail.com",
-    theme: "metro",
-  });
+  console.log(req.session.user);
+  let id;
+  if(req.session.user) {
+  	db.User.findOne({
+  		where: {
+  			id: req.session.user.id
+  		},
+  		include: [
+  			{
+  				model: db.Theme,
+  			},
+  			{
+  				model: db.Location,
+  				include: [db.Food]
+  			}
+  		]
+  	}).then(data => {
+  		let food = data.dataValues.Food;
+  		let locations = data.dataValues.Food;
+
+  		console.log(data);
+
+  		res.render("index", data.dataValues);
+
+  	}).catch(err => {
+  		res.render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  	});
+
+  } else {
+  	res.status(500).render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  }
 });
 
 // Create Route

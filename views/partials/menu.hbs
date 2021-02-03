@@ -1,44 +1,17 @@
 <div id="location-menu">
 	<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
 		{{#each Locations}}
-			<li class="accordion-item {{dataValues.type}}" data-accordion-item>
+			<li class="accordion-item {{dataValues.type}} {{@first }}" data-accordion-item>
 				<a href="#" class="accordion-title">{{dataValues.name}}</a>
 
 				<div class="accordion-content" data-tab-content>
-					{{dataValues.type}}
-					{{!-- {{#ifEquals dataValues.type "Pantry"}}
-						{{> containers/pantry}}
-					{{/ifEquals}} --}}
+					<ul class='food-item'>
+						{{#each Food}}
+							<li class='food'>{{dataValues.name}}</li>
+						{{/each}}
+					</ul>
 				</div>
 			</li>
 		{{/each}}
-
-   {{!--  <li class="accordion-item pantry" data-accordion-item>
-        <!-- Accordion tab title -->
-        <a href="#" class="accordion-title pa">Pantry</a>
-
-        <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-        <div class="accordion-content" data-tab-content>
-            {{> containers/pantry}}
-        </div>
-    </li>
-    <li class="accordion-item refridgerator" data-accordion-item>
-        <!-- Accordion tab title -->
-        <a href="#" class="accordion-title">Refridgerator</a>
-
-        <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-        <div class="accordion-content" data-tab-content>
-            {{> containers/fridge}}
-        </div>
-    </li>
-    <li class="accordion-item freezer" data-accordion-item>
-        <!-- Accordion tab title -->
-        <a href="#" class="accordion-title">Freezer</a>
-
-        <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-        <div class="accordion-content" data-tab-content>
-            {{> containers/freezer}}
-        </div>
-    </li> --}}
 	</ul>
 </div>

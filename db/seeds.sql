@@ -2,7 +2,7 @@ USE despensa;
 
 -- ADVICE --
 INSERT INTO advice(content, createdAt, updatedAt) VALUES("Never be far from a can of corn", NOW(), NOW());
-INSERT INTO advice(content, createdAt, updatedAt) VALUES("Refrigerator does not have a d in it", NOW(), NOW());
+INSERT INTO advice(content, createdAt, updatedAt) VALUES("Refrigerator does <em>not</em> have a 'd' in it", NOW(), NOW());
 
 -- THEMES --
 INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("metro", "[]", NOW(), NOW());
@@ -40,10 +40,10 @@ INSERT INTO locations (name, type, UserId) VALUES ("Larder", "Pantry", 4);
 
 
 -- FOODS --
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("milk", "Krogers", "2021-02-12", 0, 128, 1, 1, 1);
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("strawberry yogurt", "Yoplait", "2021-03-12", 0, 32, 1, 1, 1);
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Mayonnaise", "Best Foods", "2021-04-12", 0, 20, 2, 1, 1);
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Crackers, Original", "Ritz", null, 0, 13.7, 6, 2, 3);
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", "2021-06-12", 0, 52, 1, 1, 1);
-INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", "2021-07-12", 0, 15, 2, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("milk", "Krogers", "2021-02-12", 0, 128, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("strawberry yogurt", "Yoplait", "2021-03-12", 0, 32, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("Mayonnaise", "Best Foods", "2021-04-12", 0, 20, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("Crackers, Original", "Ritz", null, 0, 13.7, 2, 3);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", "2021-06-12", 0, 52, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, UserId, LocationId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", "2021-07-12", 0, 15, 1, 1);
 
