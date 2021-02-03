@@ -3,29 +3,51 @@ $(function() {
   $("form, [type='submit']").submit(function(e) {
   	e.preventDefault();
   	// console.log($("form"))
-  	$.ajax({
-  		url: "api/login",
-  	}).done(data => {
-  		console.log(data);
-  	});
+  	// $.ajax({
+  	// 	url: "api/login",
+  	// }).done(data => {
+  	// 	console.log(data);
+  	// });
   });
 
   // **userCONTROLLER Events**
 	// Sign Up
-	$().submit(function(e) {
+	$("#sign-up-btn").submit(function(e) {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/signup",
+			data:{
+				user: $("#user").val(),
+				password: $("#pass").val()
+			},
+			method: "POST"
 		}).done(data => {
 			console.log(data);
+			window.location.replace("/")
+		});
+	});
+
+	// Sign Up
+	$("#log-in-btn").submit(function(e) {
+		e.preventDefault();
+		// console.log($("form"))
+		$.ajax({
+			url: "/api/signup",
+			data:{
+				user: $("#user").val(),
+				password: $("#pass").val()
+			},
+			method: "POST"
+		}).done(data => {
+			console.log(data);
+			window.location.replace("/")
 		});
 	});
 
 	// **foodCONTROLLER Events**
 
 	// Create new food (I think this is a form)
-
 	$().submit(function(e) {
 		e.preventDefault();
 		// console.log($("form"))
@@ -37,7 +59,6 @@ $(function() {
 	});
 
 	// Delete Food
-
 	$().click(function(e) {
 		$.ajax({
 			url:"api/foods/delete/:id",
@@ -47,7 +68,6 @@ $(function() {
 	});
 
 	// Update food(?)
-
 	$().submit(function(e) {
 		e.preventDefault();
 		// console.log($("form"))
@@ -59,7 +79,6 @@ $(function() {
 	});
 
 	// **themesController Events**
-
 	// $().click(function(e) {
 	// 	$.ajax({
 	// 		url:"api/themes/update",
