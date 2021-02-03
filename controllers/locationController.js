@@ -1,12 +1,10 @@
+// Dependencies
 const express = require("express");
-const router = express.Router();
-
 const { Location, Food } = require("../models");
 
+// Express router methods
+const router = express.Router();
 
-// const router = express.Router();
-
-// // Import the model (location.js) to use its database functions.
 
 // // Create all our routes and set up logic within those routes where required.
 // router.get("/", function (req, res) {
@@ -29,7 +27,7 @@ router.get("api/locations/:userId", (req, res) => {
             const dbLocationJson = data.map(location => location.toJSON())
             var hbsObject = { location: dbLocationJson };
             return res.render("index", hbsObject);
-        })
+        }).catch(err => { res.status(500).send(err.message) })
 
     }
 
@@ -65,10 +63,7 @@ router.post("api/locations/create", (req, res) => {
             console.log(data);
             res.send(data);
             res.redirect("/");
-        }).catch(err => {
-            if (err) console.log(err.message)
-            res.status(500).send("Internal server error")
-        });
+        }).catch(err => { res.status(500).send(err.message) });
 
     }
 
@@ -94,10 +89,7 @@ router.put("api/locations/update/:id", (req, res) => {
         ).then(data => {
             res.send(data);
             res.redirect("/");
-        }).catch(err => {
-            if (err) console.log(err.message)
-            res.status(500).send("Internal server error")
-        });
+        }).catch(err => { res.status(500).send(err.message) });
 
     }
 
@@ -117,10 +109,7 @@ router.delete("api/locations/delete/:id", (req, res) => {
         }).then(data => {
             res.send(data);
             res.redirect("/");
-        }).catch(err => {
-            if (err) console.log(err.message)
-            res.status(500).send("Internal server error")
-        });
+        }).catch(err => { res.status(500).send(err.message) });
 
     }
 

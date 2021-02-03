@@ -18,7 +18,7 @@ router.get("/api/advice", (req, res) => {
 router.post("/api/advice/create", (req, res) => {
     db.Advice.create({
         content: req.body.content
-    }).then(data => res.json(data)).catch(err => { throw err })
+    }).then(data => res.json(data)).catch(err => { res.status(500).send(err.message) })
 })
 
 module.exports = router;
