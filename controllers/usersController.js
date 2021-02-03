@@ -102,9 +102,7 @@ router.put("/api/users/update/:id", (req, res) => {
       console.log(data);
       res.send("User info updated.");
     })
-    .catch((err) => {
-      res.status(500).send(err.message);
-    });
+    .catch((err) => { res.status(500).send(err.message) });
 });
 
 // Delete Route
@@ -115,9 +113,7 @@ router.delete("users/delete/:id", function (req, res) {
     }
   }).then((data) => {
     res.json(data);
-  }).catch(err => {
-    res.status(500).send(err.message);
-  });
+  }).catch(err => { res.status(500).send(err.message) });
 });
 
 // Logout route
