@@ -21,9 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         Location.hasMany(models.Food, {
             // TODO: Figure out what happens to food if not deleted when location is deleted
         });
-        Location.hasMany(models.Container, {
-            onDelete: "cascade"
-        });
         Location.belongsTo(models.User, {
             foreignKey: {
                 name: "UserId",
