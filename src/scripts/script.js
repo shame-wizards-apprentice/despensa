@@ -31,9 +31,10 @@ $(function () {
 			},
 			method: "POST"
 		}).then(data => {
-			console.log(data);
 			if(data.id) {
 				window.location.replace("/");
+			} else {
+				console.log(data);
 			}
 		}).fail(err => {
 			console.log(err);

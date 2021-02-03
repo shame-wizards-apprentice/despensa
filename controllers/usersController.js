@@ -32,11 +32,11 @@ router.get("/", (req, res) => {
   		res.render("index", data.dataValues);
 
   	}).catch(err => {
-  		res.render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  		res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
   	});
 
   } else {
-  	res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  	res.render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
   }
 });
 
@@ -51,7 +51,7 @@ router.post("/api/signup", function (req, res) {
 router.post("/api/login", (req, res) => {
   db.User.findOne({
     where: {
-      username: req.body.username,
+      email: req.body.email,
     },
   })
     .then((data) => {
@@ -61,10 +61,10 @@ router.post("/api/login", (req, res) => {
         if (bcrypt.compareSync(req.body.password, data.password)) {
           req.session.user = {
             id: data.id,
-            username: data.username,
+            email: data.email,
           };
-          // res.json(data);
-          res.render("profile", { user: req.session.user });
+          res.json(req.session.user);
+          
         } else {
           res
             .status(401)
