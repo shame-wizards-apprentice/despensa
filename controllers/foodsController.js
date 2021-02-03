@@ -18,13 +18,12 @@ router.get("api/foods", (req, res) => {
             where: {
                 userId: req.session.user.id
             }
-        })
-            .then(dbFood => {
-                console.log(dbFood);
-                const dbFoodsJson = dbFood.map(food => food.toJSON())
-                var hbsObject = { food: dbFoodsJson };
-                return res.render("index", hbsObject);
-            })
+        }).then(dbFood => {
+            console.log(dbFood);
+            const dbFoodsJson = dbFood.map(food => food.toJSON())
+            var hbsObject = { food: dbFoodsJson };
+            return res.render("index", hbsObject);
+        }).catch(err => { res.status(500).send(err.message) })
 
     }
 
@@ -46,9 +45,7 @@ router.post("api/foods/create", (req, res) => {
         }).then(data => {
             res.json(data);
             res.redirect("/foods");
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
+        }).catch(err => { res.status(500).send(err.message); });
 
     }
 
@@ -77,9 +74,7 @@ router.put("api/foods/update/:id", (req, res) => {
         ).then(data => {
             res.json(data);
             res.redirect("/foods");
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
+        }).catch(err => { res.status(500).send(err.message); });
 
     }
 
@@ -99,9 +94,7 @@ router.delete("api/foods/delete/:id", (req, res) => {
         }).then(data => {
             res.json(data);
             res.redirect("/foods");
-        }).catch(err => {
-            res.status(500).send(err.message);
-        });
+        }).catch(err => { res.status(500).send(err.message); });
 
     }
 
