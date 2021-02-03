@@ -102,6 +102,8 @@ INSERT INTO advice(content, createdAt, updatedAt) VALUES("Trust her", NOW(), NOW
 INSERT INTO advice(content, createdAt, updatedAt) VALUES("Fill in text in the subject box pertaining to the email theme", NOW(), NOW());
 INSERT INTO advice(content, createdAt, updatedAt) VALUES("Focus on the actual problem", NOW(), NOW());
 INSERT INTO advice(content, createdAt, updatedAt) VALUES("Add salt and pepper to taste", NOW(), NOW());
+INSERT INTO advice(content, createdAt, updatedAt) VALUES("Always keep your promises (unless cheese is involved)", NOW(), NOW());
+INSERT INTO advice(content, createdAt, updatedAt) VALUES("Make your pancakes more metal by referring to syrup as tree blood", NOW(), NOW());
 
 
 -- THEMES --
