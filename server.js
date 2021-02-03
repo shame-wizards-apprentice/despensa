@@ -35,8 +35,18 @@ app.use(session({
 app.engine("hbs", hbsHelpers.engine);
 app.set("view engine", "hbs");
 
-const userRoutes = require("./controllers/usersController.js");
+const adviceRoutes = require("./controllers/adviceController");
+const containerRoutes = require("./controllers/containersController");
+const foodsRoutes = require("./controllers/foodsController");
+const locationRoutes = require("./controllers/locationController");
+const userRoutes = require("./controllers/usersController");
+
+app.use(adviceRoutes);
+app.use(containerRoutes);
+app.use(foodsRoutes);
+app.use(locationRoutes);
 app.use(userRoutes);
+
 
 // Start our server so that it can begin listening to client requests.
 // 'force: true' drops the database/tables and recreates everything

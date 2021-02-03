@@ -12,3 +12,5 @@ router.get("/api/themes", (req, res) => {
             res.json(data)
         })
 });
+
+module.exports = router;
