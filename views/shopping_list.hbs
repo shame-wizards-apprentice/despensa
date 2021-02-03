@@ -1,0 +1,6 @@
+<fieldset class="fieldset">
+    <legend>Shopping List</legend>
+    {{#each shopping_list}}
+    <input id="{{shopping_list.id}}" type="checkbox"><label for="{{shopping_list.id}}">{{shopping_list.name}}</label>
+    {{/each}}
+</fieldset>

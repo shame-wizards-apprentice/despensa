@@ -1,0 +1,55 @@
+@mixin flex($dir: row, $wrap: wrap) {
+	display: flex;
+	flex-flow: $dir $wrap;
+}
+
+@mixin fade($direction: 'out', $duration: 0.5) {
+	transition: all ease-#{$direction} #{$duration}s;
+}
+
+@mixin translate($direction: Y, $amount: 0) {
+	transform: unquote("translate#{$direction}(#{$amount})");
+}
+
+// MUST specify a URL
+@mixin fullBgImage($url, $position: center) {
+	background: url($url);
+	background-size: cover;
+	background-position: $position;
+	position: relative;
+	z-index: 0;
+}
+
+@mixin gradientImageBG($imageURL, $direction, $color-stops...) {
+	background-image: linear-gradient($direction, $color-stops), url($imageURL);	
+}
+
+@mixin gradient($direction, $color-stops...) {
+	background-image: linear-gradient($direction, $color-stops);
+}
+
+@mixin overlay($color: rgba(black, 0.5)) {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		background: $color;
+	}
+}
+
+@mixin gradientOverlay($direction,$color-stops...) {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		@include gradient($direction, $color-stops);
+	}
+}

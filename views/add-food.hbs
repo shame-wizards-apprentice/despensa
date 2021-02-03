@@ -1,0 +1,51 @@
+{{> header}}
+<a class="button expanded" href="#">Scane Barcode</a>
+<a class="button expanded" href="#">Upload Barcode</a>
+<a class="button expanded" href="#">Manually Enter Food Info</a>
+
+<div class="card" style="width: 300px;">
+    <div class="card-divider">
+        Barcode Info
+    </div>
+    <div class="card-section">
+        <h4>{{barcode.info1}}</h4>
+        <h4>{{barcode.info2}}</h4>
+        <h4>{{barcode.info3}}</h4>
+        <h4>{{barcode.info4}}</h4>
+        <label for="useby">Please enter number of days before food is spoiled</label>
+        <input type="number" name="useby">
+    </div>
+</div>
+
+
+<div id="Select-Location">>
+    <ul class="dropdown menu" data-dropdown-menu>
+        <li>
+            <a href="#">Locations</a>
+            <ul>
+                <li><a data-location-id="1">Pantry</a></li>
+                <li><a data-location-id="2">Refridgerator</a></li>
+                <li><a data-location-id="3">Freezer</a></li>
+            </ul>
+        </li>
+    </ul>
+    <button type="button" id="new-location-btn" class="success button">Create New Location</button>
+</div>
+
+
+<div class="hide" id="Select-Container">
+    <a href="#">Container</a>
+    <ul class="dropdown menu" data-dropdown-menu>
+        <li><a href="#">Shelf</a></li>
+        <li><a href="#">Drawer</a></li>
+    </ul>
+</div>
+
+<div>
+    <button type="button" id="new-container-btn" class="success button">Create New Container</button>
+</div>
+
+
+<div id="Select-Add" class="hide">
+    <button type="button" class="success button">Add to Inventory</button>
+</div>

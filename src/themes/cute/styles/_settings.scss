@@ -1,0 +1,36 @@
+@import "../../../styles/global/core";
+
+$coreColors: (
+	champagne: #FFD6A5,
+	lemon: #FDFFB6,
+	tea: #CAFFBF,
+	celeste: #9BF6FF,
+	celestepurple: #BDB2FF,
+	mauve: #FFC6FF,
+	neutral: #FFFFFC
+);
+
+@include palette($color: 'champagne', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+$body--bg-color: getColor('neutral-50');
+$text-color: getColor('neutral-700');
+$site-header--bg-color: getColor('tea-500');
+$site-title--color: getColor('neutral-50');
+
+$body--bg-color: getColor('neutral-100');
+$body--color: getColor('mauve-400');
+$legal-notice--color: getColor('neutral-400');
+$legal-notice--border-left: 4px solid getColor('champagne-400');
+$legal-notice--bg-color: darkenColor(getColor('neutral-50'), 6);
+
+$accordion--bg-color: getColor('neutral-500');
+$accordion--bg-color-2: getColor('tea-500');
+
+$pantry--bg-color: getColor('champagne-400');
+$pantry--color: getContrast($pantry--bg-color);
+
+$fridge--bg-color: getColor('celeste-400');
+$fridge--color: getContrast($fridge--bg-color);
+
+$freezer--bg-color: getColor('mauve-400');
+$freezer--color: getContrast($freezer--bg-color);
