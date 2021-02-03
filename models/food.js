@@ -10,9 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        daysToUse: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+        expirationDate: {
+            type: DataTypes.DATE
         },
         isCheese: {
             type: DataTypes.BOOLEAN,

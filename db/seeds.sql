@@ -56,9 +56,9 @@ INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", 
 INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 10, 4);
 
 -- FOODS --
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("milk", "Krogers", 8, 0, 128, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("strawberry yogurt", "Yoplait", 87, 0, 32, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Mayonnaise", "Best Foods", 231, 0, 20, 2, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Crackers, Original", "Ritz", 497, 0, 13.7, 6, 2);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", 23, 0, 52, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", 42, 0, 15, 2, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("milk", "Krogers", "2021-02-12", 0, 128, 1, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("strawberry yogurt", "Yoplait", "2021-03-12", 0, 32, 1, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Mayonnaise", "Best Foods", "2021-04-12", 0, 20, 2, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Crackers, Original", "Ritz", null, 0, 13.7, 6, 2, 3);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", "2021-06-12", 0, 52, 1, 1, 1);
+INSERT INTO food (name, brand, expirationDate, isCheese, amount, ContainerId, UserId, LocationId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", "2021-07-12", 0, 15, 2, 1, 1);

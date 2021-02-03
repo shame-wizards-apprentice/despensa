@@ -1,18 +1,18 @@
-{{#if user}}
-<link rel="stylesheet" href="themes/{{user.theme}}/css/{{user.theme}}-styles.css" type="text/css"/>
+{{#if email}}
+<link rel="stylesheet" href="themes/{{Theme.dataValues.iconClass}}/css/{{Theme.dataValues.iconClass}}-styles.css" type="text/css"/>
 {{else}}
-<link rel="stylesheet" href="themes/{{theme}}/css/{{theme}}-styles.css" type="text/css"/>
+<link rel="stylesheet" href="themes/{{Theme.dataValues.iconClass}}/css/{{Theme.dataValues.iconClass}}-styles.css" type="text/css"/>
 {{/if}}
 </head>
 <body>
 <div id="page-container" class="grid-y">
 <div class="site-header top-bar">
 	<div class="top-bar-left">
-			<h1 class="menu-text">Despensa</h1>
+			<h1 class="menu-text site-title">Despensa</h1>
 	</div>
 	<div class="top-bar-right">
 		<ul class="menu">
-			{{#if user}}
+			{{#if email}}
 			<li><a href="#">View Despensa</a></li>
 			<li><a href="#">Add Food</a></li>
 		  <li>
@@ -22,14 +22,17 @@
 		 	{{else}}
 		 	<li>
 		  	<form class="form form-horizontal">
-				  <div id="username-group" class="field-group">
+				  {{!-- <div id="username-group" class="field-group">
 				      <label for="user">User Name</label>
-				      <input type="text" id="user" name="user">
+				      <input type="text" id="user" name="user" required>
+				  </div> --}}
+				  <div id="username-group" class="field-group">
+				      <label for="email">Email</label>
+				      <input type="email" id="email" name="email" required>
 				  </div>
-
 				  <div id="password-group" class="field-group">
 				      <label for="pass">Password</label>
-				      <input type="password" id="pass" name="pass">
+				      <input type="password" id="pass" name="pass" required>
 				  </div>
 
 				  <button type="submit" id="sign-in-btn" class="btn btn-default">Sign In</button>

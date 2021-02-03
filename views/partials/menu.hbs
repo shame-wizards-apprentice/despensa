@@ -1,6 +1,18 @@
 <div id="location-menu">
 	<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
-    <li class="accordion-item pantry" data-accordion-item>
+		{{#each Locations}}
+			<li class="accordion-item {{dataValues.type}}" data-accordion-item>
+				<a href="#" class="accordion-title">{{dataValues.name}}</a>
+
+				<div class="accordion-content" data-tab-content>
+					{{#each Containers}}
+						{{> container type="SHELF" locationType=":(" name="A SHELF"}}
+					{{/each}}
+				</div>
+			</li>
+		{{/each}}
+
+   {{!--  <li class="accordion-item pantry" data-accordion-item>
         <!-- Accordion tab title -->
         <a href="#" class="accordion-title pa">Pantry</a>
 
@@ -26,6 +38,6 @@
         <div class="accordion-content" data-tab-content>
             {{> containers/freezer}}
         </div>
-    </li>
+    </li> --}}
 	</ul>
 </div>

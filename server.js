@@ -26,7 +26,7 @@ var hbsHelpers = exphbs.create({
 app.use(session({
   secret: 'What does despensa mean? ',
   resave: false,
-  saveUninitialied: true,
+  saveUninitialied: false,
   cookies: {
     maxAge: 1000 * 60 * 60 * 2
   }
