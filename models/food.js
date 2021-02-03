@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        expirationDate: {
-            type: DataTypes.DATE
+        daysToUse: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         isCheese: {
             type: DataTypes.BOOLEAN,
@@ -26,13 +27,6 @@ module.exports = (sequelize, DataTypes) => {
 
     // Each food belongs to a user and cannot be created without a location due to the foreign key constraint
     Food.associate = (models) => {
-        Food.belongsTo(models.Location, {
-            // TODO: figure out what happens when deleted
-            foreignKey: {
-                name: "locationId",
-                allowNull: false
-            }
-        });
         Food.belongsTo(models.User, {
             onDelete: "cascade",
             foreignKey: {
