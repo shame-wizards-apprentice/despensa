@@ -17,13 +17,19 @@ $(function() {
 
 // Sign Up
 
-$().submit(function(e) {
+$("#sign-up-btn").submit(function(e) {
 	e.preventDefault();
 	// console.log($("form"))
 	$.ajax({
 		url: "/api/signup",
+		data:{
+			user: $("#user").val(),
+			password: $("#pass").val()
+		},
+		method: "POST"
 	}).done(data => {
 		console.log(data);
+		window.location.replace("/")
 	});
 });
 

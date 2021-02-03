@@ -11,10 +11,10 @@ INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("space", "[]
 INSERT INTO themes (iconClass, images, createdAt, updatedAt) VALUES("cute", "[]", NOW(), NOW());
 
 -- USERS --
-INSERT INTO users (username, email, ThemeId) VALUES ("Leora Harlyn", "name@email.com", 4); -- bunnies! ("kawaii" theme)
-INSERT INTO users (username, email, ThemeId) VALUES ("Hella Margrave", "name@email.com", 2); -- gothic theme
-INSERT INTO users (username, email, ThemeId) VALUES ("Cas Reynolds", "name@email.com", 3); -- sci-fi / space theme
-INSERT INTO users (username, email, ThemeId) VALUES ("Adelaide Stromnahl", "name@email.com", 1); -- default theme
+INSERT INTO users (username, email, password, ThemeId) VALUES ("Leora Harlyn", "name@email.com", "password", 4); -- bunnies! ("kawaii" theme)
+INSERT INTO users (username, email, password, ThemeId) VALUES ("Hella Margrave", "name@email.com","password", 2); -- gothic theme
+INSERT INTO users (username, email, password, ThemeId) VALUES ("Cas Reynolds", "name@email.com","password", 3); -- sci-fi / space theme
+INSERT INTO users (username, email, password, ThemeId) VALUES ("Adelaide Stromnahl", "name@email.com","password", 1); -- default theme
 
 -- LOCATIONS --
 -- ID 1

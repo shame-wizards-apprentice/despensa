@@ -1,37 +1,37 @@
-<link rel="stylesheet" href="themes/{{user.theme}}/css/{{user.theme}}-styles.css" type="text/css"/>
+<link rel="stylesheet" href="themes/{{user.theme}}/css/{{user.theme}}-styles.css" type="text/css" />
 </head>
+
 <body>
-<div class="top-bar">
-	<div class="top-bar-left">
+	<div class="top-bar">
+		<div class="top-bar-left">
 			<li class="menu-text">Despensa</li>
-	</div>
-	<div class="top-bar-right">
-		<ul class="menu">
-			{{#if user}}
-			<li><a href="#">View Despensa</a></li>
-			<li><a href="#">Add Food</a></li>
-		  <li>
-		  	<a href="/signout">Sign Out</a>
-		  	{{else}}
-		  	<form class="form form-horizontal">
-				  <div id="username-group">
-				      <label for="user">User Name</label>
-				      <input type="text" id="user" name="user">
-				  </div>
+		</div>
+		<div class="top-bar-right">
+			<ul class="menu">
+				{{#if user}}
+				<li><a data-open="optionsModal">fas fa-cog </a></li>
+				<li>
+					<a href="/signout">Sign Out</a>
+					{{else}}
+					<form class="form form-horizontal">
+						<div id="username-group">
+							<label for="user">User Name</label>
+							<input type="text" id="user" name="user">
+						</div>
 
-				  <div id="password-group">
-				      <label for="pass">Password</label>
-				      <input type="password" id="pass" name="pass">
-				  </div>
+						<div id="password-group">
+							<label for="pass">Password</label>
+							<input type="password" id="pass" name="pass">
+						</div>
 
-				  <div class="button-group">
-				  	<button type="submit" id="sign-in-btn">Sign In</button> / 
-				  	<button type="submit" id="sign-up-btn">Sign Up</button>
-				  </div>	
-				</form>
-		  </li>
-		  {{/if}}
-		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
-		</ul>
+						<div class="button-group">
+							<button type="submit" id="sign-in-btn">Sign In</button> /
+							<button type="submit" id="sign-up-btn">Sign Up</button>
+						</div>
+					</form>
+				</li>
+				{{/if}}
+				<li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
+			</ul>
+		</div>
 	</div>
-</div>
