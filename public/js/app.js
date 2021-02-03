@@ -46,10 +46,10 @@ $(function () {
 		console.log($(this).data("location-id"))
 	});
 
-	$("#Select-Container a").click(function () {
-		$("#Select-Container").addClass("hide");
-		$("#Select-Add").removeClass("hide");
-		console.log($(this).data("location-id"))
-	});
+	// $("#Select-Container a").click(function () {
+	// 	$("#Select-Container").addClass("hide");
+	// 	$("#Select-Add").removeClass("hide");
+	// 	console.log($(this).data("location-id"))
+	// });
 
 });
