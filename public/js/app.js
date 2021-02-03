@@ -1,56 +1,115 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function () {
-	$("form, [type='submit']").submit(function (e) {
-		e.preventDefault();
-	});
+$(function() {
+  $("form, [type='submit']").submit(function(e) {
+  	e.preventDefault();
+  	// console.log($("form"))
+  	$.ajax({
+  		url: "api/login",
+  	}).done(data => {
+  		console.log(data);
+  	});
+  });
 
-	$("#sign-up-btn").click(function(e) {
+  // **userCONTROLLER Events**
+	// Sign Up
+	$().submit(function(e) {
 		e.preventDefault();
-		// console.log("SIGN ME UP, SCOTTY!");
+		// console.log($("form"))
 		$.ajax({
 			url: "/api/signup",
-			data: {
-				email: $("#email").val(),
-				password: $("#pass").val()
-			},
-			method: "POST"
-		}).then(data => {
+		}).done(data => {
 			console.log(data);
-		}).fail(err => {
-			console.log(err);
 		});
 	});
 
-	$("#sign-in-btn").click(function(e) {
+	// **foodCONTROLLER Events**
+
+	// Create new food (I think this is a form)
+
+	$().submit(function(e) {
 		e.preventDefault();
+		// console.log($("form"))
 		$.ajax({
-			url: "/api/login",
-			data: {
-				email: $("#email").val(),
-				password: $("#pass").val()
-			},
-			method: "POST"
-		}).then(data => {
-			if(data.id) {
-				window.location.replace("/");
-			} else {
-				console.log(data);
-			}
-		}).fail(err => {
-			console.log(err);
+			url: "api/foods/create",
+		}).done(data => {
+			console.log(data);
 		});
 	});
 
-	$("#Select-Location a").click(function () {
-		$("#Select-Location").addClass("hide");
-		$("#Select-Container").removeClass("hide");
-		console.log($(this).data("location-id"))
+	// Delete Food
+
+	$().click(function(e) {
+		$.ajax({
+			url:"api/foods/delete/:id",
+		}).done(data => {
+			console.log(data);
+		});
 	});
 
-	// $("#Select-Container a").click(function () {
-	// 	$("#Select-Container").addClass("hide");
-	// 	$("#Select-Add").removeClass("hide");
-	// 	console.log($(this).data("location-id"))
+	// Update food(?)
+
+	$().submit(function(e) {
+		e.preventDefault();
+		// console.log($("form"))
+		$.ajax({
+			url: "api/theme/update/:id",
+		}).done(data => {
+			console.log(data);
+		});
+	});
+
+	// **themesController Events**
+
+	// $().click(function(e) {
+	// 	$.ajax({
+	// 		url:"api/themes/update",
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
 	// });
 
+	// **locationController Events**
+
+	// add Location
+	$().submit(function(e) {
+		// console.log($("form"))
+		e.preventDefault();
+		$.ajax({
+			url:"api/locations/create",
+		}).done(data => {
+			console.log(data);
+		});
+	});
+
+	// Delete location
+	$().click(function(e) {
+		$.ajax({
+			url:"api/locations/delete/:id",
+		}).done(data => {
+			console.log(data);
+		});
+	});
+
+	// **adviceCONTROLLER Events**
+
+	// Get Advice
+	$().click(function(e) {
+		$.ajax({
+			url:"/api/advice",
+		}).done(data => {
+			console.log(data);
+		});
+	});
+
+	// Create Advice
+
+	$().submit(function(e) {
+		// console.log($("form"))
+		e.preventDefault();
+		$.ajax({
+			url:"/api/advice/create",
+		}).done(data => {
+			console.log(data);
+		});
+	});
 });
