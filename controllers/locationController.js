@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Location, Food} = require("../models");
+const { Location, Food } = require("../models");
 
 
 // const router = express.Router();
@@ -125,5 +125,6 @@ router.delete("api/locations/delete/:id", (req, res) => {
     }
 
 });
-// // Export routes for server.js to use.
+
+// Export routes for server.js to use.
 module.exports = router;
