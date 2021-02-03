@@ -40,12 +40,14 @@ const containerRoutes = require("./controllers/containersController");
 const foodsRoutes = require("./controllers/foodsController");
 const locationRoutes = require("./controllers/locationController");
 const userRoutes = require("./controllers/usersController");
+const themeRoutes = require("./controllers/themeController")
 
 app.use(adviceRoutes);
 app.use(containerRoutes);
 app.use(foodsRoutes);
 app.use(locationRoutes);
 app.use(userRoutes);
+app.use(themeRoutes);
 
 
 // Start our server so that it can begin listening to client requests.
