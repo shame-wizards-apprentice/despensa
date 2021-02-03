@@ -24,15 +24,12 @@ router.get("/", (req, res) => {
   			}
   		]
   	}).then(data => {
-  		let food = data.dataValues.Food;
-  		let locations = data.dataValues.Food;
-
   		console.log(data);
 
   		res.render("index", data.dataValues);
 
   	}).catch(err => {
-  		res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  		res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! Something went wrong ..." });
   	});
 
   } else {
@@ -42,6 +39,7 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
+	console.log(req.body);
   createUser(req.body, function (data) {
     res.json(data);
   })
@@ -90,7 +88,7 @@ router.get("/profile", (req, res) => {
 router.get("/lardersquadVIP", (req, res) => {
   if (req.session.user) {
     res.send(
-      `You are part of an exceptional group of people, ${req.session.user.username}.`
+      `You are part of an exceptional group of people, ${req.session.user.email}.`
     );
   } else {
     res
@@ -152,10 +150,10 @@ router.get("/logout", (req, res) => {
 // Functions to create user and automatically create locations for them
 async function createUser(data, cb) {
   let userObj = await db.User.create({
-    username: data.username,
+    username: data.email,
     email: data.email,
     password: data.password,
-    ThemeId: data.ThemeId,
+    ThemeId: 1,
   });
 
   // Call the defaultLocation function using the newly created user object
@@ -194,9 +192,6 @@ async function defaultLocation(user) {
       type: "freezer",
       UserId: `${user.id}`,
     }]).catch(err => { res.status(500).send(err.message) })
-  // console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`
-
-  // console.log("==================================================")
 
 };
 

@@ -1,6 +1,7 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-  $("form, [type='submit']").submit(function(e) {
+	console.log("app.js loaded");
+  $("form").submit(function(e) {
   	e.preventDefault();
   	// console.log($("form"))
   	// $.ajax({
@@ -12,24 +13,27 @@ $(function() {
 
   // **userCONTROLLER Events**
 	// Sign Up
-	$("#sign-up-btn").submit(function(e) {
+	$("#sign-up-btn").click(function(e) {
+		console.log("SIGN ME UP SCOTTY");
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/signup",
 			data:{
-				user: $("#user").val(),
+				email: $("#email").val(),
 				password: $("#pass").val()
 			},
 			method: "POST"
 		}).done(data => {
 			console.log(data);
 			window.location.replace("/")
+		}).fail(err => {
+			console.log(err);
 		});
 	});
 
 	// Sign Up
-	$("#log-in-btn").submit(function(e) {
+	$("#log-in-btn").click(function(e) {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
@@ -42,6 +46,8 @@ $(function() {
 		}).done(data => {
 			console.log(data);
 			window.location.replace("/")
+		}).fail(err => {
+			console.log(err);
 		});
 	});
 
