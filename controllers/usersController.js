@@ -123,6 +123,7 @@ router.get("/logout", (req, res) => {
   res.send("success");
 });
 
+// Functions to create user and automatically create locations for them
 async function createUser(data, cb) {
   let userObj = await db.User.create({
     username: data.username,
@@ -131,6 +132,7 @@ async function createUser(data, cb) {
     ThemeId: data.ThemeId,
   });
 
+  // Call the defaultLocation function using the newly created user object
   await defaultLocation(userObj).catch(err => { res.status(500).send(err.message) });
   db.User.findOne({
     where: {
@@ -141,11 +143,11 @@ async function createUser(data, cb) {
     // return data
     console.log(`this is user: ${JSON.stringify(user, null, 2)}`);
     cb(user)
-  })
+  }).catch(err => { res.status(500).send(err.message) })
 }
 
 async function defaultLocation(user) {
-  let locationObj = await db.Location.bulkCreate([
+  await db.Location.bulkCreate([
     {
       name: "Shopping list",
       type: "list",
