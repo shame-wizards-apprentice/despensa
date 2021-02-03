@@ -1,37 +1,46 @@
-<link rel="stylesheet" href="themes/{{user.theme}}/css/{{user.theme}}-styles.css" type="text/css"/>
+{{#if email}}
+<link rel="stylesheet" href="themes/{{Theme.dataValues.iconClass}}/css/{{Theme.dataValues.iconClass}}-styles.css" type="text/css"/>
+{{else}}
+<link rel="stylesheet" href="themes/{{theme}}/css/{{theme}}-styles.css" type="text/css"/>
+{{/if}}
 </head>
 <body>
-<div class="top-bar">
+<div id="page-container" class="grid-y">
+<div class="site-header top-bar">
 	<div class="top-bar-left">
-			<li class="menu-text">Despensa</li>
+			<h1 class="menu-text site-title">Despensa</h1>
 	</div>
 	<div class="top-bar-right">
 		<ul class="menu">
-			{{#if user}}
-			<li><a href="#">View Despensa</a></li>
-			<li><a href="#">Add Food</a></li>
+			{{#if email}}
 		  <li>
 		  	<a href="/signout">Sign Out</a>
-		  	{{else}}
+		  </li>
+		  <li>
+		  	<a href="/settings"> <i class="fas fa-user" id="settings"></i> </a>
+		  </li>
+		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
+		 	{{else}}
+		 	<li>
 		  	<form class="form form-horizontal">
-				  <div id="username-group">
+				  {{!-- <div id="username-group" class="field-group">
 				      <label for="user">User Name</label>
-				      <input type="text" id="user" name="user">
+				      <input type="text" id="user" name="user" required>
+				  </div> --}}
+				  <div id="username-group" class="field-group">
+				      <label for="email">Email</label>
+				      <input type="email" id="email" name="email" required>
 				  </div>
-
-				  <div id="password-group">
+				  <div id="password-group" class="field-group">
 				      <label for="pass">Password</label>
-				      <input type="password" id="pass" name="pass">
+				      <input type="password" id="pass" name="pass" required>
 				  </div>
 
-				  <div class="button-group">
-				  	<button type="submit" id="sign-in-btn">Sign In</button> / 
-				  	<button type="submit" id="sign-up-btn">Sign Up</button>
-				  </div>	
+				  <button type="submit" id="sign-in-btn" class="btn btn-default">Sign In</button>
+			  	<button type="submit" id="sign-up-btn" class="btn btn-warn">Sign Up</button>
 				</form>
 		  </li>
 		  {{/if}}
-		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
 		</ul>
 	</div>
 </div>

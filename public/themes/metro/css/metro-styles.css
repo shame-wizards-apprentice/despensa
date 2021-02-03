@@ -438,7 +438,7 @@ body {
 	width: 100%; }
 
 body {
-	background-color: #f7f7f7;
+	background-color: #dedede;
 	color: #363636; }
 
 .site-header {
@@ -450,6 +450,139 @@ body {
 ul.menu {
 	background-color: transparent; }
 
-.accordion a {
-	color: #f7f7f7;
+body {
+	background-color: #dedede;
+	color: #0d0d0d;
+	height: 100vh;
+	position: relative;
 	font-size: 1rem; }
+
+#page-container {
+	height: 100vh; }
+
+.site-header {
+	padding: 0 4rem; }
+
+.top-bar-right {
+	text-align: center; }
+
+.legal-notice {
+	color: #919191;
+	font-size: smaller;
+	border-left: 4px solid #f6802d;
+	display: inline-block;
+	padding: 1rem;
+	background-color: #e9e9e9; }
+
+#location-menu {
+	position: fixed;
+	width: 100%;
+	bottom: 0; }
+
+.form-horizontal {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: flex-end; }
+	.form-horizontal .field-group {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
+		margin: 0 0.1rem; }
+
+.tabs {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-ms-flex-pack: distribute;
+	    justify-content: space-around;
+	-webkit-box-align: stretch;
+	    -ms-flex-align: stretch;
+	        align-items: stretch; }
+	.tabs li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
+		text-align: center; }
+		.tabs li a {
+			font-size: 1rem; }
+
+.accordion {
+	border-radius: 1rem 1rem 0 0;
+	overflow: hidden;
+	border: 0;
+	margin-bottom: 0;
+	padding: 0;
+	background-color: #737373; }
+	.accordion li {
+		border-radius: inherit;
+		background-color: #737373;
+		border: 0; }
+		.accordion li:active, .accordion li.is-active {
+			background-color: #88bc29; }
+			.accordion li:active a, .accordion li.is-active a {
+				background-color: transparent; }
+	.accordion a {
+		border: 0;
+		color: #f8f8f8;
+		font-size: 1rem; }
+	.accordion .accordion-content {
+		background-color: transparent;
+		border: 0; }
+
+li.pantry {
+	background-color: #f6802d; }
+	li.pantry a {
+		color: #f8f8f8; }
+	li.pantry.accordion-item::after {
+		z-index: -1;
+		height: 20px;
+		width: 1200px;
+		position: absolute;
+		bottom: 0;
+		background-color: #f6802d; }
+
+li.refrigerator {
+	background-color: #30e0f3; }
+	li.refrigerator a {
+		color: #0b0b0b; }
+
+li.freezer {
+	background-color: #d64c6f; }
+	li.freezer a {
+		color: #f8f8f8; }
+
+.btn {
+	position: relative;
+	background-color: gainsboro;
+	margin: 0.2rem 0.4rem;
+	padding: 0.5rem 1rem;
+	vertical-align: middle; }
+	.btn-default {
+		background-color: #5D576B;
+		color: #f8f8f8; }
+	.btn-info {
+		background-color: #41D3BD;
+		color: #0b0b0b; }
+	.btn-success {
+		background-color: #A9E190;
+		color: #0b0b0b; }
+	.btn-alert {
+		background-color: #F4F1BB;
+		color: #0b0b0b; }
+	.btn-warn {
+		background-color: #ED6A5A;
+		color: #f8f8f8; }

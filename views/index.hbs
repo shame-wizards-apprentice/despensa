@@ -1,6 +1,21 @@
 {{> header}}
-<h1>We ❤ Food</h1>
-<h3>And Have <em>Opinions</em> About Yours</h3>
-<blockquote class="legal-notice">"Opinions" are personal beliefs about a particular topic and may be wildly inaccurate.
-    A (non-literal) grain of salt should be taken with each opinion presented. <cite>- Legal</cite></blockquote>
+<div class="grid-y text-center grid-padding-x">
+	<div class="cell">
+		<h1>We ❤ Food</h1>
+		<h5>And Have <em>Opinions</em> About Yours</h5>
+	</div>
+	<div class="cell">
+		{{#if message}}
+			<div class="message message-warn">{{message}}</div>
+		{{/if}}
+	</div>
+	<div class="cell">
+
+		<blockquote class="legal-notice">"Opinions" are personal beliefs about a particular topic and may be wildly inaccurate.
+	    A (non-literal) grain of salt should be taken with each opinion presented. <cite>- Legal</cite></blockquote>
+	    <br>
+	    <img src="images/cado-family--transparent.png" alt="Cado Family Photo">
+	</div>
+</div>
+
 {{> menu}}

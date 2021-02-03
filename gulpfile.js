@@ -222,4 +222,5 @@ gulp.task('dev', gulp.parallel('dev:styles', 'dev:images', 'dev:scripts'));
 gulp.task('watch', gulp.parallel('watch:styles', 'watch:scripts', 'watch:images', 'watch:views'));
 
 // DEFAULT
-gulp.task('default', gulp.series('clean', 'dev', 'server', gulp.parallel('watch', 'browser-sync')));
+// 'clean' @ beginning to delete public folder
+gulp.task('default', gulp.series('dev', 'server', gulp.parallel('watch', 'browser-sync')));

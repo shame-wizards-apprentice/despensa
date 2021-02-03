@@ -2,24 +2,20 @@
 $range: 'static';
 @include palette($color: 'primary', $complement-name: 'complement', $rangeType: $range, $rangeDepth: 9);
 
-body {
-	background-color: getColor('neutral-100');
-	color: getColor('accent-400');
-}
+$body--bg-color: getColor('neutral-100');
+$body--color: getColor('accent-400');
+$legal-notice--color: getColor('neutral-400');
+$legal-notice--border-left: 4px solid getColor('secondary-400');
+$legal-notice--bg-color: darkenColor(getColor('neutral-50'), 6);
 
-.site-header {
-	padding: 0 4rem;
-}
+$accordion--bg-color: getColor('neutral-500');
+$accordion--bg-color-2: getColor('primary-500');
 
-.top-bar-right {
-	text-align: center;
-}
+$pantry--bg-color: getColor('secondary-400');
+$pantry--color: getContrast($pantry--bg-color);
 
-.legal-notice {
-	color: getColor('neutral-400');
-	font-size: smaller;
-	border-left: 4px solid getColor('secondary-400');
-	display: inline-block;
-	padding: 1rem;
-	background-color: darkenColor(getColor('neutral-50'), 6);
-}
+$fridge--bg-color: getColor('tertiary-400');
+$fridge--color: getContrast($fridge--bg-color);
+
+$freezer--bg-color: getColor('accent-400');
+$freezer--color: getContrast($freezer--bg-color);

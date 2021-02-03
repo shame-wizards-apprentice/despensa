@@ -7,11 +7,37 @@ const db = require("../models");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index", {
-    username: "Angel",
-    email: "skelliebunnie@gmail.com",
-    theme: "metro",
-  });
+  console.log(req.session.user);
+
+  if(req.session.user) {
+  	db.User.findOne({
+  		where: {
+  			id: req.session.user.id
+  		},
+  		include: [
+  			{
+  				model: db.Theme,
+  			},
+  			{
+  				model: db.Location,
+  				include: [db.Food]
+  			}
+  		]
+  	}).then(data => {
+  		let food = data.dataValues.Food;
+  		let locations = data.dataValues.Food;
+
+  		console.log(data);
+
+  		res.render("index", data.dataValues);
+
+  	}).catch(err => {
+  		res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  	});
+
+  } else {
+  	res.render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  }
 });
 
 // Create Route
@@ -25,7 +51,7 @@ router.post("/api/signup", function (req, res) {
 router.post("/api/login", (req, res) => {
   db.User.findOne({
     where: {
-      username: req.body.username,
+      email: req.body.email,
     },
   })
     .then((data) => {
@@ -35,10 +61,10 @@ router.post("/api/login", (req, res) => {
         if (bcrypt.compareSync(req.body.password, data.password)) {
           req.session.user = {
             id: data.id,
-            username: data.username,
+            email: data.email,
           };
-          // res.json(data);
-          res.render("profile", { user: req.session.user });
+          res.json(req.session.user);
+          
         } else {
           res
             .status(401)
