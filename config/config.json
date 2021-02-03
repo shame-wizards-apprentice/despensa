@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "despensa",
-    "host": "127.0.0.1",
+    "username": "f3ibf9s7mmcf45rs",
+    "password": "cca5k4sy5wrtt8xv",
+    "database": "u322bhuobdgxtie3",
+    "host": "cis9cbtgerlk68wl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "password",
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "f3ibf9s7mmcf45rs",
+    "password": "cca5k4sy5wrtt8xv",
+    "database": "u322bhuobdgxtie3",
+    "host": "cis9cbtgerlk68wl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "f3ibf9s7mmcf45rs",
+    "password": "cca5k4sy5wrtt8xv",
+    "database": "u322bhuobdgxtie3",
+    "host": "cis9cbtgerlk68wl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
