@@ -16,6 +16,10 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Use handlebars
+app.engine("hbs", hbsHelpers.engine);
+app.set("view engine", "hbs");
+
 var hbsHelpers = exphbs.create({
   helpers: require('./config/hbs-helpers.js').helpers,
   defaultLayout: 'main',
@@ -32,9 +36,9 @@ app.use(session({
   }
 }));
 
-app.engine("hbs", hbsHelpers.engine);
-app.set("view engine", "hbs");
 
+
+// Import routes
 const adviceRoutes = require("./controllers/adviceController");
 const containerRoutes = require("./controllers/containersController");
 const foodsRoutes = require("./controllers/foodsController");
@@ -42,6 +46,7 @@ const locationRoutes = require("./controllers/locationController");
 const userRoutes = require("./controllers/usersController");
 const themeRoutes = require("./controllers/themeController");
 
+// Use routes
 app.use(adviceRoutes);
 app.use(containerRoutes);
 app.use(foodsRoutes);

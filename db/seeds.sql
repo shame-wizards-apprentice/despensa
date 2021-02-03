@@ -38,26 +38,6 @@ INSERT INTO locations (name, type, UserId) VALUES ("Ice Box", "Freezer", 4);
 -- ID 10
 INSERT INTO locations (name, type, UserId) VALUES ("Larder", "Pantry", 4);
 
--- CONTAINERS --
--- should we add 'position(s)'? Provide a dropdown for those as well: top, middle, bottom, left, right?
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "Top left", 1, 1);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "top right", 1, 1);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "middle", 1, 1);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Drawer", 1, 1);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", 3, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", 3, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", 3, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Drawer", 3, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", 3, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "A", 4, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "B", 4, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "C", 4, 2);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 2, 1);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 6, 3);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 7, 3);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 8, 4);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 9, 4);
-INSERT INTO containers (type, description, LocationId, UserId) VALUES ("Shelf", "", 10, 4);
 
 -- FOODS --
 INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("milk", "Krogers", 8, 0, 128, 1, 1);
