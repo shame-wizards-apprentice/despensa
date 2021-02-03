@@ -40,7 +40,7 @@ const containerRoutes = require("./controllers/containersController");
 const foodsRoutes = require("./controllers/foodsController");
 const locationRoutes = require("./controllers/locationController");
 const userRoutes = require("./controllers/usersController");
-const themeRoutes = require("./controllers/themeController")
+const themeRoutes = require("./controllers/themeController");
 
 app.use(adviceRoutes);
 app.use(containerRoutes);
