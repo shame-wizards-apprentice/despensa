@@ -33,13 +33,13 @@ $(function() {
 	});
 
 	// Sign Up
-	$("#log-in-btn").click(function(e) {
+	$("#sign-in-btn").click(function(e) {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
-			url: "/api/signup",
+			url: "/api/login",
 			data:{
-				user: $("#user").val(),
+				email: $("#email").val(),
 				password: $("#pass").val()
 			},
 			method: "POST"

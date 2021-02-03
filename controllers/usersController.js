@@ -39,10 +39,10 @@ router.get("/", (req, res) => {
 
 // Create Route
 router.post("/api/signup", function (req, res) {
-	console.log(req.body);
   createUser(req.body, function (data) {
+  	req.session.user = {email: data.email, id: data.id};
     res.json(data);
-  })
+  });
 });
 
 // Login route
