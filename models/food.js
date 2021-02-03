@@ -22,10 +22,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
 
-    },);
+    });
 
-    // Each food belongs to a location and cannot be created without a location due to the foreign key constraint
-    // [SK] added the foreignKey name to label the column in the Foods table
+    // Each food belongs to a user and cannot be created without a location due to the foreign key constraint
     Food.associate = (models) => {
         Food.belongsTo(models.Location, {
             // TODO: figure out what happens when deleted
@@ -40,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
                 name: "UserId",
                 allowNull: false
             }
-        })
+        });
     };
 
     return Food;

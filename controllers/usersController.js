@@ -121,13 +121,11 @@ router.put("/api/users/update/:id", (req, res) => {
       console.log(data);
       res.send("User info updated.");
     })
-    .catch((err) => {
-      res.status(500).send(err.message);
-    });
+    .catch((err) => { res.status(500).send(err.message) });
 });
 
 // Delete Route
-router.delete("users/delete/:id", function(req, res) {
+router.delete("users/delete/:id", function (req, res) {
   User.destroy({
     where: {
       id: req.params.id
@@ -143,9 +141,10 @@ router.delete("users/delete/:id", function(req, res) {
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
-  console.log("success");
+  res.send("success");
 });
 
+// Functions to create user and automatically create locations for them
 async function createUser(data, cb) {
   let userObj = await db.User.create({
     username: data.email,
@@ -162,7 +161,7 @@ async function createUser(data, cb) {
       where: {
         id: userObj.id
       },
-      include: [db.Location, db.Container]
+      include: [db.Location]
     }).then(user => {
       // return data
       console.log(`this is user: ${JSON.stringify(user, null, 2)}`);
@@ -172,7 +171,6 @@ async function createUser(data, cb) {
     console.log(chalk.bgRed("DANGER, WILL ROBINSON"));
     return userObj;
   }
-
 
 }
 
@@ -197,36 +195,9 @@ async function defaultLocation(user) {
       type: "freezer",
       UserId: `${user.id}`,
     }
-  ])
-  // console.log(`This is location object: ${JSON.stringify(locationObj, null, 2)}`)
-  let locationArray = locationObj;
-  //await defaultContainer(locationArray).catch(err => console.log(err));
-  // console.log("==================================================")
+  ]);
 
-};
-
-async function defaultContainer(locationArray) {
-  // console.log(`This is location array: ${JSON.stringify(locationArray, null, 2)}`)
-
-  let noList = locationArray.filter(obj => obj.type != "list")
-  // console.log(`this is noList: ${JSON.stringify(noList)}`)
-
-  for (i = 0; i < noList.length; i++) {
-    db.Container.bulkCreate([{
-        type: "shelf",
-        description: "it's a shelf, yo",
-        UserId: `${noList[i].UserId}`,
-        LocationId: `${noList[i].id}`
-      },
-      {
-        type: "drawer",
-        description: "it's a drawer, yo",
-        UserId: `${noList[i].UserId}`,
-        LocationId: `${noList[i].id}`
-      }
-    ]).catch(err => console.log(err))
-  }
-
+  return locationObj;
 };
 
 // Export routes for server.js to use.
