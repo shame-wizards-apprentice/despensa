@@ -40,9 +40,9 @@ INSERT INTO locations (name, type, UserId) VALUES ("Larder", "Pantry", 4);
 
 
 -- FOODS --
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("milk", "Krogers", 8, 0, 128, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("strawberry yogurt", "Yoplait", 87, 0, 32, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Mayonnaise", "Best Foods", 231, 0, 20, 2, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Crackers, Original", "Ritz", 497, 0, 13.7, 6, 2);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", 23, 0, 52, 1, 1);
-INSERT INTO food (name, brand, daysToUse, isCheese, amount, ContainerId, UserId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", 42, 0, 15, 2, 1);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("milk", "Krogers", 8, 0, 128, 1);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("strawberry yogurt", "Yoplait", 87, 0, 32, 1);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("Mayonnaise", "Best Foods", 231, 0, 20, 1);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("Crackers, Original", "Ritz", 497, 0, 13.7, 2);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("Orange Juice, Pulp Free", "Simply Orange", 23, 0, 52, 1);
+INSERT INTO food (name, brand, daysToUse, isCheese, amount, UserId) VALUES ("Butter (Canola Oil)", "Land O' Lakes", 42, 0, 15, 1);
