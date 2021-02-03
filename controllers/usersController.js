@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   console.log(req.session.user);
-  let id;
+
   if(req.session.user) {
   	db.User.findOne({
   		where: {
@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
   	});
 
   } else {
-  	res.status(500).render("index", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
+  	res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! I'm not supposed to talk to strangers." });
   }
 });
 
