@@ -93,7 +93,7 @@ $(function() {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
-			url: "/api/theme/update/:id",
+			url: "/api/food/update/:id",
 		}).done(data => {
 			console.log(data);
 		});
@@ -142,7 +142,15 @@ $(function() {
 	// Delete location
 	$().click(function(e) {
 		$.ajax({
+			where:{
+				
+			}
 			url:"/api/locations/delete/:id",
+			data: {
+				name:$("#foodName").val(),
+				type:  $("[name='locationType']:checked").val()
+			},
+			method: "POST"
 		}).done(data => {
 			console.log(data);
 		});
