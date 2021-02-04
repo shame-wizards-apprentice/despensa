@@ -83,6 +83,10 @@ $(function() {
 	$().click(function(e) {
 		$.ajax({
 			url:"/api/foods/delete/:id",
+			data: {
+				
+			},
+			method: "DELETE"
 		}).done(data => {
 			console.log(data);
 		});
@@ -143,7 +147,7 @@ $(function() {
 	$().click(function(e) {
 		$.ajax({
 			where:{
-				
+
 			}
 			url:"/api/locations/delete/:id",
 			data: {
