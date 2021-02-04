@@ -1,6 +1,27 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-	
+
+	$(".tabs-title:first-child, .tabs-panel:first-child").addClass("is-active");
+
+	// $(".accordion-title").click(function() {
+	// 	if($(this).parents(".accordion-item").hasClass('is-active')) {
+	// 		$(this).parents(".accordion-item").removeClass("is-active");
+	// 		$(this).siblings(".accordion-content").hide();
+	// 	}
+	// });
+
+	$("#headerAva").click(function() {
+		$.ajax({
+			url: "/api/advice",
+			method: "GET"
+		}).done(data => {
+			console.log(data);
+			$(".quote").html(data.content);
+		}).fail(err => {
+			console.log(err);
+		})
+	});
+
   $("form").submit(function(e) {
   	e.preventDefault();
   	// console.log($("form"))
@@ -12,14 +33,15 @@ $(function() {
   });
 
   // **userCONTROLLER Events**
+
 	// Sign Up
-	$("#sign-up-btn").click(function(e) {
+	$("#sign-up-btn").click(function (e) {
 		console.log("SIGN ME UP SCOTTY");
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/signup",
-			data:{
+			data: {
 				email: $("#email").val(),
 				password: $("#pass").val()
 			},
@@ -33,12 +55,12 @@ $(function() {
 	});
 
 	// Sign Up
-	$("#sign-in-btn").click(function(e) {
+	$("#sign-in-btn").click(function (e) {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/login",
-			data:{
+			data: {
 				email: $("#email").val(),
 				password: $("#pass").val()
 			},
@@ -51,15 +73,61 @@ $(function() {
 		});
 	});
 
+	$("#signOut").click(function(e) {
+		e.preventDefault();
+
+		$.ajax({
+			url: "/api/users/signout",
+			method: "GET"
+		}).done(data => {
+			window.location.replace("/");
+
+		}).fail(err => {
+			console.log(err);
+		})
+	});
+
+	$(".dropdown.menu a:first-child").click(function (e) {
+		e.preventDefault();
+	});
+
+	// ** CHANGE THEME **
+	$("#optionsModal .dropdown .submenu a").click(function (e) {
+		e.preventDefault();
+
+		console.log($(this).data('id'));
+
+		$.ajax({
+			url: "/api/users/update",
+			data: {
+				username: null,
+				email: null,
+				password: null,
+				ThemeId: $(this).data("id")
+			},
+			method: "PUT"
+		}).done(data => {
+			console.log(data);
+			window.location.replace("/")
+
+		}).fail(err => {
+			console.log(err);
+		});
+	});
+
+	$("#addFoodModal .close").click(function() {
+		window.location.replace("/");
+	});
+
 	// **foodCONTROLLER Events**
-	$("#addFoodModal a:first-child").click(function(e) {
+	$("#addFoodModal a:first-child").click(function (e) {
 		e.preventDefault();
 	});
 
 	// Create new food (I think this is a form)
-	$("#addFoodSubmit").click(function(e) {
+	$("#addFoodSubmit").click(function (e) {
 		e.preventDefault();
-		
+
 		console.log($("#foodIsCheese").is(":checked"))
 
 		$.ajax({
@@ -74,28 +142,48 @@ $(function() {
 			},
 			method: "POST"
 		}).done(data => {
-			$(".avacadoAdvice").text("You've got food!")
+			$(".avocadoAdvice").removeClass("hide").text("You've got food!")
 			console.log(data);
 		});
 	});
 
 	// Delete Food
-	$().click(function(e) {
+	$(".delete-food").click(function (e) {
+		let foodid = $(this).data("foodid");
+
 		$.ajax({
-			url:"/api/foods/delete/:id",
+			url: `/api/foods/delete/${foodid}`,
+			method: "DELETE"
 		}).done(data => {
-			console.log(data);
+			$(this).parents("li.food").remove();
 		});
 	});
 
 	// Update food(?)
-	$().submit(function(e) {
+	$(".move-food").click(function (e) {
 		e.preventDefault();
-		// console.log($("form"))
+
+		let foodid = $(this).data("foodid");
+		let listid = $(this).parents("#location-menu").find(".list").data("locationid");
+
+		console.log(foodid, listid);
+
+		let foodObj = {
+			name: null,
+			brand: null,
+			amount: null,
+			isCheese: null,
+			expirationDate: null,
+			LocationId: listid
+		};
+
 		$.ajax({
-			url: "/api/theme/update/:id",
+			url: `/api/foods/update/${foodid}`,
+			data: foodObj,
+			method: "PUT"
 		}).done(data => {
-			console.log(data);
+			// console.log(data);
+			window.location.replace("/")
 		});
 	});
 
@@ -111,13 +199,13 @@ $(function() {
 	// **locationController Events**
 
 	// add Location
-	$("#addLocationModal a:first-child").click(function(e) {
+	$("#menuModal a:first-child").click(function (e) {
 		e.preventDefault();
-		
+
 	});
 
 	let locationType = "";
-	$("#addLocationModal ul ul a").click(function(e) {
+	$("#menuModal ul ul a").click(function (e) {
 		// console.log($("form"))
 		// e.preventDefault();
 		let locationType = $(this).data("type");
@@ -125,49 +213,55 @@ $(function() {
 		console.log(locationType);
 	});
 
-	$("#addLocationSubmit").click(function() {
+	$("#addLocationSubmit").click(function () {
 		$.ajax({
 			url: "/api/locations/create",
 			data: {
-				name:$("#locationName").val(),
-				type:  $("[name='locationType']:checked").val()
+				name: $("#locationName").val(),
+				type: $("[name='locationType']:checked").val()
 			},
 			method: "POST"
 		}).done(data => {
-			$(".avacadoAdvice").text("You have a new food home!")
+			$(".avocado").text("You have a new food home!")
 			console.log(data);
 		});
 	});
 
 	// Delete location
-	$().click(function(e) {
-		$.ajax({
-			url:"/api/locations/delete/:id",
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// $().click(function(e) {
+	// 	$.ajax({
+	// 		where:{
+
+	// 		}
+	// 		url:"/api/locations/delete/:id",
+	// 		data: {
+	// 			name:$("#foodName").val(),
+	// 			type:  $("[name='locationType']:checked").val()
+	// 		},
+	// 		method: "POST"
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 
 	// **adviceCONTROLLER Events**
-
 	// Get Advice
-	$().click(function(e) {
-		$.ajax({
-			url:"/api/advice",
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// $().click(function(e) {
+	// 	$.ajax({
+	// 		url:"/api/advice",
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 
 	// Create Advice
-
-	$().submit(function(e) {
-		// console.log($("form"))
-		e.preventDefault();
-		$.ajax({
-			url:"/api/advice/create",
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// $().submit(function(e) {
+	// 	// console.log($("form"))
+	// 	e.preventDefault();
+	// 	$.ajax({
+	// 		url:"/api/advice/create",
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 });

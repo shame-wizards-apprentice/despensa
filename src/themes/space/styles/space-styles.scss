@@ -1,3 +1,26 @@
-@import "settings";
+@import "../../../styles/global/core";
 
-@import "general";
+$coreColors: (
+	"primary": #CAFE48,
+	"secondary": #70F8BA,
+	"tertiary": #7CB4B8,
+	"accent": #57467B,
+	"neutral": #524948
+);
+
+@include palette($color: 'primary', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+@import "../../settings";
+
+@import "../../general";
+
+body {
+	background-color: getColor("neutral-700") !important;
+	color: white;
+}
+
+// #location-menu .accordion-content,
+// #location-menu .tab-content {
+// 	background-color: getColor("neutral-700");
+// 	color: white;
+// }

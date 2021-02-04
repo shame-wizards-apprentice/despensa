@@ -1,25 +1,33 @@
 <div id="location-menu">
 	<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
 		{{#each Locations}}
-			<li class="accordion-item {{dataValues.type}} {{@first }}" data-accordion-item>
+			<li class="accordion-item {{dataValues.type}} {{@first }}" data-locationid="{{dataValues.id}}" data-accordion-item>
 				<a href="#" class="accordion-title">{{dataValues.name}}</a>
 
 				<div class="accordion-content" data-tab-content>
 					<ul class='food-item'>
 						{{#each Food}}
-							<li class='food'>
-								<p>{{dataValues.name}}, {{dataValues.brand}}<br>{{dataValues.expirationDate}}</p>
-								<p>
+							<li class='food text-center'>
+								<div class='status-image'>
 									{{#isExpired dataValues.expirationDate}}
-										<img src="images/Toss-transparent.png" alt="Call a biohazard unit!">
+										<img src="images/Toss-transparent.png" title="Call a biohazard unit!">
 									{{/isExpired}}
 									{{#isExpiringSoon dataValues.expirationDate}}
-										<img src="images/Use-transparent.png" alt="Waste not and avoid grocery shopping longer.">
+										<img src="images/Use-transparent.png" title="Waste not and avoid grocery shopping longer.">
 									{{/isExpiringSoon}}
 									{{#isGood dataValues.expirationDate}}
-										<img src="images/Keep-transparent.png" alt="!">
+										<img src="images/Keep-transparent.png" title="I bet {{dataValues.food}}'s super yummy!">
 									{{/isGood}}
-								</p>
+								</div>
+								<div>
+									<p>{{dataValues.name}}, {{dataValues.brand}} {{#if dataValues.isCheese}} <i class="fad fa-cheese-swiss"></i> {{/if}} <br><strong>Expires:</strong> {{dataValues.expirationDate}}</p>
+								</div>
+								<div>
+									<p>{{#unlessEquals ../dataValues.type "list"}}
+									<a href="#" class="btn btn-info-300 move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
+									{{/unlessEquals}}
+									<a href="#" class="btn btn-warn-400 text-white delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a></p>
+								</div>
 							</li>
 						{{/each}}
 					</ul>

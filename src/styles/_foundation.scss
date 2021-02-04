@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
+.site-title,
+.quote {
+	font-family: 'Lobster Two', cursive;
+}
+
 body {
 	background-color: $body--bg-color;
 	color: $body--color;
@@ -6,12 +13,41 @@ body {
 	font-size: 1rem;
 }
 
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+.fas, .far,
+.top-bar .menu a {
+	font-size: 1.5rem;
+}
+
 #page-container {
 	height: 100vh;
 }
 
 .site-header {
 	padding: 0 4rem;
+
+	.field-group {
+		display: flex;
+		flex-flow: column wrap;
+	}
+
+	& label {
+		flex: 1;
+		text-align: left;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	& input {
+		min-height: 3rem;
+		width: 100%;
+		flex: 1;
+		margin-top: 1px;
+	}
 }
 
 .top-bar-right {
@@ -86,7 +122,10 @@ body {
 		font-size: 1rem;
 	}
 
-	& .accordion-content { border: 0; }
+	& .accordion-content {
+		border: 0;
+		overflow: auto;
+	}
 }
 
 li.pantry {
@@ -113,20 +152,6 @@ li.freezer {
 	a { color: $freezer--color; }
 }
 
-.btn {
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
-	padding: 0.5rem 1rem;
-	vertical-align: middle;
-
-	@each $name,$color in $messageColors {
-		&-#{$name} {
-			background-color: $color;
-			color: getContrast($color);
-		}
-	}
-}
 
 .reveal.large {
 	min-height: 90%;
@@ -141,7 +166,7 @@ li.freezer {
 	display: flex;
 	flex-flow: row wrap;
 	position: relative;
-	margin-bottom: 70px;
+	// margin-bottom: 70px;
 
 	// &::after {
 	// 	position: absolute;
@@ -158,13 +183,19 @@ li.freezer {
 	// }
 }
 
-.accordion .food {
+.accordion .food-item .food,
+.tabs .food-item .food {
 	z-index: 1;
 	background-color: $food--bg-color;
 	color: $food--color;
 	padding: 0.5rem 1.5rem;
 	text-align: center;
-	margin: 0 1rem;
+	margin: 1rem;
+}
+
+.accordion li.is-active > a,
+.tabs li.is-active > a {
+	background-color: black;
 }
 
 .avocadoAdvice {
@@ -172,4 +203,96 @@ li.freezer {
 	padding: 1rem 1rem 1rem 1.5rem;
 	background-color: lemonchiffon;
 	border-left: 5px solid olive;
+}
+
+.twitter {
+	color: #1da1f2;
+}
+
+#optionsModal div:first-child,
+#optionsModal div:nth-child(2) {
+	max-width: 50%;
+	display: inline-block;
+}
+
+.quote {
+	font-size: 3rem;
+	text-align: center;
+	background-color: lemonchiffon;
+	padding: 2rem;
+	margin-top: 3rem;
+}
+
+.btn {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
+	position: relative;
+	background-color: gainsboro;
+	margin: 0.5rem 0.4rem;
+	padding: 1rem;
+	vertical-align: middle;
+	color: white;
+
+	@each $name,$color in $palette {
+		// @debug $color, getContrast(red);
+		&-#{$name} {
+			background-color: $color !important;
+			color: getContrast($color);
+		}
+	}
+
+	& > i { margin: 0; padding: 0; }
+}
+
+.text-white { color: white !important; }
+.text-black { color: black !important; }
+
+.message {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
+	margin: 1rem 0 2.5rem;
+	padding: 1rem;
+	font-size: 1.25rem;
+
+	@each $name,$color in $palette {
+		&-#{$name} {
+			border: 5px solid $color;
+			background-color: lightenColor($color, 50);
+			color: getContrast($color);
+		}
+	}
+}
+
+@media all and (max-width: 640px) {
+	.site-header {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.site-header .top-bar-right .menu {
+		justify-content: space-between;
+		margin-bottom: 1rem;
+
+		& li a {
+			font-size: 2rem;
+		}
+
+		& li a i { font-size: 2.5rem; }
+	}
+}
+
+@media all and (max-width: 640px) {
+	.site-header .to-bar-right {
+
+	}
+}
+
+@media all and (max-width: 735px) {
+	.site-header {
+		padding: 0 0.25rem;
+	}
+}
+
+@media all and (min-width: 1024px) {
+	.site-header {
+		padding: 0 10rem;
+	}
 }

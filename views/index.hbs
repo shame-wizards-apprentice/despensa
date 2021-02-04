@@ -2,11 +2,11 @@
 <div class="grid-y text-center grid-padding-x">
 	<div class="cell">
 		<h1>We ❤ Food</h1>
-		<h5>And Have <em>Opinions</em> About Yours</h5>
+		<h5>And Have <a href="https://twitter.com/cadofamily" target="_blank" class="twitter">#<em>Opinions</em></a> About Yours</h5>
 	</div>
 	<div class="cell">
 		{{#if message}}
-		<div class="message message-warn">{{message}}</div>
+		<div class="message message-warn-200">{{message}}</div>
 		{{/if}}
 	</div>
 	<div class="cell">
@@ -23,20 +23,8 @@
 <div class="reveal large" id="menuModal" data-reveal>
 	<h1>What would you like to do?</h1>
 	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
-	</div>
-	<div class="avacadoAdvice"></div>
-	<button class="close-button" data-close aria-label="Close reveal" type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
-</div>
-
-<div class="reveal large" id="addLocationModal" data-reveal>
-	<h1>Adding Location?</h1>
-	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+		<a class="btn btn-success-200" id="addLocation" data-open="menuModal">Create New Location</a>
+		<a class="btn btn-info-200" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
 	</div>
 	<div class="field-group">
 		<label for="location"><input type="radio" name="locationType" value="Refrigerator">Refrigerator</label>
@@ -47,8 +35,8 @@
 		<label for="locationName">Name</label>
 		<input type="text" id="locationName">
 	</div>
-	<a class="btn btn-success" id="addLocationSubmit">Add Location</a>
-	<div class="avacadoAdvice"></div>
+	<a class="btn btn-success-200" id="addLocationSubmit">Add Location</a>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -57,8 +45,8 @@
 <div class="reveal large" id="addFoodModal" data-reveal>
 	<h1>Adding Food?</h1>
 	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+		<a class="btn btn-info-200" id="addLocation" data-open="menuModal">Create New Location</a>
+		<a class="btn btn-success-200" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
 	</div>
 	<div class="field-group">
 		<label for="foodName">Name</label>
@@ -86,8 +74,8 @@
 		<label for=""><input type="radio" name="foodLocation" value="{{dataValues.id}}"> {{dataValues.name}}</label>
 		{{/each}}
 	</div>
-	<a class="btn btn-success" id="addFoodSubmit">Add Food</a>
-	<div class="avacadoAdvice"></div>
+	<a class="btn btn-success-200" id="addFoodSubmit">Add Food</a>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -97,12 +85,12 @@
 	<h1>What would you like to do?</h1>
 	<ul class="dropdown menu" data-dropdown-menu>
 		<li>
-			<a href="">Change Theme</a>
+			<a href="#" style="text-transform: capitalize">{{Theme.dataValues.iconClass}}</a>
 			<ul>
-				<li><a id="metroToggle">Metro</a></li>
-				<li><a id="spaceToggle">Space</a></li>
-				<li><a id="gothToggle">Goth</a></li>
-				<li><a id="cuteToggle">Cute</a></li>
+				{{#unlessEquals Theme.dataValues.id 1}}<li><a id="metroToggle" data-id="1">Metro</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 3}}<li><a id="spaceToggle" data-id="3">Space</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 2}}<li><a id="gothToggle" data-id="2">Goth</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 4}}<li><a id="cuteToggle" data-id="4">Cute</a></li>{{/unlessEquals}}
 			</ul>
 		</li>
 	</ul>
@@ -115,14 +103,14 @@
 		<input type="email" id="userEmail" value="{{email}}">
 	</div>
 	<div class="field-group">
-		<p class="message message-warning">Only enter your password if you would like to change it!</p>
+		<p class="message message-warn-200">Only enter your password if you would like to change it!</p>
 		<label for="userPassword">Password</label>
 		<input type="text" id="userPassword">
 		<label for="userPassword">Confirm Password</label>
 		<input type="text" id="userPassword2">
 	</div>
-	<a class="btn btn-success" id="updateAccountSubmit">Update Account</a>
-	<div class="avacadoAdvice"></div>
+	<a class="btn btn-success-200" id="updateAccountSubmit">Update Account</a>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>

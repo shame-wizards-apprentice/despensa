@@ -438,11 +438,15 @@ body {
 	width: 100%; }
 
 body {
-	background-color: #e0dcdc;
-	color: #393332; }
+	background-color: #e0dcdc !important;
+	color: #373737; }
 
 .site-header {
 	background-color: #a3e401; }
+	.site-header a {
+		color: #f8f7f7; }
+		.site-header a:hover {
+			color: #8773af; }
 
 .site-title {
 	color: #f8f7f7; }
@@ -450,139 +454,86 @@ body {
 ul.menu {
 	background-color: transparent; }
 
-body {
-	background-color: #e0dcdc;
-	color: #8773af;
-	height: 100vh;
-	position: relative;
-	font-size: 1rem; }
-
-#page-container {
-	height: 100vh; }
-
-.site-header {
-	padding: 0 4rem; }
-
-.top-bar-right {
-	text-align: center; }
-
 .legal-notice {
 	color: #988c8a;
-	font-size: smaller;
-	border-left: 4px solid #2ef59a;
-	display: inline-block;
-	padding: 1rem;
-	background-color: #eae7e7; }
+	border-left: 4px solid #8773af;
+	background-color: #f8f7f7; }
 
 #location-menu {
-	position: fixed;
-	width: 100%;
-	bottom: 0; }
-
-.form-horizontal {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row wrap;
-	        flex-flow: row wrap;
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between;
-	-webkit-box-align: end;
-	    -ms-flex-align: end;
-	        align-items: flex-end; }
-	.form-horizontal .field-group {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1;
-		        flex: 1;
-		margin: 0 0.1rem; }
-
-.tabs {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row wrap;
-	        flex-flow: row wrap;
-	-ms-flex-pack: distribute;
-	    justify-content: space-around;
-	-webkit-box-align: stretch;
-	    -ms-flex-align: stretch;
-	        align-items: stretch; }
-	.tabs li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1;
-		        flex: 1;
-		text-align: center; }
-		.tabs li a {
-			font-size: 1rem; }
-
-.accordion {
-	border-radius: 1rem 1rem 0 0;
-	overflow: hidden;
-	border: 0;
-	margin-bottom: 0;
-	padding: 0;
 	background-color: #7a6d6b; }
-	.accordion li {
-		border-radius: inherit;
-		background-color: #7a6d6b;
+	#location-menu li {
 		border: 0; }
-		.accordion li:active, .accordion li.is-active {
-			background-color: #a3e401; }
-			.accordion li:active a, .accordion li.is-active a {
-				background-color: transparent; }
-	.accordion a {
-		border: 0;
-		color: #f9f8f8;
-		font-size: 1rem; }
-	.accordion .accordion-content {
-		background-color: transparent;
-		border: 0; }
+		#location-menu li:active a,
+		#location-menu li.is-active a {
+			background-color: #e3fe9f;
+			color: #373737; }
+	#location-menu > a {
+		color: #373737; }
+	#location-menu .is-active a:hover,
+	#location-menu a:hover {
+		background-color: #b3fe9f; }
 
-li.pantry {
-	background-color: #2ef59a; }
-	li.pantry a {
-		color: #0b0a0a; }
-	li.pantry.accordion-item::after {
-		z-index: -1;
-		height: 20px;
-		width: 1200px;
-		position: absolute;
-		bottom: 0;
-		background-color: #2ef59a; }
+li.list,
+li.List {
+	background-color: #feea9f !important; }
+	li.list > a,
+	li.List > a {
+		color: #373737 !important; }
+	li.list .tab-content,
+	li.list .accordion-content,
+	li.List .tab-content,
+	li.List .accordion-content {
+		background-color: #fff4cf; }
 
-li.refrigerator {
-	background-color: #71aeb2; }
-	li.refrigerator a {
-		color: #f9f8f8; }
+li.pantry,
+li.Pantry {
+	background-color: #cac1dc !important; }
+	li.pantry > a,
+	li.Pantry > a {
+		color: #373737 !important; }
+	li.pantry.accordion-item::after,
+	li.Pantry.accordion-item::after {
+		background-color: #cac1dc; }
+	li.pantry .tab-content,
+	li.pantry .accordion-content,
+	li.Pantry .tab-content,
+	li.Pantry .accordion-content {
+		background-color: #e4e0ed; }
 
-li.freezer {
-	background-color: #8773af; }
-	li.freezer a {
-		color: #f9f8f8; }
+li.refrigerator,
+li.Refrigerator {
+	background-color: #a3fad2 !important; }
+	li.refrigerator > a,
+	li.Refrigerator > a {
+		color: #373737 !important; }
+	li.refrigerator .tab-content,
+	li.refrigerator .accordion-content,
+	li.Refrigerator .tab-content,
+	li.Refrigerator .accordion-content {
+		background-color: #d1fde9; }
 
-.btn {
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
+li.freezer,
+li.Freezer {
+	background-color: #c0dbdd !important; }
+	li.freezer > a,
+	li.Freezer > a {
+		color: #373737 !important; }
+	li.freezer .tab-content,
+	li.freezer .accordion-content,
+	li.Freezer .tab-content,
+	li.Freezer .accordion-content {
+		background-color: #e0edee; }
+
+.food-item .food {
+	background-color: #fff1bd;
+	color: #373737;
 	padding: 0.5rem 1rem;
-	vertical-align: middle; }
-	.btn-default {
-		background-color: #5D576B;
-		color: #f9f8f8; }
-	.btn-info {
-		background-color: #41D3BD;
-		color: #0b0a0a; }
-	.btn-success {
-		background-color: #A9E190;
-		color: #0b0a0a; }
-	.btn-alert {
-		background-color: #F4F1BB;
-		color: #0b0a0a; }
-	.btn-warn {
-		background-color: #ED6A5A;
-		color: #f9f8f8; }
+	margin: 0 1rem; }
+
+.food div:first-child,
+.food div:nth-child(2) {
+	display: inline-block; }
+
+body {
+	background-color: #393332 !important;
+	color: white; }

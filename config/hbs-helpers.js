@@ -13,6 +13,13 @@ var register = function(Handlebars) {
 
       return options.inverse(this);
     },
+    unlessEquals: function(a, b, options) {
+      if (a !== b) {
+        return options.fn(this);
+      }
+
+      return options.inverse(this);
+    },
     isExpired: function(dateString, options) {
     	if( dateString !== null && dayjs().isAfter(dayjs(dateString)) ) {
     		return options.fn(this);

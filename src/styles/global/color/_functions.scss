@@ -24,8 +24,11 @@
 		$amount: $amount * 100;
 	}
 	$amount: clamp($amount, -($clampAmount), $clampAmount);
-	$clr: scale-color($color, $lightness: ($amount));
-	@return $clr;
+	@if type-of($color) == color {
+		@return scale-color($color, $lightness: ($amount));
+	} @else {
+		@return $color;
+	}
 }
 
 @function darkenColor($color, $amount: 16.5, $clampAmount: 87) {
@@ -33,8 +36,11 @@
 		$amount: $amount * 100;
 	}
 	$amount: clamp($amount, -($clampAmount), $clampAmount);
-	$clr: scale-color($color, $lightness: -($amount));
-	@return $clr;
+	@if type-of($color) == color {
+		@return scale-color($color, $lightness: -($amount));
+	} @else {
+		@return $color;
+	}
 }
 
 @function getLightest($color, $map: $palette) {
@@ -116,25 +122,31 @@
 	$luminance: null; $clr: null;
 	$luminance-comp: 0.37;
 
-	@if type_of($color) == color {
+	@if type-of($color) == color {
 		$luminance: luminance($color);
-		@if lightness($color) > $luminance-comp {
-			$clr: scale-color($color, $lightness: -95);
-		} @else {
-			$clr: scale-color($color, $lightness: 95);
-		}
+		// @if lightness($color) > $luminance-comp {
+		// 	$clr: scale-color($color, $lightness: -95);
+		// } @else {
+		// 	$clr: scale-color($color, $lightness: 95);
+		// }
 	} @else {
 		$color: getColor($color, $map);
 		$luminance: luminance($color);
 	}
 
 	@if $luminance >= $luminance-comp {
-		$clr: darkenColor(getColor('neutral-700'), 80);
+		// $clr: darkenColor(getColor('neutral-700'), 80);
+		$clr: #373737;
 	} @else {
-		$clr: lightenColor(getColor('neutral-100'), 80);
+		// $clr: lightenColor(getColor('neutral-100'), 80);
+		$clr: #fefefe;
 	}
 
-	//@debug $color $luminance $luminance-comp $clr;
+	@debug $clr;
+
+	@if $clr == null {
+		@return $color;
+	}
 
 	@return $clr;
 }

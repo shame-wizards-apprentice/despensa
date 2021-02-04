@@ -1,0 +1,34 @@
+$body--bg-color: getColor('neutral-50');
+$text-color: getContrast($body--bg-color);
+$site-header--bg-color: getColor('primary-500');
+$site-title--color: getColor('neutral-50');
+
+$header-link--color: getColor('neutral-50');
+$header-link--hover-color: getColor('accent-400');
+
+$body--bg-color: getColor('neutral-100');
+$body--color: getColor('tertiary-400');
+$legal-notice--color: getColor('neutral-400');
+$legal-notice--border-left: 4px solid getColor('accent-400');
+$legal-notice--bg-color: getColor('neutral-50');
+
+$accordion--bg-color: getColor('neutral-500');
+$accordion--bg-color-2: getColor('primary-200');
+$accordion--color-2: getContrast($accordion--bg-color-2);
+
+$location--hover-bg-color: getColor('primary-analogous3-200');
+
+$list--bg-color: getColor('primary-analogous2-200');
+$list--color: getContrast($list--bg-color);
+
+$pantry--bg-color: getColor('accent-200');
+$pantry--color: getContrast($pantry--bg-color);
+
+$fridge--bg-color: getColor('secondary-200');
+$fridge--color: getContrast($fridge--bg-color);
+
+$freezer--bg-color: getColor('tertiary-200');
+$freezer--color: getContrast($freezer--bg-color);
+
+$food--bg-color: getColor('primary-analogous2-100');
+$food--color: getContrast($food--bg-color);

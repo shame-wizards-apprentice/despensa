@@ -7,9 +7,9 @@ const db = require("../models");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  console.log(req.session.user);
 
   if(req.session.user) {
+  	console.log(req.session.user.id);
   	db.User.findOne({
   		where: {
   			id: req.session.user.id
@@ -29,7 +29,8 @@ router.get("/", (req, res) => {
   		res.render("index", data.dataValues);
 
   	}).catch(err => {
-  		res.status(500).render("500", { theme: "metro", message: "Oops, I'm sorry! Something went wrong ..." });
+  		res.status(500).render("500", { theme: "metro", message: err.message });
+  		// "Oops, I'm sorry! Something went wrong ..."
   	});
 
   } else {
@@ -98,7 +99,7 @@ router.get("/lardersquadVIP", (req, res) => {
 });
 
 // Update Route
-router.put("/api/users/update/:id", (req, res) => {
+router.put("/api/users/update", (req, res) => {
   console.log(req.body);
   let userObj = {};
   if (req.body.username !== "" && req.body.username !== null) {
@@ -117,17 +118,15 @@ router.put("/api/users/update/:id", (req, res) => {
   if (req.body.ThemeId !== "" && req.body.ThemeId !== null) {
     userObj.ThemeId = req.body.ThemeId;
   }
-  User.update(userObj, {
+  
+  db.User.update(userObj, {
     where: {
-      id: req.params.id,
+      id: req.session.user.id,
     },
   })
     .then((data) => {
       console.log(data);
-      req.session.user = {
-      	email: data.email,
-      	id: data.id
-      }
+      
       res.send("User info updated.");
     })
     .catch((err) => { res.status(500).send(err.message) });
@@ -135,7 +134,7 @@ router.put("/api/users/update/:id", (req, res) => {
 
 // Delete Route
 router.delete("users/delete/:id", function (req, res) {
-  User.destroy({
+  db.User.destroy({
     where: {
       id: req.params.id
     }
@@ -145,9 +144,8 @@ router.delete("users/delete/:id", function (req, res) {
 });
 
 // Logout route
-router.get("/logout", (req, res) => {
+router.get("/api/users/signout", (req, res) => {
   req.session.destroy();
-  res.redirect("/");
   res.send("success");
 });
 
