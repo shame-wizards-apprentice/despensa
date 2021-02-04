@@ -52,13 +52,27 @@ $(function() {
 	});
 
 	// **foodCONTROLLER Events**
+	$("#addFoodModal a:first-child").click(function(e) {
+		e.preventDefault();
+	});
 
 	// Create new food (I think this is a form)
-	$().submit(function(e) {
+	$("#addFoodSubmit").click(function(e) {
 		e.preventDefault();
-		// console.log($("form"))
+		
+		console.log($("#foodIsCheese").is(":checked"))
+
 		$.ajax({
-			url: "api/foods/create",
+			url: "/api/foods/create",
+			data: {
+				name: $("#foodName").val(),
+				brand: $("#foodBrand").val(),
+				expirationDate: $("#foodExpirationDate").val(),
+				isCheese: $("#foodIsCheese").is(":checked"),
+				amount: $("#foodAmount").val(),
+				locationId: $("[name='foodLocation']:checked").val()
+			},
+			method: "POST"
 		}).done(data => {
 			console.log(data);
 		});
@@ -67,7 +81,7 @@ $(function() {
 	// Delete Food
 	$().click(function(e) {
 		$.ajax({
-			url:"api/foods/delete/:id",
+			url:"/api/foods/delete/:id",
 		}).done(data => {
 			console.log(data);
 		});
@@ -78,7 +92,7 @@ $(function() {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
-			url: "api/theme/update/:id",
+			url: "/api/theme/update/:id",
 		}).done(data => {
 			console.log(data);
 		});
@@ -96,11 +110,27 @@ $(function() {
 	// **locationController Events**
 
 	// add Location
-	$().submit(function(e) {
-		// console.log($("form"))
+	$("#addLocationModal a:first-child").click(function(e) {
 		e.preventDefault();
+	});
+
+	let locationType = "";
+	$("#addLocationModal ul ul a").click(function(e) {
+		// console.log($("form"))
+		// e.preventDefault();
+		let locationType = $(this).data("type");
+		// $("#addLocationModal ul a:firstChild").text(locationType);
+		console.log(locationType);
+	});
+
+	$("#addLocationSubmit").click(function() {
 		$.ajax({
-			url:"api/locations/create",
+			url: "/api/locations/create",
+			data: {
+				name: $("#locationName").val(),
+				type: locationType
+			},
+			method: "POST"
 		}).done(data => {
 			console.log(data);
 		});
@@ -109,7 +139,7 @@ $(function() {
 	// Delete location
 	$().click(function(e) {
 		$.ajax({
-			url:"api/locations/delete/:id",
+			url:"/api/locations/delete/:id",
 		}).done(data => {
 			console.log(data);
 		});
