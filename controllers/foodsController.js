@@ -9,7 +9,7 @@ const router = express.Router();
 // Routes
 
 // Display all foods belonging to logged in user
-router.get("api/foods", (req, res) => {
+router.get("/api/foods", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -30,7 +30,7 @@ router.get("api/foods", (req, res) => {
 });
 
 // Add a new food
-router.post("api/foods/create", (req, res) => {
+router.post("/api/foods/create", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -52,7 +52,7 @@ router.post("api/foods/create", (req, res) => {
 });
 
 // Update food stats
-router.put("api/foods/update/:id", (req, res) => {
+router.put("/api/foods/update/:id", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -81,7 +81,7 @@ router.put("api/foods/update/:id", (req, res) => {
 });
 
 // Delete a food
-router.delete("api/foods/delete/:id", (req, res) => {
+router.delete("/api/foods/delete/:id", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }

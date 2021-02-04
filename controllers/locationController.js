@@ -13,7 +13,7 @@ const router = express.Router();
 // });
 
 // Display all locations owned by user
-router.get("api/locations/:userId", (req, res) => {
+router.get("/api/locations/:userId", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -34,7 +34,7 @@ router.get("api/locations/:userId", (req, res) => {
 });
 
 // Create a new location if user is logged in
-router.post("api/locations/create", (req, res) => {
+router.post("/api/locations/create", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -54,7 +54,7 @@ router.post("api/locations/create", (req, res) => {
 });
 
 // Update user's locations if logged in
-router.put("api/locations/update/:id", (req, res) => {
+router.put("/api/locations/update/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
@@ -80,7 +80,7 @@ router.put("api/locations/update/:id", (req, res) => {
 });
 
 // Delete a location, if user is logged in
-router.delete("api/locations/delete/:id", (req, res) => {
+router.delete("/api/locations/delete/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
