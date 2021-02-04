@@ -11,92 +11,30 @@ ul.menu { background-color: transparent; }
 body {
 	background-color: $body--bg-color;
 	color: $body--color;
-	height: 100vh;
-	position: relative;
-	font-size: 1rem;
-}
-
-#page-container {
-	height: 100vh;
-}
-
-.site-header {
-	padding: 0 4rem;
-}
-
-.top-bar-right {
-	text-align: center;
 }
 
 .legal-notice {
 	color: $legal-notice--color;
-	font-size: smaller;
 	border-left: $legal-notice--border-left;
-	display: inline-block;
-	padding: 1rem;
 	background-color: $legal-notice--bg-color;
 }
 
 #location-menu {
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-}
-
-.form-horizontal {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	align-items: flex-end;
-
-	& .field-group {
-		flex: 1;
-		margin: 0 0.1rem;
-	}
-}
-
-.tabs {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
-	align-items: stretch;
-
-	& li {
-		flex: 1;
-		text-align: center;
-
-		& a { font-size: 1rem; }
-	}
-}
-
-.accordion {
-	border-radius: 1rem 1rem 0 0;
-	overflow: hidden;
-	border: 0;
-	margin-bottom: 0;
-	padding: 0;
 	background-color: $accordion--bg-color;
 
 	& li {
-		border-radius: inherit;
 		background-color: $accordion--bg-color;
 		border: 0;
 
 		&:active,
 		&.is-active {
 			background-color: $accordion--bg-color-2;
-
-			& a { background-color: transparent; }
 		}
 	}
 
 	& a {
-		border: 0;
 		color: getContrast($accordion--bg-color);
-		font-size: 1rem;
 	}
-
-	& .accordion-content { background-color: transparent; border: 0; }
 }
 
 li.pantry {
@@ -104,11 +42,6 @@ li.pantry {
 	a { color: $pantry--color; }
 
 	&.accordion-item::after {
-		z-index: -1;
-		height: 20px;
-		width: 1200px;
-		position: absolute;
-		bottom: 0;
 		background-color: $pantry--bg-color;
 	}
 }
@@ -121,21 +54,6 @@ li.refrigerator {
 li.freezer {
 	background-color: $freezer--bg-color;
 	a { color: $freezer--color; }
-}
-
-.btn {
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
-	padding: 0.5rem 1rem;
-	vertical-align: middle;
-
-	@each $name,$color in $messageColors {
-		&-#{$name} {
-			background-color: $color;
-			color: getContrast($color);
-		}
-	}
 }
 
 .accordion .food {

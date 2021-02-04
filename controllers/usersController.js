@@ -144,9 +144,8 @@ router.delete("users/delete/:id", function (req, res) {
 });
 
 // Logout route
-router.get("/logout", (req, res) => {
+router.get("/api/users/signout", (req, res) => {
   req.session.destroy();
-  res.redirect("/");
   res.send("success");
 });
 

@@ -452,107 +452,28 @@ ul.menu {
 
 body {
 	background-color: #ffffbd;
-	color: #ff24ff;
-	height: 100vh;
-	position: relative;
-	font-size: 1rem; }
-
-#page-container {
-	height: 100vh; }
-
-.site-header {
-	padding: 0 4rem; }
-
-.top-bar-right {
-	text-align: center; }
+	color: #ff24ff; }
 
 .legal-notice {
 	color: #ffff24;
-	font-size: smaller;
 	border-left: 4px solid #ff9b24;
-	display: inline-block;
-	padding: 1rem;
 	background-color: #ffffd2; }
 
 #location-menu {
-	position: fixed;
-	width: 100%;
-	bottom: 0; }
-
-.form-horizontal {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row wrap;
-	        flex-flow: row wrap;
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between;
-	-webkit-box-align: end;
-	    -ms-flex-align: end;
-	        align-items: flex-end; }
-	.form-horizontal .field-group {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1;
-		        flex: 1;
-		margin: 0 0.1rem; }
-
-.tabs {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: row wrap;
-	        flex-flow: row wrap;
-	-ms-flex-pack: distribute;
-	    justify-content: space-around;
-	-webkit-box-align: stretch;
-	    -ms-flex-align: stretch;
-	        align-items: stretch; }
-	.tabs li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1;
-		        flex: 1;
-		text-align: center; }
-		.tabs li a {
-			font-size: 1rem; }
-
-.accordion {
-	border-radius: 1rem 1rem 0 0;
-	overflow: hidden;
-	border: 0;
-	margin-bottom: 0;
-	padding: 0;
 	background-color: #e6e600; }
-	.accordion li {
-		border-radius: inherit;
+	#location-menu li {
 		background-color: #e6e600;
 		border: 0; }
-		.accordion li:active, .accordion li.is-active {
+		#location-menu li:active, #location-menu li.is-active {
 			background-color: #27e600; }
-			.accordion li:active a, .accordion li.is-active a {
-				background-color: transparent; }
-	.accordion a {
-		border: 0;
-		color: #151500;
-		font-size: 1rem; }
-	.accordion .accordion-content {
-		background-color: transparent;
-		border: 0; }
+	#location-menu a {
+		color: #151500; }
 
 li.pantry {
 	background-color: #ff9b24; }
 	li.pantry a {
 		color: #151500; }
 	li.pantry.accordion-item::after {
-		z-index: -1;
-		height: 20px;
-		width: 1200px;
-		position: absolute;
-		bottom: 0;
 		background-color: #ff9b24; }
 
 li.refrigerator {
@@ -563,28 +484,6 @@ li.refrigerator {
 li.freezer {
 	background-color: #ff24ff; }
 	li.freezer a {
-		color: #fffff2; }
-
-.btn {
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
-	padding: 0.5rem 1rem;
-	vertical-align: middle; }
-	.btn-default {
-		background-color: #5D576B;
-		color: #fffff2; }
-	.btn-info {
-		background-color: #41D3BD;
-		color: #151500; }
-	.btn-success {
-		background-color: #A9E190;
-		color: #151500; }
-	.btn-alert {
-		background-color: #F4F1BB;
-		color: #151500; }
-	.btn-warn {
-		background-color: #ED6A5A;
 		color: #fffff2; }
 
 .accordion .food {

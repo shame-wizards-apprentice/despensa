@@ -8,22 +8,22 @@
 <div id="page-container" class="grid-y">
 <div class="site-header top-bar">
 	<div class="top-bar-left">
-			<img src="images/Use-transparent.png" id="headerAva" alt="Ava Cado" style="display: inline-block" data-open="AvaAdvice">
+			<img src="images/Use-transparent.png" id="headerAva" alt="Ava Cado" style="display: inline-block; margin: 0 auto" data-open="AvaAdvice">
 			<h1 class="menu-text site-title" style="display: inline-block">Despensa</h1>
 	</div>
 	<div class="top-bar-right">
 		<ul class="menu">
 			{{#if email}}
 			<li>
-		  	<a href="#" data-open="menuModal"> <i class="fas fa-bars" id="menu"></i> </a>
+		  	<a href="#" id="signOut">Sign Out</a>
 		  </li>
 		  <li>
 		  	<a href="#" data-open="optionsModal"> <i class="fas fa-cog" id="settings"></i> </a>
 		  </li>
 		  <li>
-		  	<a href="/signout">Sign Out</a>
+		  	<a href="#" data-open="menuModal"> <i class="fas fa-bars" id="menu"></i> </a>
 		  </li>
-		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
+		  {{!-- <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li> --}}
 		 	{{else}}
 		 	<li>
 		  	<form class="form form-horizontal">
@@ -40,8 +40,8 @@
 				      <input type="password" id="pass" name="pass" required>
 				  </div>
 
-				  <button type="submit" id="sign-in-btn" class="btn btn-default">Sign In</button>
-			  	<button type="submit" id="sign-up-btn" class="btn btn-warn">Sign Up</button>
+				  <button type="submit" id="sign-in-btn" class="btn btn-success-100">Sign In</button>
+			  	<button type="submit" id="sign-up-btn" class="btn btn-alert-100">Sign Up</button>
 				</form>
 		  </li>
 		  {{/if}}

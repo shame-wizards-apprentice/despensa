@@ -7,21 +7,21 @@
 				<div class="accordion-content" data-tab-content>
 					<ul class='food-item'>
 						{{#each Food}}
-							<li class='food'>
-								<p>{{dataValues.name}}, {{dataValues.brand}}<br>{{dataValues.expirationDate}}</p>
+							<li class='food text-center'>
+								<p>{{dataValues.name}}, {{dataValues.brand}}<br>{{dataValues.expirationDate}} {{#if dataValues.isCheese}} <i class="fad fa-cheese-swiss"></i> {{/if}}</p>
 								<p>
 									{{#isExpired dataValues.expirationDate}}
-										<img src="images/Toss-transparent.png" alt="Call a biohazard unit!">
+										<img src="images/Toss-transparent.png" title="Call a biohazard unit!">
 									{{/isExpired}}
 									{{#isExpiringSoon dataValues.expirationDate}}
-										<img src="images/Use-transparent.png" alt="Waste not and avoid grocery shopping longer.">
+										<img src="images/Use-transparent.png" title="Waste not and avoid grocery shopping longer.">
 									{{/isExpiringSoon}}
 									{{#isGood dataValues.expirationDate}}
-										<img src="images/Keep-transparent.png" alt="!">
+										<img src="images/Keep-transparent.png" title="I bet {{dataValues.food}}'s super yummy!">
 									{{/isGood}}
 									<br>
-									<a href="#" class="btn btn-alert move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
-									<a href="#" class="btn btn-warn delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a>
+									<a href="#" class="btn btn-alert-300 move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
+									<a href="#" class="btn btn-warn-300 delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a>
 								</p>
 							</li>
 						{{/each}}

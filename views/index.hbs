@@ -2,11 +2,11 @@
 <div class="grid-y text-center grid-padding-x">
 	<div class="cell">
 		<h1>We ❤ Food</h1>
-		<h5>And Have <em>Opinions</em> About Yours</h5>
+		<h5>And Have <a href="https://twitter.com/cadofamily" target="_blank" class="twitter">#<em>Opinions</em></a> About Yours</h5>
 	</div>
 	<div class="cell">
 		{{#if message}}
-		<div class="message message-warn">{{message}}</div>
+		<div class="message message-warn-200">{{message}}</div>
 		{{/if}}
 	</div>
 	<div class="cell">
@@ -26,7 +26,7 @@
 		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
 		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
 	</div>
-	<div class="avacadoAdvice"></div>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -48,7 +48,7 @@
 		<input type="text" id="locationName">
 	</div>
 	<a class="btn btn-success" id="addLocationSubmit">Add Location</a>
-	<div class="avacadoAdvice"></div>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -87,7 +87,7 @@
 		{{/each}}
 	</div>
 	<a class="btn btn-success" id="addFoodSubmit">Add Food</a>
-	<div class="avacadoAdvice"></div>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -115,14 +115,14 @@
 		<input type="email" id="userEmail" value="{{email}}">
 	</div>
 	<div class="field-group">
-		<p class="message message-warning">Only enter your password if you would like to change it!</p>
+		<p class="message message-warn-200">Only enter your password if you would like to change it!</p>
 		<label for="userPassword">Password</label>
 		<input type="text" id="userPassword">
 		<label for="userPassword">Confirm Password</label>
 		<input type="text" id="userPassword2">
 	</div>
 	<a class="btn btn-success" id="updateAccountSubmit">Update Account</a>
-	<div class="avacadoAdvice"></div>
+	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
 	</button>

@@ -25,14 +25,17 @@ $legal-notice--bg-color: darkenColor(getColor('neutral-50'), 6);
 $accordion--bg-color: getColor('neutral-500');
 $accordion--bg-color-2: getColor('green-500');
 
-$pantry--bg-color: getColor('orange-400');
+$list--bg-color: getColor('green-analogous1-400');
+$list--color: getContrast($list--bg-color);
+
+$pantry--bg-color: getColor('green-500');
 $pantry--color: getContrast($pantry--bg-color);
 
-$fridge--bg-color: getColor('blue-400');
+$fridge--bg-color: getColor('blue-500');
 $fridge--color: getContrast($fridge--bg-color);
 
-$freezer--bg-color: getColor('red-400');
+$freezer--bg-color: getColor('blue-700');
 $freezer--color: getContrast($freezer--bg-color);
 
-$food--bg-color: getColor('green-analogous3-200');
+$food--bg-color: getColor('red-200');
 $food--color: getContrast($food--bg-color);

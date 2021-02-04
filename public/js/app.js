@@ -1,6 +1,27 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-	
+
+	$(".tabs-title:first-child, .tabs-panel:first-child").addClass("is-active");
+
+	// $(".accordion-title").click(function() {
+	// 	if($(this).parents(".accordion-item").hasClass('is-active')) {
+	// 		$(this).parents(".accordion-item").removeClass("is-active");
+	// 		$(this).siblings(".accordion-content").hide();
+	// 	}
+	// });
+
+	$("#headerAva").click(function() {
+		$.ajax({
+			url: "/api/advice",
+			method: "GET"
+		}).done(data => {
+			console.log(data);
+			$(".quote").html(data.content);
+		}).fail(err => {
+			console.log(err);
+		})
+	});
+
   $("form").submit(function(e) {
   	e.preventDefault();
   	// console.log($("form"))
@@ -51,6 +72,20 @@ $(function() {
 		});
 	});
 
+	$("#signOut").click(function(e) {
+		e.preventDefault();
+
+		$.ajax({
+			url: "/api/users/signout",
+			method: "GET"
+		}).done(data => {
+			window.location.replace("/");
+
+		}).fail(err => {
+			console.log(err);
+		})
+	});
+
 	$(".dropdown.menu a:first-child").click(function(e) {
 		e.preventDefault();
 	});
@@ -78,6 +113,8 @@ $(function() {
 			console.log(err);
 		});
 	});
+
+	$("#addFoodModal .close")
 
 	// **foodCONTROLLER Events**
 	$("#addFoodModal a:first-child").click(function(e) {

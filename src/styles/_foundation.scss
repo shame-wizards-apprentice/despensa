@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
+.site-title,
+.quote {
+	font-family: 'Lobster Two', cursive;
+}
+
 body {
 	background-color: $body--bg-color;
 	color: $body--color;
@@ -6,12 +13,40 @@ body {
 	font-size: 1rem;
 }
 
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+.fas, .far,
+.top-bar .menu a {
+	font-size: 1.5rem;
+}
+
 #page-container {
 	height: 100vh;
 }
 
 .site-header {
 	padding: 0 4rem;
+
+	.field-group {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	& label {
+		text-align: center;
+		flex: 0 0 100%;
+		width: 100%;
+		display: block;
+	}
+
+	& input {
+		height: 3.15rem;
+		width: 100%;
+		flex: 1;
+	}
 }
 
 .top-bar-right {
@@ -86,7 +121,10 @@ body {
 		font-size: 1rem;
 	}
 
-	& .accordion-content { border: 0; }
+	& .accordion-content {
+		border: 0;
+		overflow: auto;
+	}
 }
 
 li.pantry {
@@ -114,15 +152,35 @@ li.freezer {
 }
 
 .btn {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
 	position: relative;
 	background-color: gainsboro;
-	margin: 0.2rem 0.4rem;
-	padding: 0.5rem 1rem;
+	margin: 0.5rem 0.4rem;
+	padding: 1rem;
 	vertical-align: middle;
 
-	@each $name,$color in $messageColors {
+	& > i { margin: 0; padding: 0; }
+
+	@each $name,$color in $palette {
+		@debug $name, $color;
 		&-#{$name} {
-			background-color: $color;
+			background-color: $color !important;
+			color: getContrast($color) !important;
+		}
+	}
+}
+
+.message {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
+	margin: 1rem 0 2.5rem;
+	padding: 1rem;
+	font-size: 1.25rem;
+
+	@each $name,$color in $palette {
+		@debug $name, $color;
+		&-#{$name} {
+			border: 5px solid $color;
+			background-color: lightenColor($color, 50);
 			color: getContrast($color);
 		}
 	}
@@ -158,7 +216,8 @@ li.freezer {
 	// }
 }
 
-.accordion .food {
+.accordion .food-item .food,
+.tabs .food-item .food {
 	z-index: 1;
 	background-color: $food--bg-color;
 	color: $food--color;
@@ -167,9 +226,72 @@ li.freezer {
 	margin: 1rem;
 }
 
+.accordion li.is-active > a,
+.tabs li.is-active > a {
+	background-color: black;
+}
+
 .avocadoAdvice {
 	margin: 1rem 0;
 	padding: 1rem 1rem 1rem 1.5rem;
 	background-color: lemonchiffon;
 	border-left: 5px solid olive;
+}
+
+.twitter {
+	color: #1da1f2;
+}
+
+#optionsModal div:first-child,
+#optionsModal div:nth-child(2) {
+	max-width: 50%;
+	display: inline-block;
+}
+
+.quote {
+	font-size: 3rem;
+	text-align: center;
+	background-color: lemonchiffon;
+	padding: 2rem;
+	margin-top: 3rem;
+}
+
+@media all and (max-width: 640px) {
+	.site-header {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.site-header .top-bar-right .menu {
+		justify-content: space-between;
+		margin-bottom: 1rem;
+
+		& li a {
+			font-size: 2rem;
+		}
+
+		& li a i { font-size: 2.5rem; }
+	}
+}
+
+@media all and (max-width: 970px) {
+	.site-header .top-bar-left,
+	.site-header .top-bar-right {
+		width: 100%;
+		text-align: center;
+	}
+
+	.site-header .menu li {
+		width: 100%;
+	}
+
+	.site-header .form {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+	}
+
+	.site-header .field-groups {
+		flex: 1;
+	}
 }
