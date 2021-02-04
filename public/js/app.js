@@ -1,25 +1,25 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
-	
-  $("form").submit(function(e) {
-  	e.preventDefault();
-  	// console.log($("form"))
-  	// $.ajax({
-  	// 	url: "api/login",
-  	// }).done(data => {
-  	// 	console.log(data);
-  	// });
-  });
+$(function () {
 
-  // **userCONTROLLER Events**
+	$("form").submit(function (e) {
+		e.preventDefault();
+		// console.log($("form"))
+		// $.ajax({
+		// 	url: "api/login",
+		// }).done(data => {
+		// 	console.log(data);
+		// });
+	});
+
+	// **userCONTROLLER Events**
 	// Sign Up
-	$("#sign-up-btn").click(function(e) {
+	$("#sign-up-btn").click(function (e) {
 		console.log("SIGN ME UP SCOTTY");
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/signup",
-			data:{
+			data: {
 				email: $("#email").val(),
 				password: $("#pass").val()
 			},
@@ -33,12 +33,12 @@ $(function() {
 	});
 
 	// Sign Up
-	$("#sign-in-btn").click(function(e) {
+	$("#sign-in-btn").click(function (e) {
 		e.preventDefault();
 		// console.log($("form"))
 		$.ajax({
 			url: "/api/login",
-			data:{
+			data: {
 				email: $("#email").val(),
 				password: $("#pass").val()
 			},
@@ -51,12 +51,12 @@ $(function() {
 		});
 	});
 
-	$(".dropdown.menu a:first-child").click(function(e) {
+	$(".dropdown.menu a:first-child").click(function (e) {
 		e.preventDefault();
 	});
 
 	// ** CHANGE THEME **
-	$("#optionsModal .dropdown .submenu a").click(function(e) {
+	$("#optionsModal .dropdown .submenu a").click(function (e) {
 		e.preventDefault();
 
 		console.log($(this).data('id'));
@@ -80,14 +80,14 @@ $(function() {
 	});
 
 	// **foodCONTROLLER Events**
-	$("#addFoodModal a:first-child").click(function(e) {
+	$("#addFoodModal a:first-child").click(function (e) {
 		e.preventDefault();
 	});
 
 	// Create new food (I think this is a form)
-	$("#addFoodSubmit").click(function(e) {
+	$("#addFoodSubmit").click(function (e) {
 		e.preventDefault();
-		
+
 		console.log($("#foodIsCheese").is(":checked"))
 
 		$.ajax({
@@ -108,11 +108,11 @@ $(function() {
 	});
 
 	// Delete Food
-	$(".delete-food").click(function(e) {
+	$(".delete-food").click(function (e) {
 		let foodid = $(this).data("foodid");
 
 		$.ajax({
-			url:`/api/foods/delete/${foodid}`,
+			url: `/api/foods/delete/${foodid}`,
 			method: "DELETE"
 		}).done(data => {
 			$(this).parents("li.food").remove();
@@ -120,11 +120,11 @@ $(function() {
 	});
 
 	// Update food(?)
-	$(".move-food").click(function(e) {
+	$(".move-food").click(function (e) {
 		e.preventDefault();
 
 		let foodid = $(this).data("foodid");
-		let listid = $(this).parents(".accordion").find(".list").data("locationid");
+		let listid = $(this).parents("#location-menu").find(".list").data("locationid");
 
 		console.log(foodid, listid);
 
@@ -159,13 +159,13 @@ $(function() {
 	// **locationController Events**
 
 	// add Location
-	$("#addLocationModal a:first-child").click(function(e) {
+	$("#addLocationModal a:first-child").click(function (e) {
 		e.preventDefault();
-		
+
 	});
 
 	let locationType = "";
-	$("#addLocationModal ul ul a").click(function(e) {
+	$("#addLocationModal ul ul a").click(function (e) {
 		// console.log($("form"))
 		// e.preventDefault();
 		let locationType = $(this).data("type");
@@ -173,12 +173,12 @@ $(function() {
 		console.log(locationType);
 	});
 
-	$("#addLocationSubmit").click(function() {
+	$("#addLocationSubmit").click(function () {
 		$.ajax({
 			url: "/api/locations/create",
 			data: {
-				name:$("#locationName").val(),
-				type:  $("[name='locationType']:checked").val()
+				name: $("#locationName").val(),
+				type: $("[name='locationType']:checked").val()
 			},
 			method: "POST"
 		}).done(data => {
@@ -191,7 +191,7 @@ $(function() {
 	// $().click(function(e) {
 	// 	$.ajax({
 	// 		where:{
-				
+
 	// 		}
 	// 		url:"/api/locations/delete/:id",
 	// 		data: {
