@@ -1,6 +1,6 @@
 // Dependencies
 const express = require("express");
-const { Location, Food } = require("../models");
+const db = require("../models");
 
 // Express router methods
 const router = express.Router();
@@ -13,12 +13,12 @@ const router = express.Router();
 // });
 
 // Display all locations owned by user
-router.get("api/locations/:userId", (req, res) => {
+router.get("/api/locations/:userId", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.findAll({
+        db.Location.findAll({
             where: {
                 userId: req.sessions.userId
             }
@@ -34,32 +34,33 @@ router.get("api/locations/:userId", (req, res) => {
 });
 
 // Create a new location if user is logged in
-router.post("api/locations/create", (req, res) => {
+router.post("/api/locations/create", (req, res) => {
     if (!req.session.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.create({
+        let newLocation= {
             name: req.body.name,
             type: req.body.type,
-            userId: req.session.user.id
-        }).then(data => {
+            UserId: req.session.user.id
+        }
+        console.log(newLocation)
+        db.Location.create(newLocation).then(data => {
             console.log(data);
             res.send(data);
             res.redirect("/");
         }).catch(err => { res.status(500).send(err.message) });
-
     }
 
 });
 
 // Update user's locations if logged in
-router.put("api/locations/update/:id", (req, res) => {
+router.put("/api/locations/update/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.update(
+        db.Location.update(
             {
                 name: req.body.name,
                 type: req.body.type,
@@ -80,12 +81,12 @@ router.put("api/locations/update/:id", (req, res) => {
 });
 
 // Delete a location, if user is logged in
-router.delete("api/locations/delete/:id", (req, res) => {
+router.delete("/api/locations/delete/:id", (req, res) => {
     if (!req.sessions.user) {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.destroy({
+        db.Location.destroy({
             where: {
                 userId: req.sessions.user.id,
                 id: req.params.id

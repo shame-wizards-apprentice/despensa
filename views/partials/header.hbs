@@ -8,16 +8,20 @@
 <div id="page-container" class="grid-y">
 <div class="site-header top-bar">
 	<div class="top-bar-left">
-			<h1 class="menu-text site-title">Despensa</h1>
+			<img src="images/Use-transparent.png" id="headerAva" alt="Ava Cado" style="display: inline-block" data-open="AvaAdvice">
+			<h1 class="menu-text site-title" style="display: inline-block">Despensa</h1>
 	</div>
 	<div class="top-bar-right">
 		<ul class="menu">
 			{{#if email}}
-		  <li>
-		  	<a href="/signout">Sign Out</a>
+			<li>
+		  	<a href="#" data-open="menuModal"> <i class="fas fa-bars" id="menu"></i> </a>
 		  </li>
 		  <li>
-		  	<a href="/settings"> <i class="fas fa-user" id="settings"></i> </a>
+		  	<a href="#" data-open="optionsModal"> <i class="fas fa-cog" id="settings"></i> </a>
+		  </li>
+		  <li>
+		  	<a href="/signout">Sign Out</a>
 		  </li>
 		  <li><input type="search" placeholder="Search"> <button type="button" class="button">Search</button></li>
 		 	{{else}}

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         expirationDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         isCheese: {

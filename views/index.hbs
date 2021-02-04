@@ -6,16 +6,139 @@
 	</div>
 	<div class="cell">
 		{{#if message}}
-			<div class="message message-warn">{{message}}</div>
+		<div class="message message-warn">{{message}}</div>
 		{{/if}}
 	</div>
 	<div class="cell">
-
-		<blockquote class="legal-notice">"Opinions" are personal beliefs about a particular topic and may be wildly inaccurate.
-	    A (non-literal) grain of salt should be taken with each opinion presented. <cite>- Legal</cite></blockquote>
-	    <br>
-	    <img src="images/cado-family--transparent.png" alt="Cado Family Photo">
+		<blockquote class="legal-notice">"Opinions" are personal beliefs about a particular topic and may be wildly
+			inaccurate.
+			A (non-literal) grain of salt should be taken with each opinion presented. <cite>- Legal</cite></blockquote>
+		<br>
+		<img src="images/cado-family--transparent.png" alt="Cado Family Photo">
 	</div>
 </div>
 
 {{> menu}}
+
+<div class="reveal large" id="menuModal" data-reveal>
+	<h1>What would you like to do?</h1>
+	<div class="button-group">
+		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
+		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+	</div>
+	<div class="avacadoAdvice"></div>
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="reveal large" id="addLocationModal" data-reveal>
+	<h1>Adding Location?</h1>
+	<div class="button-group">
+		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
+		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+	</div>
+	<div class="field-group">
+		<label for="location"><input type="radio" name="locationType" value="Refrigerator">Refrigerator</label>
+		<label for="location"><input type="radio" name="locationType" value="Freezer">Freezer</label>
+		<label for="location"><input type="radio" name="locationType" value="Pantry">Pantry</label>
+	</div>
+	<div class="field-group">
+		<label for="locationName">Name</label>
+		<input type="text" id="locationName">
+	</div>
+	<a class="btn btn-success" id="addLocationSubmit">Add Location</a>
+	<div class="avacadoAdvice"></div>
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="reveal large" id="addFoodModal" data-reveal>
+	<h1>Adding Food?</h1>
+	<div class="button-group">
+		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
+		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+	</div>
+	<div class="field-group">
+		<label for="foodName">Name</label>
+		<input type="text" id="foodName">
+	</div>
+	<div class="field-group">
+		<label for="foodBrand">Brand</label>
+		<input type="text" id="foodBrand">
+	</div>
+	<div class="field-group">
+		<label for="foodExpirationDate">ExpirationDate</label>
+		<input type="date" id="foodExpirationDate">
+	</div>
+	<div class="field-group">
+		<label for="foodIsCheese">Is It Cheese?</label>
+		<input type="hidden" id="foodIsCheeseHidden" name="isCheese" value="0">
+		<input type="checkbox" id="foodIsCheese" name="isCheese" value="1">
+	</div>
+	<div class="field-group">
+		<label for="foodAmount">Amount (in oz.)</label>
+		<input type="number" id="foodAmount">
+	</div>
+	<div class="field-group">
+		{{#each Locations}}
+		<label for=""><input type="radio" name="foodLocation" value="{{dataValues.id}}"> {{dataValues.name}}</label>
+		{{/each}}
+	</div>
+	<a class="btn btn-success" id="addFoodSubmit">Add Food</a>
+	<div class="avacadoAdvice"></div>
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="reveal large" id="optionsModal" data-reveal>
+	<h1>What would you like to do?</h1>
+	<ul class="dropdown menu" data-dropdown-menu>
+		<li>
+			<a href="">Change Theme</a>
+			<ul>
+				<li><a id="metroToggle">Metro</a></li>
+				<li><a id="spaceToggle">Space</a></li>
+				<li><a id="gothToggle">Goth</a></li>
+				<li><a id="cuteToggle">Cute</a></li>
+			</ul>
+		</li>
+	</ul>
+	<div class="field-group">
+		<label for="userUsername">Username</label>
+		<input type="text" id="userUsername" value="{{username}}">
+	</div>
+	<div class="field-group">
+		<label for="userEmail">Email</label>
+		<input type="email" id="userEmail" value="{{email}}">
+	</div>
+	<div class="field-group">
+		<p class="message message-warning">Only enter your password if you would like to change it!</p>
+		<label for="userPassword">Password</label>
+		<input type="text" id="userPassword">
+		<label for="userPassword">Confirm Password</label>
+		<input type="text" id="userPassword2">
+	</div>
+	<a class="btn btn-success" id="updateAccountSubmit">Update Account</a>
+	<div class="avacadoAdvice"></div>
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="reveal large" id="AvaAdvice" data-reveal>
+	{{!-- Random Advice --}}
+	<figure>
+		<img src="images/Artboard 9-transparent.png" alt="Ava Cado: Font of All Kitchen Wisdom"
+			style="display: block; margin: 0 auto">
+		<figcaption style="text-align: center; font-style: italic; color: olive">
+			Ava Cado, Font of All Kitchen Wisdom
+		</figcaption>
+	</figure>
+	<div class="quote quote-below"></div>
+	<button class="close-button" data-close aria-label="Close reveal" type="button">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
