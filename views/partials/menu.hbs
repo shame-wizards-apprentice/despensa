@@ -8,8 +8,7 @@
 					<ul class='food-item'>
 						{{#each Food}}
 							<li class='food text-center'>
-								<p>{{dataValues.name}}, {{dataValues.brand}}<br>{{dataValues.expirationDate}} {{#if dataValues.isCheese}} <i class="fad fa-cheese-swiss"></i> {{/if}}</p>
-								<p>
+								<div class='status-image'>
 									{{#isExpired dataValues.expirationDate}}
 										<img src="images/Toss-transparent.png" title="Call a biohazard unit!">
 									{{/isExpired}}
@@ -19,10 +18,16 @@
 									{{#isGood dataValues.expirationDate}}
 										<img src="images/Keep-transparent.png" title="I bet {{dataValues.food}}'s super yummy!">
 									{{/isGood}}
-									<br>
-									<a href="#" class="btn btn-alert-300 move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
-									<a href="#" class="btn btn-warn-300 delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a>
-								</p>
+								</div>
+								<div>
+									<p>{{dataValues.name}}, {{dataValues.brand}} {{#if dataValues.isCheese}} <i class="fad fa-cheese-swiss"></i> {{/if}} <br><strong>Expires:</strong> {{dataValues.expirationDate}}</p>
+								</div>
+								<div>
+									<p>{{#unlessEquals ../dataValues.type "list"}}
+									<a href="#" class="btn btn-info-300 move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
+									{{/unlessEquals}}
+									<a href="#" class="btn btn-warn-400 text-white delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a></p>
+								</div>
 							</li>
 						{{/each}}
 					</ul>

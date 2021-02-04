@@ -124,23 +124,29 @@
 
 	@if type-of($color) == color {
 		$luminance: luminance($color);
-		@if lightness($color) > $luminance-comp {
-			$clr: scale-color($color, $lightness: -95);
-		} @else {
-			$clr: scale-color($color, $lightness: 95);
-		}
+		// @if lightness($color) > $luminance-comp {
+		// 	$clr: scale-color($color, $lightness: -95);
+		// } @else {
+		// 	$clr: scale-color($color, $lightness: 95);
+		// }
 	} @else {
 		$color: getColor($color, $map);
 		$luminance: luminance($color);
 	}
 
 	@if $luminance >= $luminance-comp {
-		$clr: darkenColor(getColor('neutral-700'), 80);
+		// $clr: darkenColor(getColor('neutral-700'), 80);
+		$clr: #373737;
 	} @else {
-		$clr: lightenColor(getColor('neutral-100'), 80);
+		// $clr: lightenColor(getColor('neutral-100'), 80);
+		$clr: #fefefe;
 	}
 
-	//@debug $color $luminance $luminance-comp $clr;
+	@debug $clr;
+
+	@if $clr == null {
+		@return $color;
+	}
 
 	@return $clr;
 }

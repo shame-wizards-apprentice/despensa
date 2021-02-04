@@ -23,20 +23,8 @@
 <div class="reveal large" id="menuModal" data-reveal>
 	<h1>What would you like to do?</h1>
 	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
-	</div>
-	<div class="avocadoAdvice hide"></div>
-	<button class="close-button" data-close aria-label="Close reveal" type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
-</div>
-
-<div class="reveal large" id="addLocationModal" data-reveal>
-	<h1>Adding Location?</h1>
-	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+		<a class="btn btn-success-200" id="addLocation" data-open="menuModal">Create New Location</a>
+		<a class="btn btn-info-200" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
 	</div>
 	<div class="field-group">
 		<label for="location"><input type="radio" name="locationType" value="Refrigerator">Refrigerator</label>
@@ -47,7 +35,7 @@
 		<label for="locationName">Name</label>
 		<input type="text" id="locationName">
 	</div>
-	<a class="btn btn-success" id="addLocationSubmit">Add Location</a>
+	<a class="btn btn-success-200" id="addLocationSubmit">Add Location</a>
 	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
@@ -57,8 +45,8 @@
 <div class="reveal large" id="addFoodModal" data-reveal>
 	<h1>Adding Food?</h1>
 	<div class="button-group">
-		<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
-		<a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
+		<a class="btn btn-info-200" id="addLocation" data-open="menuModal">Create New Location</a>
+		<a class="btn btn-success-200" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
 	</div>
 	<div class="field-group">
 		<label for="foodName">Name</label>
@@ -86,7 +74,7 @@
 		<label for=""><input type="radio" name="foodLocation" value="{{dataValues.id}}"> {{dataValues.name}}</label>
 		{{/each}}
 	</div>
-	<a class="btn btn-success" id="addFoodSubmit">Add Food</a>
+	<a class="btn btn-success-200" id="addFoodSubmit">Add Food</a>
 	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>
@@ -97,12 +85,12 @@
 	<h1>What would you like to do?</h1>
 	<ul class="dropdown menu" data-dropdown-menu>
 		<li>
-			<a href="#">Change Theme</a>
+			<a href="#" style="text-transform: capitalize">{{Theme.dataValues.iconClass}}</a>
 			<ul>
-				<li><a id="metroToggle" data-id="1">Metro</a></li>
-				<li><a id="spaceToggle" data-id="3">Space</a></li>
-				<li><a id="gothToggle" data-id="2">Goth</a></li>
-				<li><a id="cuteToggle" data-id="4">Cute</a></li>
+				{{#unlessEquals Theme.dataValues.id 1}}<li><a id="metroToggle" data-id="1">Metro</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 3}}<li><a id="spaceToggle" data-id="3">Space</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 2}}<li><a id="gothToggle" data-id="2">Goth</a></li>{{/unlessEquals}}
+				{{#unlessEquals Theme.dataValues.id 4}}<li><a id="cuteToggle" data-id="4">Cute</a></li>{{/unlessEquals}}
 			</ul>
 		</li>
 	</ul>
@@ -121,7 +109,7 @@
 		<label for="userPassword">Confirm Password</label>
 		<input type="text" id="userPassword2">
 	</div>
-	<a class="btn btn-success" id="updateAccountSubmit">Update Account</a>
+	<a class="btn btn-success-200" id="updateAccountSubmit">Update Account</a>
 	<div class="avocadoAdvice hide"></div>
 	<button class="close-button" data-close aria-label="Close reveal" type="button">
 		<span aria-hidden="true">&times;</span>

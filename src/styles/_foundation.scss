@@ -32,20 +32,21 @@ img {
 
 	.field-group {
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: column wrap;
 	}
 
 	& label {
-		text-align: center;
-		flex: 0 0 100%;
-		width: 100%;
-		display: block;
+		flex: 1;
+		text-align: left;
+		margin-bottom: 0;
+		padding-bottom: 0;
 	}
 
 	& input {
-		height: 3.15rem;
+		min-height: 3rem;
 		width: 100%;
 		flex: 1;
+		margin-top: 1px;
 	}
 }
 
@@ -151,40 +152,6 @@ li.freezer {
 	a { color: $freezer--color; }
 }
 
-.btn {
-	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
-	position: relative;
-	background-color: gainsboro;
-	margin: 0.5rem 0.4rem;
-	padding: 1rem;
-	vertical-align: middle;
-
-	& > i { margin: 0; padding: 0; }
-
-	@each $name,$color in $palette {
-		@debug $name, $color;
-		&-#{$name} {
-			background-color: $color !important;
-			color: getContrast($color) !important;
-		}
-	}
-}
-
-.message {
-	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
-	margin: 1rem 0 2.5rem;
-	padding: 1rem;
-	font-size: 1.25rem;
-
-	@each $name,$color in $palette {
-		@debug $name, $color;
-		&-#{$name} {
-			border: 5px solid $color;
-			background-color: lightenColor($color, 50);
-			color: getContrast($color);
-		}
-	}
-}
 
 .reveal.large {
 	min-height: 90%;
@@ -256,6 +223,44 @@ li.freezer {
 	margin-top: 3rem;
 }
 
+.btn {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
+	position: relative;
+	background-color: gainsboro;
+	margin: 0.5rem 0.4rem;
+	padding: 1rem;
+	vertical-align: middle;
+	color: white;
+
+	@each $name,$color in $palette {
+		// @debug $color, getContrast(red);
+		&-#{$name} {
+			background-color: $color !important;
+			color: getContrast($color);
+		}
+	}
+
+	& > i { margin: 0; padding: 0; }
+}
+
+.text-white { color: white !important; }
+.text-black { color: black !important; }
+
+.message {
+	@include palette($color: 'default', $colorMap: $messageColors, $complement-name: 'complement', $rangeType: $range, $rangeDepth: 5);
+	margin: 1rem 0 2.5rem;
+	padding: 1rem;
+	font-size: 1.25rem;
+
+	@each $name,$color in $palette {
+		&-#{$name} {
+			border: 5px solid $color;
+			background-color: lightenColor($color, 50);
+			color: getContrast($color);
+		}
+	}
+}
+
 @media all and (max-width: 640px) {
 	.site-header {
 		flex-direction: column;
@@ -274,24 +279,20 @@ li.freezer {
 	}
 }
 
-@media all and (max-width: 970px) {
-	.site-header .top-bar-left,
-	.site-header .top-bar-right {
-		width: 100%;
-		text-align: center;
-	}
+@media all and (max-width: 640px) {
+	.site-header .to-bar-right {
 
-	.site-header .menu li {
-		width: 100%;
 	}
+}
 
-	.site-header .form {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: center;
+@media all and (max-width: 735px) {
+	.site-header {
+		padding: 0 0.25rem;
 	}
+}
 
-	.site-header .field-groups {
-		flex: 1;
+@media all and (min-width: 1024px) {
+	.site-header {
+		padding: 0 10rem;
 	}
 }

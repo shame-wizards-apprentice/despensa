@@ -115,7 +115,9 @@ $(function() {
 		});
 	});
 
-	$("#addFoodModal .close")
+	$("#addFoodModal .close").click(function() {
+		window.location.replace("/");
+	});
 
 	// **foodCONTROLLER Events**
 	$("#addFoodModal a:first-child").click(function (e) {
@@ -140,7 +142,7 @@ $(function() {
 			},
 			method: "POST"
 		}).done(data => {
-			$(".avacadoAdvice").text("You've got food!")
+			$(".avocadoAdvice").removeClass("hide").text("You've got food!")
 			console.log(data);
 		});
 	});
@@ -197,13 +199,13 @@ $(function() {
 	// **locationController Events**
 
 	// add Location
-	$("#addLocationModal a:first-child").click(function (e) {
+	$("#menuModal a:first-child").click(function (e) {
 		e.preventDefault();
 
 	});
 
 	let locationType = "";
-	$("#addLocationModal ul ul a").click(function (e) {
+	$("#menuModal ul ul a").click(function (e) {
 		// console.log($("form"))
 		// e.preventDefault();
 		let locationType = $(this).data("type");
@@ -220,7 +222,7 @@ $(function() {
 			},
 			method: "POST"
 		}).done(data => {
-			$(".avacadoAdvice").text("You have a new food home!")
+			$(".avocado").text("You have a new food home!")
 			console.log(data);
 		});
 	});

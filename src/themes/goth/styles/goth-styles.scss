@@ -1,3 +1,15 @@
-@import "settings";
+@import "../../../styles/global/core";
 
-@import "general";
+$coreColors: (
+	"primary": #F2545B,
+	"secondary": #A93F55,
+	"tertiary": #8C5E58,
+	"accent": #F3F7F0,
+	"neutral": #19323C
+);
+
+@include palette($color: 'primary', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+@import "../../settings";
+
+@import "../../general";

@@ -1,3 +1,19 @@
-@import "settings";
+@import "../../../styles/global/core";
 
-@import "general";
+$coreColors: (
+	primary: #ff96b7,
+	secondary: #CAFFBF,
+	tertiary: #9BF6FF,
+	accent: #BDB2FF,
+	neutral: #c8d4cc
+);
+
+@include palette($color: 'primary', $complement-name: 'complement', $rangeType: 'static', $rangeDepth: 9);
+
+@import "../../settings";
+
+@import "../../general";
+
+body {
+	background-color: getColor('primary-50') !important;
+}

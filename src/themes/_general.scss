@@ -1,0 +1,110 @@
+body {
+	background-color: $body--bg-color !important;
+	color: $text-color;
+}
+
+.site-header {
+	background-color: $site-header--bg-color;
+	
+	& a {
+		color: $header-link--color;
+
+		&:hover {
+			color: $header-link--hover-color;
+		}
+	}
+}
+
+.site-title { color: $site-title--color; }
+
+ul.menu { background-color: transparent; }
+
+.legal-notice {
+	color: $legal-notice--color;
+	border-left: $legal-notice--border-left;
+	background-color: $legal-notice--bg-color;
+}
+
+#location-menu {
+	background-color: $accordion--bg-color;
+
+	& li {
+		// background-color: $accordion--bg-color;
+		border: 0;
+
+		&:active a,
+		&.is-active a {
+			background-color: $accordion--bg-color-2;
+			color: $accordion--color-2;
+		}
+	}
+
+	& > a {
+		color: $accordion--color-2;
+	}
+
+	& .is-active a:hover,
+	& a:hover {
+		background-color: $location--hover-bg-color;
+	}
+}
+
+li.list,
+li.List {
+	background-color: $list--bg-color !important;
+	& > a { color: $list--color !important; }
+
+	.tab-content,
+	.accordion-content {
+		background-color: scale-color($list--bg-color, $lightness: 50);
+	}
+}
+
+li.pantry,
+li.Pantry {
+	background-color: $pantry--bg-color !important;
+	& > a { color: $pantry--color !important; }
+
+	&.accordion-item::after {
+		background-color: $pantry--bg-color;
+	}
+
+	.tab-content,
+	.accordion-content {
+		background-color: scale-color($pantry--bg-color, $lightness: 50);
+	}
+}
+
+li.refrigerator,
+li.Refrigerator {
+	background-color: $fridge--bg-color !important;
+	& > a { color: $fridge--color !important; }
+
+	& .tab-content,
+	& .accordion-content {
+		background-color: scale-color($fridge--bg-color, $lightness: 50);
+	}
+}
+
+li.freezer,
+li.Freezer {
+	background-color: $freezer--bg-color !important;
+	& > a { color: $freezer--color !important; }
+	.tab-content,
+	.accordion-content {
+		background-color: scale-color($freezer--bg-color, $lightness: 50);
+	}
+}
+
+.food-item .food {
+	background-color: $food--bg-color;
+	color: $food--color;
+	padding: 0.5rem 1rem;
+	margin: 0 1rem;
+}
+
+.food div:first-child,
+.food div:nth-child(2) {
+	display: inline-block;
+
+}
