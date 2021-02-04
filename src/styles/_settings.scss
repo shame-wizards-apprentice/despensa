@@ -19,3 +19,9 @@ $fridge--color: getContrast($fridge--bg-color);
 
 $freezer--bg-color: getColor('accent-400');
 $freezer--color: getContrast($freezer--bg-color);
+
+$food--bg-color: getColor('primary-analogous3-200');
+$food--color: getContrast($food--bg-color);
+
+$shelf-top--bg-color: getColor('tertiary-700');
+$shelf--border-color: getColor('tertiary-900');
