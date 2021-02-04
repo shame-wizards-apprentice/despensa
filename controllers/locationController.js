@@ -1,6 +1,6 @@
 // Dependencies
 const express = require("express");
-const { Location, Food } = require("../models");
+const db = require("../models");
 
 // Express router methods
 const router = express.Router();
@@ -18,7 +18,7 @@ router.get("/api/locations/:userId", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.findAll({
+        db.Location.findAll({
             where: {
                 userId: req.sessions.userId
             }
@@ -39,7 +39,7 @@ router.post("/api/locations/create", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.create({
+        db.Location.create({
             name: req.body.name,
             type: req.body.type,
             userId: req.session.user.id
@@ -59,7 +59,7 @@ router.put("/api/locations/update/:id", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.update(
+        db.Location.update(
             {
                 name: req.body.name,
                 type: req.body.type,
@@ -85,7 +85,7 @@ router.delete("/api/locations/delete/:id", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Location.destroy({
+        db.Location.destroy({
             where: {
                 userId: req.sessions.user.id,
                 id: req.params.id

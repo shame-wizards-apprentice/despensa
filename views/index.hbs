@@ -19,7 +19,7 @@
 
 {{> menu}}
 
-<div class="reveal large" id="menuModal" data-reveal >
+<div class="reveal large" id="menuModal" data-reveal>
 <h1>What would you like to do?</h1>
   <div class="button-group">
     <a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
@@ -34,7 +34,7 @@
 <div class="reveal large" id="addLocationModal" data-reveal>
 	<h1>Adding Location?</h1>
   <div class="button-group">
-    <a class="btn btn-warn" data-open="menuModal">Back to Menu</a>
+    <a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
     <a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
   </div>
     <ul class="dropdown menu" data-dropdown-menu>
@@ -51,6 +51,7 @@
     	<label for="locationName">Name</label>
     	<input type="text" id="locationName">
     </div>
+    <a class="btn btn-success" id="addLocationSubmit">Add Location</a>
     <div class="avacadoAdvice"></div>
     <button class="close-button" data-close aria-label="Close reveal" type="button">
     <span aria-hidden="true">&times;</span>
@@ -60,8 +61,8 @@
 <div class="reveal large" id="addFoodModal" data-reveal >
 <h1>Adding Food?</h1>
   <div class="button-group">
-  	<a class="btn btn-warn" data-open="menuModal">Back To Menu</a>
-    <a class="btn btn-success" id="newLocation" data-open="addLocationModal">Create New Location</a>
+  	<a class="btn btn-success" id="addLocation" data-open="addLocationModal">Create New Location</a>
+    <a class="btn btn-success" id="addFood" data-open="addFoodModal">Add Food to Inventory</a>
   </div>
     <div class="field-group">
     	<label for="foodName">Name</label>
@@ -77,12 +78,19 @@
     </div>
     <div class="field-group">
     	<label for="foodIsCheese">Is It Cheese?</label>
-    	<input type="checkbox" id="foodIsCheese">
+    	<input type="hidden" id="foodIsCheeseHidden" name="isCheese" value="0">
+    	<input type="checkbox" id="foodIsCheese" name="isCheese" value="1">
     </div>
     <div class="field-group">
     	<label for="foodAmount">Amount (in oz.)</label>
     	<input type="number" id="foodAmount">
     </div>
+    <div class="field-group">
+    	{{#each Locations}}
+    		<label for=""><input type="radio" name="foodLocation" value="{{dataValues.id}}"> {{dataValues.name}}</label>
+    	{{/each}}
+    </div>
+    <a class="btn btn-success" id="addFoodSubmit">Add Food</a>
     <div class="avacadoAdvice"></div>
     <button class="close-button" data-close aria-label="Close reveal" type="button">
     <span aria-hidden="true">&times;</span>
@@ -117,6 +125,7 @@
   	<label for="userPassword">Confirm Password</label>
   	<input type="text" id="userPassword2">
   </div>
+  	<a class="btn btn-success" id="updateAccountSubmit">Update Account</a>
     <div class="avacadoAdvice"></div>
     <button class="close-button" data-close aria-label="Close reveal" type="button">
     <span aria-hidden="true">&times;</span>
@@ -125,7 +134,12 @@
 
 <div class="reveal large" id="AvaAdvice" data-reveal>
 {{!-- Random Advice --}}
-<img src="images/Artboard 9-transparent.png" alt="Ava Cado: Font of All Kitchen Wisdom" style="display: block; margin: 0 auto">
+<figure>
+	<img src="images/Artboard 9-transparent.png" alt="Ava Cado: Font of All Kitchen Wisdom" style="display: block; margin: 0 auto">
+	<figcaption style="text-align: center; font-style: italic; color: olive">
+		Ava Cado, Font of All Kitchen Wisdom
+	</figcaption>
+</figure>
 <div class="quote quote-below"></div>
 <button class="close-button" data-close aria-label="Close reveal" type="button">
     <span aria-hidden="true">&times;</span>

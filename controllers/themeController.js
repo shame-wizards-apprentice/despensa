@@ -1,13 +1,13 @@
 // Dependencies
 const express = require("express");
-const { Theme } = require("../models");
+const db = require("../models");
 
 // Express router methods
 const router = express.Router();
 
 // API route to display all themes as json
 router.get("/api/themes", (req, res) => {
-    Theme.findAll()
+    db.Theme.findAll()
         .then(data => {
             res.json(data)
         }).catch(err => { res.status(500).send(err.message) })

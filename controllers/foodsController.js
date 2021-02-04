@@ -1,10 +1,9 @@
 // Dependencies
 const express = require("express");
-const { Food } = require("../models");
+const db = require("../models");
 
 // Express router methods
 const router = express.Router();
-
 
 // Routes
 
@@ -14,7 +13,7 @@ router.get("/api/foods", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Food.findAll({
+        db.Food.findAll({
             where: {
                 userId: req.session.user.id
             }
@@ -31,24 +30,29 @@ router.get("/api/foods", (req, res) => {
 
 // Add a new food
 router.post("/api/foods/create", (req, res) => {
+	console.log(req.body);
     if (!req.session.user) {
-        res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
+      res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Food.create({
-            name: req.body.name,
-            brand: req.body.brand,
-            daysToUse: req.body.daysToUse,
-            isCheese: req.body.isCheese,
-            amount: req.body.amount,
-            userId: req.session.user.id
-        }).then(data => {
-            res.json(data);
-            res.redirect("/foods");
-        }).catch(err => { res.status(500).send(err.message); });
+    	let newFood = {
+        name: req.body.name,
+        brand: req.body.brand,
+        expirationDate: req.body.expirationDate,
+        isCheese: req.body.isCheese === "true" ? true : false,
+        amount: req.body.amount,
+        LocationId: parseInt(req.body.locationId),
+        UserId: req.session.user.id
+      };
+      console.log(newFood);
+      db.Food.create(newFood).then(data => {
+          res.json(data);
 
+      }).catch(err => { 
+      	res.status(500).send(err); 
+
+      });
     }
-
 });
 
 // Update food stats
@@ -57,10 +61,10 @@ router.put("/api/foods/update/:id", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Food.update({
+        db.Food.update({
             name: req.body.name,
             brand: req.body.brand,
-            daysToUse: req.body.daysToUse,
+            expirationDate: req.body.expirationDate,
             isCheese: req.body.isCheese,
             amount: req.body.amount,
             userId: req.session.user.id
@@ -86,7 +90,7 @@ router.delete("/api/foods/delete/:id", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        Food.destroy({
+        db.Food.destroy({
             where: {
                 userId: req.session.user.id,
                 id: req.params.id

@@ -631,11 +631,3 @@ li.freezer {
 	.btn-warn {
 		background-color: #ED6A5A;
 		color: #f7f8f9; }
-
-.reveal.large {
-	min-height: 90%;
-}
-
-.dropdown li {
-	list-style-type: none;
-}
