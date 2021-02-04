@@ -39,16 +39,17 @@ router.post("/api/locations/create", (req, res) => {
         res.status(401).send("Oops, I'm sorry! I'm not supposed to talk to strangers.")
     }
     else {
-        db.Location.create({
+        let newLocation= {
             name: req.body.name,
             type: req.body.type,
-            userId: req.session.user.id
-        }).then(data => {
+            UserId: req.session.user.id
+        }
+        console.log(newLocation)
+        db.Location.create(newLocation).then(data => {
             console.log(data);
             res.send(data);
             res.redirect("/");
         }).catch(err => { res.status(500).send(err.message) });
-
     }
 
 });
