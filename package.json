@@ -20,6 +20,7 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "chalk": "^4.1.0",
+    "dayjs": "^1.10.4",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",

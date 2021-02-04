@@ -7,7 +7,20 @@
 				<div class="accordion-content" data-tab-content>
 					<ul class='food-item'>
 						{{#each Food}}
-							<li class='food'>{{dataValues.name}}</li>
+							<li class='food'>
+								<p>{{dataValues.name}}, {{dataValues.brand}}<br>{{dataValues.expirationDate}}</p>
+								<p>
+									{{#isExpired dataValues.expirationDate}}
+										<img src="images/Toss-transparent.png" alt="Call a biohazard unit!">
+									{{/isExpired}}
+									{{#isExpiringSoon dataValues.expirationDate}}
+										<img src="images/Use-transparent.png" alt="Waste not and avoid grocery shopping longer.">
+									{{/isExpiringSoon}}
+									{{#isGood dataValues.expirationDate}}
+										<img src="images/Keep-transparent.png" alt="!">
+									{{/isGood}}
+								</p>
+							</li>
 						{{/each}}
 					</ul>
 				</div>

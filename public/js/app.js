@@ -1,6 +1,6 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
-	console.log("app.js loaded");
+	
   $("form").submit(function(e) {
   	e.preventDefault();
   	// console.log($("form"))
