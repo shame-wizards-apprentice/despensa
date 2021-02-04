@@ -51,6 +51,34 @@ $(function() {
 		});
 	});
 
+	$(".dropdown.menu a:first-child").click(function(e) {
+		e.preventDefault();
+	});
+
+	// ** CHANGE THEME **
+	$("#optionsModal .dropdown .submenu a").click(function(e) {
+		e.preventDefault();
+
+		console.log($(this).data('id'));
+
+		$.ajax({
+			url: "/api/users/update",
+			data: {
+				username: null,
+				email: null,
+				password: null,
+				ThemeId: $(this).data("id")
+			},
+			method: "PUT"
+		}).done(data => {
+			console.log(data);
+			window.location.replace("/")
+
+		}).fail(err => {
+			console.log(err);
+		});
+	});
+
 	// **foodCONTROLLER Events**
 	$("#addFoodModal a:first-child").click(function(e) {
 		e.preventDefault();
@@ -80,22 +108,42 @@ $(function() {
 	});
 
 	// Delete Food
-	$().click(function(e) {
+	$(".delete-food").click(function(e) {
+		let foodid = $(this).data("foodid");
+
 		$.ajax({
-			url:"/api/foods/delete/:id",
+			url:`/api/foods/delete/${foodid}`,
+			method: "DELETE"
 		}).done(data => {
-			console.log(data);
+			$(this).parents("li.food").remove();
 		});
 	});
 
 	// Update food(?)
-	$().submit(function(e) {
+	$(".move-food").click(function(e) {
 		e.preventDefault();
-		// console.log($("form"))
+
+		let foodid = $(this).data("foodid");
+		let listid = $(this).parents(".accordion").find(".list").data("locationid");
+
+		console.log(foodid, listid);
+
+		let foodObj = {
+			name: null,
+			brand: null,
+			amount: null,
+			isCheese: null,
+			expirationDate: null,
+			LocationId: listid
+		};
+
 		$.ajax({
-			url: "/api/food/update/:id",
+			url: `/api/foods/update/${foodid}`,
+			data: foodObj,
+			method: "PUT"
 		}).done(data => {
-			console.log(data);
+			// console.log(data);
+			window.location.replace("/")
 		});
 	});
 
@@ -140,42 +188,40 @@ $(function() {
 	});
 
 	// Delete location
-	$().click(function(e) {
-		$.ajax({
-			where:{
+	// $().click(function(e) {
+	// 	$.ajax({
+	// 		where:{
 				
-			}
-			url:"/api/locations/delete/:id",
-			data: {
-				name:$("#foodName").val(),
-				type:  $("[name='locationType']:checked").val()
-			},
-			method: "POST"
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// 		}
+	// 		url:"/api/locations/delete/:id",
+	// 		data: {
+	// 			name:$("#foodName").val(),
+	// 			type:  $("[name='locationType']:checked").val()
+	// 		},
+	// 		method: "POST"
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 
 	// **adviceCONTROLLER Events**
-
 	// Get Advice
-	$().click(function(e) {
-		$.ajax({
-			url:"/api/advice",
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// $().click(function(e) {
+	// 	$.ajax({
+	// 		url:"/api/advice",
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 
 	// Create Advice
-
-	$().submit(function(e) {
-		// console.log($("form"))
-		e.preventDefault();
-		$.ajax({
-			url:"/api/advice/create",
-		}).done(data => {
-			console.log(data);
-		});
-	});
+	// $().submit(function(e) {
+	// 	// console.log($("form"))
+	// 	e.preventDefault();
+	// 	$.ajax({
+	// 		url:"/api/advice/create",
+	// 	}).done(data => {
+	// 		console.log(data);
+	// 	});
+	// });
 });

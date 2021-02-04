@@ -1,7 +1,7 @@
 <div id="location-menu">
 	<ul class="accordion" data-responsive-accordion-tabs="accordion large-tabs">
 		{{#each Locations}}
-			<li class="accordion-item {{dataValues.type}} {{@first }}" data-accordion-item>
+			<li class="accordion-item {{dataValues.type}} {{@first }}" data-locationid="{{dataValues.id}}" data-accordion-item>
 				<a href="#" class="accordion-title">{{dataValues.name}}</a>
 
 				<div class="accordion-content" data-tab-content>
@@ -19,6 +19,9 @@
 									{{#isGood dataValues.expirationDate}}
 										<img src="images/Keep-transparent.png" alt="!">
 									{{/isGood}}
+									<br>
+									<a href="#" class="btn btn-alert move-food" data-foodid="{{dataValues.id}}">Move to Shopping List</a>
+									<a href="#" class="btn btn-warn delete-food" data-foodid="{{dataValues.id}}"> <i class="fas fa-trash-alt"></i> </a>
 								</p>
 							</li>
 						{{/each}}
