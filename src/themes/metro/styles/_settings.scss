@@ -33,3 +33,6 @@ $fridge--color: getContrast($fridge--bg-color);
 
 $freezer--bg-color: getColor('red-400');
 $freezer--color: getContrast($freezer--bg-color);
+
+$food--bg-color: getColor('green-analogous3-200');
+$food--color: getContrast($food--bg-color);

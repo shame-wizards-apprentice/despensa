@@ -32,3 +32,6 @@ $fridge--color: getContrast($fridge--bg-color);
 
 $freezer--bg-color: getColor('grape-400');
 $freezer--color: getContrast($freezer--bg-color);
+
+$food--bg-color: getColor('lime-analogous3-200');
+$food--color: getContrast($food--bg-color);

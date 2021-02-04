@@ -586,3 +586,7 @@ li.freezer {
 	.btn-warn {
 		background-color: #ED6A5A;
 		color: #f6fafb; }
+
+.accordion .food {
+	background-color: #f8cba5;
+	color: #060d0f; }
