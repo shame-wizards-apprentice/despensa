@@ -74,6 +74,7 @@ $(function() {
 			},
 			method: "POST"
 		}).done(data => {
+			$(".avacadoAdvice").text("You've got food!")
 			console.log(data);
 		});
 	});
@@ -112,6 +113,7 @@ $(function() {
 	// add Location
 	$("#addLocationModal a:first-child").click(function(e) {
 		e.preventDefault();
+		
 	});
 
 	let locationType = "";
@@ -127,11 +129,12 @@ $(function() {
 		$.ajax({
 			url: "/api/locations/create",
 			data: {
-				name: $("#locationName").val(),
-				type: locationType
+				name:$("#locationName").val(),
+				type:  $("[name='locationType']:checked").val()
 			},
 			method: "POST"
 		}).done(data => {
+			$(".avacadoAdvice").text("You have a new food home!")
 			console.log(data);
 		});
 	});
