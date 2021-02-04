@@ -1,3 +1,5 @@
+var dayjs = require('dayjs');
+
 // https://stackoverflow.com/a/42224612
 var register = function(Handlebars) {
   var helpers = {
@@ -10,7 +12,31 @@ var register = function(Handlebars) {
       }
 
       return options.inverse(this);
-    }
+    },
+    isExpired: function(dateString, options) {
+    	if( dateString !== null && dayjs().isAfter(dayjs(dateString)) ) {
+    		return options.fn(this);
+    	} else {
+    		return options.inverse(this);
+    	}
+    },
+    isExpiringSoon: function(dateString, options) {
+    	const e1 = dayjs(dateString).subtract(4, 'd');
+    	const e2 = dayjs(dateString).add(1, 'd');
+
+    	if( dateString !== null && dayjs().isAfter(e1) && dayjs().isBefore(e2) ) {
+    		return options.fn(this);
+    	} else {
+    		return options.inverse(this);
+    	}
+    },
+    isGood: function(dateString, options) {
+    	if( ( dayjs().isBefore(dayjs(dateString).subtract(4, 'days')) && dayjs().isBefore(dayjs(dateString)) ) || dateString === null ) {
+    		return options.fn(this);
+    	} else {
+    		return options.inverse(this);
+    	}
+    },
   };
 
   if (Handlebars && typeof Handlebars.registerHelper === "function") {
