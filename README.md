@@ -16,29 +16,37 @@ Barry Cado isn't supposed to talk to strangers, so introduce yourself first. Cli
 Once logged in, click the hamburger menu on the top right-hand corner for options to add or edit your kitchen. Click "Add Food To Inventory" and enter food name, brand, expiration date, and amount--and don't forget to answer the all-important question: is this food cheese?
 Click "Create New Location" to add a new location, or rename or delete your existing locations. 
 Once you've added food to your inventory, the tabs at the bottom of the screen will populate with your existing food. If it's fresh, Cara Cado will appear next to the food letting you know it's good to go. If it's nearing its expiration date, Ava Cado will pop up reminding you to use it. If it's spoiled, the Count will let you know it's time to toss. And, of course, you'll get a handy-dandy cheese icon reminding you which of your foods are cheese. Click the trash can icon to delete a food, and the "Move to Shopping List" icon to remind yourself to buy more. 
-Last but not least, click on Ava Cado in the top left-hand side of the screen for your daily dose of solid life advice. This feature is available whether you're logged in or not, so be sure to take advantage!
+Last but not least, click on Ava Cado in the top left-hand side of the screen for your daily dose of solid life advice. This feature is available whether you're logged in or not, because let's face it, none of us really know what we're doing in life and Ava is here to remind us of that.
+And remember, be humorous, stay hydrated, and in a pinch, comment on the awkwardness of it all. 
 
 ![Despensa Landing Page](public/images/landing-page.png?raw=true "Landing Page")
 
 Despensa Landing Page
+
 ![Add Food](public/images/add-food.png?raw=true "Add Food")
 
 Add Food
+
 ![Add Location](public/images/add-location.png?raw=true "Add Location")
 
 Add Location
+
 ![Metro Theme (Default)](public/images/metro-theme.png?raw=true "Metro")
 
 Dashboard with default "Metro" theme
+
 ![Space Theme](public/images/space-theme.png?raw=true "Space")
 
 Dashboard with "Space" theme
+
 ![Goth Theme](public/images/goth-theme.png?raw=true "Goth")
 
 Dashboard with "Goth" theme
+
 ![Cute Theme](public/images/cute-theme.png?raw=true "Cute")
 
 Dashboard with "Cute" theme
+
 ![Unsolicited Advice Feature](public/images/advice.png?raw=true "Advice")
 
 Unsolicited advice
@@ -55,4 +63,10 @@ Unsolicited advice
 * [Bcrypt](https://www.npmjs.com/package/bcrypt) - Passwords encrypted using Bcrypt
 
 ## Contact
-[Contact our legal team for any questions or concerns](https://www.youtube.com/watch?v=DLzxrzFCyOs)
+* [Doug Johnson](https://github.com/DougJohnson22), project manager (rides bike without handlebars, codes with handlebars)
+* [Angel Knight](https://github.com/skelliebunnie), front-end lead, master of sass...(er, SCSS)
+* [Doug Johnson](https://github.com/DougJohnson22), project manager (rides bike without handlebars, codes with handlebars)
+* [Rex Flores](https://github.com/Tyrannofloresrex), the famous Swingman, able to leap from front-end to back-end in a single bound
+* [Rachel Nelson-Schille](https://github.com/shame-wizards-apprentice) back-end lead, giver of much advice and follower of none
+
+For all other matters, please [contact our legal team](https://www.youtube.com/watch?v=DLzxrzFCyOs) as we are very busy learning about Japanese grammar and practicing the art of reappraisal.
