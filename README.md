@@ -15,8 +15,8 @@ Follow [The Cado Family](https://twitter.com/CadoFamily) on Twitter for daily un
 
 Barry Cado isn't supposed to talk to strangers, so introduce yourself first--or, pretend to be his wife to help him feel more comfortable! Login with the following credentials to test out our app.
 
-Email: ava@cado.com
-Password: Cados4Life
+* Email: ava@cado.com
+* Password: Cados4Life
 
 If don't want to enter into this relationship under false pretenses, click the "Sign Up" button in the top right-hand corner of the page and enter your email address and desired password to create an account of your own. If you already have an account, enter your email and password and click "Login" to view your food!
 Once logged in, click the hamburger menu on the top right-hand corner for options to add or edit your kitchen. Click "Add Food To Inventory" and enter food name, brand, expiration date, and amount--and don't forget to answer the all-important question: is this food cheese?
