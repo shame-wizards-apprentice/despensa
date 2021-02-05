@@ -65,7 +65,6 @@ Unsolicited advice
 ## Contact
 * [Doug Johnson](https://github.com/DougJohnson22), project manager (rides bike without handlebars, codes with handlebars)
 * [Angel Knight](https://github.com/skelliebunnie), front-end lead, master of sass...(er, SCSS)
-* [Doug Johnson](https://github.com/DougJohnson22), project manager (rides bike without handlebars, codes with handlebars)
 * [Rex Flores](https://github.com/Tyrannofloresrex), the famous Swingman, able to leap from front-end to back-end in a single bound
 * [Rachel Nelson-Schille](https://github.com/shame-wizards-apprentice) back-end lead, giver of much advice and follower of none
 
