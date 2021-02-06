@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         isRude: {
-            type: dataTypes.BOOLEAN,
+            type: DataTypes.BOOLEAN,
             defaultValue: true,
             allowNull: false
         }
