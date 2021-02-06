@@ -67,6 +67,7 @@ Unsolicited advice
 * [Sequelize](https://www.npmjs.com/package/sequelize) - ORM built with Sequelize
 * [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Front-end markup built using Handlebars
 * [Bcrypt](https://www.npmjs.com/package/bcrypt) - Passwords encrypted using Bcrypt
+* [DayJS](https://www.npmjs.com/package/dayjs) - Expiration date math courtesy of DayJS
 
 ## Contact
 * [Doug Johnson](https://github.com/DougJohnson22), project manager (rides bike without handlebars, codes with handlebars)
