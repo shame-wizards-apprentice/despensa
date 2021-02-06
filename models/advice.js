@@ -4,11 +4,6 @@ module.exports = (sequelize, DataTypes) => {
         content: {
             type: DataTypes.TEXT,
             allowNull: false
-        },
-        isRude: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
-            allowNull: false
         }
 
     });
